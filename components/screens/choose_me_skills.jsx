@@ -1,14 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import StackChip from "../stackchip";
 import { useSimplyContext } from "../../context/SimplyContext";
 import { updateUserDoc } from "../../services/user.services";
-import axios from "axios";
+import useSWR from "swr";
 
 function ChooseMeSkills() {
-  const { currentUser, stackList, setStackList } = useSimplyContext();
-  const [data, setData] = useState();
+  const { currentUser, stackList, setStackList ,setChangeDone} = useSimplyContext();
+  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const { data, error } = useSWR('https://raw.githubusercontent.com/shashi2602/devicon/master/devicon.json', fetcher)
 
+  
   const handleOnSelect = (item) => {
     setStackList((items) => [
       ...items,
@@ -22,13 +25,13 @@ function ChooseMeSkills() {
   const handleSave = () => {
     try {
       updateUserDoc(currentUser.docid, { skills: stackList });
+      setChangeDone("change")
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
-    
-    setStackList(currentUser.skills);
+    setStackList(currentUser.skills?currentUser.skills:[]);
   }, []);
 
   const formatResult = (item) => {
@@ -61,7 +64,7 @@ function ChooseMeSkills() {
           ></ReactSearchAutocomplete>
         </div>
         <div className="flex flex-wrap gap-2 mt-4">
-          {stackList.map((item, i) => {
+          {stackList?.map((item, i) => {
             return (
               <StackChip
                 key={i}

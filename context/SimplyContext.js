@@ -7,20 +7,25 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 const Simply = React.createContext();
 
 function SimplyContext({ children }) {
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [userNamesList, setUserNamesList] = useState([]); //TODO: change usernamelist to AllUsers
   const [selectedSocial, setSelectedSocial] = useState([]);
   const [selectTechStack, setSelectTechStack] = useState([]);
   const [projectList, setProjectList] = useState([]);
   const [about,setAbout]=useState("")
   const [stackList, setStackList] = useState([]);
+  const [changeDone,setChangeDone]=useState("");
+  const [save,setSave]=useState();
   const [error, setError] = useState({
     show: false,
     msg: "",
   });
 
+ //auth state change 
+ const[user, loading]=useAuthState(auth)
+ 
 
   //Fetching the usernames
   useEffect(() => {
@@ -35,15 +40,16 @@ function SimplyContext({ children }) {
     });
   }, []);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setLoading(false);
-      setUser(user);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  // ! Need to remove 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     setLoading(false);
+  //     setUser(user);
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
 
   const handleCurrentUser = () => {
     const cuser = userNamesList.find((u) => u.uid === user?.uid);
@@ -60,7 +66,7 @@ function SimplyContext({ children }) {
   useEffect(() => {
     handleCurrentUser()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userNamesList, user]);
+  }, [userNamesList, user,changeDone]);
 
   const GoogleSignInWithPopUP = () => {
     return signInWithPopup(auth, GoogleProvider);
@@ -99,8 +105,13 @@ function SimplyContext({ children }) {
         stackList,
         setError,
         error,
+        changeDone,
+        setChangeDone,
+        save,
+        setSave
       }}
     >
+      
       {!loading && children}
     </Simply.Provider>
   );

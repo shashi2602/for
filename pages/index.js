@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState, Fragment } from "react";
 import GithubBtn from "../components/buttons/github_btn";
 import GoogleBtn from "../components/buttons/google_btn";
@@ -53,7 +54,7 @@ function HomePage() {
                   data-aos="zoom-y-out"
                   data-aos-delay="150"
                 >
-                  Our site makes you a portfolio site in seconds.
+                  People don't care about what you say, they care about what you build. 
                 </p>
                 <div
                   className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"

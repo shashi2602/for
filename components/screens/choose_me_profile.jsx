@@ -3,10 +3,11 @@ import { useSimplyContext } from "../../context/SimplyContext";
 import { updateUserDoc } from "../../services/user.services";
 import Image from "next/image";
 import sampleProfile from "../../public/avatar-2.png";
+import toast,{Toaster} from "react-hot-toast";
 import axios from "axios";
 
 function ChooseMeProfile() {
-  const { error, setError, currentUser} = useSimplyContext();
+  const { error, setError, currentUser,setChangeDone} = useSimplyContext();
   const [username, setUserName] = useState("");
   const [expertise, setExpertise] = useState("");
   const [country, setCountry] = useState("");
@@ -22,60 +23,73 @@ function ChooseMeProfile() {
       setProfileImage(currentUser?.profile_img);
     }
   }, [currentUser]);
-  const handleSubmit = () => {
-    if (
-      (username != "") &
-      (expertise != "") &
-      (country != "") &
-      (status != "")
-    ) {
-      const profile = {
-        username: username,
-        expertise: expertise,
-        country: country,
-        status: status,
-      };
-      try {
-        updateUserDoc(currentUser.docid, profile);
-      } catch (e) {
-        console.log(e);
-      }
-      setError({
-        show: false,
-      });
-    } else {
-      setError({
-        show: true,
-        msg: "must fill all the fields",
-      });
-    }
-  };
+
+  console.log({
+          username: username,
+          expertise: expertise,
+          country: country,
+          status: status,
+        })
+  // const handleSubmit = () => {
+  //   if (
+  //     (username != "") &
+  //     (expertise != "") &
+  //     (country != "") &
+  //     (status != "")
+  //   ) {
+  //     const profile = {
+  //       username: username,
+  //       expertise: expertise,
+  //       country: country,
+  //       status: status,
+  //     };
+  //     try {
+  //       updateUserDoc(currentUser.docid, profile);
+  //       setChangeDone("change done profile")
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //     setError({
+  //       show: false,
+  //     });
+  //   } else {
+  //     setError({
+  //       show: true,
+  //       msg: "must fill all the fields",
+  //     });
+  //   }
+  // };
 
   const uploadImage = (image) => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "hyt1lmd8");
-    axios
+    const fetch=axios
       .post("https://api.cloudinary.com/v1_1/dtpdc2bhh/image/upload", data)
       .then((res) => {
         setProfileImage(res.data.url);
         try {
           updateUserDoc(currentUser.docid, { profile_img: res.data.url });
-          console.log("updated in firebase");
+          
         } catch (err) {
           console.log(err);
         }
         console.log("🎉 Image Uploaded at ", res.data.url);
+        setChangeDone("change in profile image")
       })
       .catch((err) => {
         console.log(err);
       });
+      toast.promise(fetch,{
+        'loading':'😅 uploading',
+        'error':"😱 error while uploading",
+        'success':"🥳 upload success"
+      })
   };
-  const upload = () => {
-    console.log("upload");
-  };
+ 
   return (
     <div className="m-2 w-full">
+      <Toaster position="top-right"/>
       <div className="flex justify-center pt-3">
         <div className="grid grid-rows gap-3 justify-items-center">
           <div>
@@ -138,7 +152,6 @@ function ChooseMeProfile() {
           }}
         />
       </div>
-      <button onClick={handleSubmit}>submit</button>
       {error.show ? <p>{error.msg}</p> : <></>}
     </div>
   );

@@ -1,3 +1,4 @@
+import SaveButton from "./buttons/save_btn";
 import {chooseMeTypes} from "./utiles/choose_me_types"
 function ChooseMe(props) {
 
@@ -14,6 +15,7 @@ function ChooseMe(props) {
                    {type.icon} {type.name}
                 </button>
                 })}
+                <SaveButton/>
             </div>
         </div>
     )

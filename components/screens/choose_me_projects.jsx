@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useSimplyContext } from "../../context/SimplyContext";
 import { updateUserDoc } from "../../services/user.services";
 
 
 function ChooseMeProjects() {
-  const { projectList, setProjectList, currentUser } = useSimplyContext();
+  const { projectList, setProjectList, currentUser ,setChangeDone} = useSimplyContext();
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDesc, setProjectDesc] = useState("");
   const [projectStacks, setProjectStacks] = useState("");
@@ -47,6 +48,7 @@ function ChooseMeProjects() {
     try {
       // console.log(projectList)
       updateUserDoc(currentUser.docid, { projects: projectList });
+      setChangeDone("change in projects")
     } catch (err) {
       console.log();
     }
@@ -64,7 +66,7 @@ function ChooseMeProjects() {
       console.log(projectList)
   },[projectList])
   useEffect(() => {
-    setProjectList(currentUser.projects);
+    setProjectList(currentUser.projects?currentUser.projects:[]);
   }, []);
   return (
     <div className="w-full  m-2 p-2">
@@ -126,7 +128,7 @@ function ChooseMeProjects() {
         </button>
       </div>
       <div className="flex flex-wrap xl:flex-none gap-3 justify-center pt-4 mx-4">
-        {projectList.map((p, i) => {
+        {projectList?.map((p, i) => {
           return (
             <div
               className=" w-80  border-2 border-black rounded p-4"

@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 
 
 function DashBoard() {
-  const {user,userNamesList}=useSimplyContext()
+  const {user,userNamesList,currentUser}=useSimplyContext()
   const [userNameNotFound,setUserNameNotFound]=useState(true)
   const router=useRouter()
   useEffect(() => {
@@ -29,7 +29,7 @@ function DashBoard() {
         <div>
           You have not selected the user name plz signout
         </div>
-        :<LayoutPage/>
+        :currentUser?<LayoutPage/>:<p>loading</p>
       }
     </div>
   );

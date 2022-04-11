@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, Fragment, useRef, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { social } from "../utiles/social_types";
@@ -8,7 +9,7 @@ function ChooseMeSocialMedia() {
   let [isOpen, setIsOpen] = useState(false);
   let [clickedSocial, setClickedSocial] = useState({});
   const linkRef = useRef();
-  const { selectedSocial, setSelectedSocial, error, currentUser } =
+  const { selectedSocial, setSelectedSocial, error, currentUser ,setChangeDone} =
     useSimplyContext();
   function closeModal() {
     setIsOpen(false);
@@ -33,13 +34,13 @@ function ChooseMeSocialMedia() {
   const handleSave = () => {
     try {
       updateUserDoc(currentUser.docid, { social: selectedSocial });
+      setChangeDone("change in social media")
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(()=>{
-    console.log(currentUser.social)
-    setSelectedSocial(currentUser.social)
+    setSelectedSocial(currentUser.social?currentUser.social:[])
   },[])
   return (
     <>

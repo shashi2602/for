@@ -2,11 +2,14 @@ import ChooseMe from "../choose_me";
 import ChooseMeInBrife from "../choose_me_in_brief";
 import { useState } from "react";
 import NavBar from "../NavBar";
+import { updateUserDoc } from "../../services/user.services";
+import { useSimplyContext } from "../../context/SimplyContext";
 function LayoutPage() {
-  const [selectedType, setType] = useState("PROFILE"); //TODO:change to PROFILE
-
+  const {currentUser,setChangeDone}=useSimplyContext()
+  const [selectedType, setType] = useState(currentUser?.last_visited_tab?currentUser?.last_visited_tab:"PROFILE"); //TODO:change to PROFILE
   function handleSelectType(type) {
     setType(type);
+    // updateUserDoc(currentUser.docid,{'last_visited_tab':type})
   }
   return (
     <>

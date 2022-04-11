@@ -10,6 +10,7 @@ import {useRouter} from "next/router"
 import { useSimplyContext } from "../context/SimplyContext";
 import { getUserDoc } from "../services/user.services";
 
+
 function User(props) {
   const router=useRouter();
   const username=router.query.username
