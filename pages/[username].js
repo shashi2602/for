@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState ,useEffect} from "react";
 import DarkMode from "../components/ui/DarkMode";
 import Footer from "../components/ui/Footer";

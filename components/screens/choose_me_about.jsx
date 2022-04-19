@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import md from "markdown-it";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { useSimplyContext } from "../../context/SimplyContext";
 
 

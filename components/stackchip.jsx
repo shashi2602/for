@@ -1,6 +1,12 @@
+import Image  from "next/image"
 function StackChip({ stack ,onDeleteClick}) {
     return <div  className=" p-2 flex gap-2 bg-gray-200 rounded " >
-        <img src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${stack?.name}/${stack?.name}-${stack?.svg}.svg`} className="h-5" alt={stack?.name} />
+        <Image
+        alt={stack?.name}
+        src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${stack?.name}/${stack?.name}-${stack?.svg}.svg`}
+        height={100}
+        width={100}
+        />
         <p className=" font-semibold text-sm">{stack?.name}</p>
         <button
             onClick={()=>onDeleteClick(stack)}
