@@ -40,7 +40,7 @@ function HomePage() {
           {hide ? (
             <div className="text-center pb-12 md:pb-16">
               <h1
-                className="text-5xl md:text-6xl dark:text-white  font-extrabold leading-tighter tracking-tighter mb-4"
+                className="text-3xl sm:text-5xl lg:text-6xl  dark:text-white  font-extrabold leading-tighter tracking-tighter mb-4"
                 data-aos="zoom-y-out"
               >
                 Make your Portfolio website easy with{" "}
@@ -54,7 +54,7 @@ function HomePage() {
                   data-aos="zoom-y-out"
                   data-aos-delay="150"
                 >
-                  People don't care about what you say, they care about what you build. 
+                 Let's make simple for developers
                 </p>
                 <div
                   className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"

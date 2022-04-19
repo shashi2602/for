@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useSimplyContext } from "../../context/SimplyContext";
 import { updateUserDoc } from "../../services/user.services";
 
-
 function ChooseMeProjects() {
-  const { projectList, setProjectList, currentUser ,setChangeDone} = useSimplyContext();
+  const { projectList, setProjectList, currentUser, setChangeDone } =
+    useSimplyContext();
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDesc, setProjectDesc] = useState("");
   const [projectStacks, setProjectStacks] = useState("");
@@ -15,14 +15,14 @@ function ChooseMeProjects() {
 
   const handleAdd = () => {
     if (projectId) {
-        const in_edit=projectList.find(project=>project.id===projectId)
-        if(in_edit){
-            in_edit["title"]= projectTitle
-            in_edit["short_info"]= projectDesc
-            in_edit["stacks"]= projectStacks
-            in_edit["live_link"]= projectLive
-            in_edit["source_code_link"]= projectSource
-        }
+      const in_edit = projectList.find((project) => project.id === projectId);
+      if (in_edit) {
+        in_edit.title = projectTitle;
+        in_edit.short_info = projectDesc;
+        in_edit.stacks = projectStacks;
+        in_edit.live_link = projectLive;
+        in_edit.source_code_link = projectSource;
+      }
     } else {
       const new_proj = {
         id: "project-" + (projectList.length + 1),
@@ -44,15 +44,7 @@ function ChooseMeProjects() {
   const handleDelete = (id) => {
     setProjectList(projectList.filter((p) => p.id != id));
   };
-  const handleSave = () => {
-    try {
-      // console.log(projectList)
-      updateUserDoc(currentUser.docid, { projects: projectList });
-      setChangeDone("change in projects")
-    } catch (err) {
-      console.log();
-    }
-  };
+
   const handleEdit = (id) => {
     const edit_project = projectList.find((project) => project.id === id);
     setProjectId(edit_project.id);
@@ -62,12 +54,7 @@ function ChooseMeProjects() {
     setProjectSource(edit_project.live_link);
     setProjectLive(edit_project.source_code_link);
   };
-  useEffect(()=>{
-      console.log(projectList)
-  },[projectList])
-  useEffect(() => {
-    setProjectList(currentUser.projects?currentUser.projects:[]);
-  }, []);
+
   return (
     <div className="w-full  m-2 p-2">
       <div className="grid grid-row">
@@ -127,6 +114,7 @@ function ChooseMeProjects() {
           ✔️Add
         </button>
       </div>
+
       <div className="flex flex-wrap xl:flex-none gap-3 justify-center pt-4 mx-4">
         {projectList?.map((p, i) => {
           return (
@@ -170,7 +158,6 @@ function ChooseMeProjects() {
           );
         })}
       </div>
-      <button onClick={handleSave}>submit</button>
     </div>
   );
 }

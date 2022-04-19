@@ -29,36 +29,25 @@ export default function NavBar() {
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex-1 flex  items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex  items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
-                  <div className="block lg:hidden pl-8">
-                    <p>
+                  <div className="block lg:hidden ">
+                    <Link href="/" passHref={true}>
                       <span className="text-3xl font-bold ">
-                        For
+                      ..-. O .-.
                       </span>
-                    </p>
+                    </Link>
                   </div>
+                  <Link href="/" passHref={true}>
                   <div
-                    className="hidden lg:block h-8 w-auto dark:text-white text-2xl"
-                    // src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                    // alt="Workflow"
+                    className="hidden lg:block h-8 w-auto dark:text-white text-2xl cursor-pointer"
                   >
                     <span className="font-bold">
                       ..-. --- .-.
                       <span className=" font-bold">{"DEV"}</span>
                     </span>
                   </div>
+                  </Link>
                 </div>
               </div>
               {currentUser ? (

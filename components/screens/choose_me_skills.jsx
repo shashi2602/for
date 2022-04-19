@@ -7,9 +7,9 @@ import { updateUserDoc } from "../../services/user.services";
 import useSWR from "swr";
 
 function ChooseMeSkills() {
-  const { currentUser, stackList, setStackList ,setChangeDone} = useSimplyContext();
+  const {stackList, setStackList ,setChangeDone} = useSimplyContext();
   const fetcher = (url) => fetch(url).then((res) => res.json());
-  const { data, error } = useSWR('https://raw.githubusercontent.com/shashi2602/devicon/master/devicon.json', fetcher)
+  const {data} = useSWR('https://raw.githubusercontent.com/shashi2602/devicon/master/devicon.json', fetcher)
 
   
   const handleOnSelect = (item) => {
@@ -17,22 +17,14 @@ function ChooseMeSkills() {
       ...items,
       { name: item.name, color: item.color, svg: item.versions.svg[0] },
     ]);
+    setChangeDone(true)
   };
   const handleRemoveStackFromList = (item) => {
     setStackList(stackList.filter((items) => items.name != item.name));
+    setChangeDone((true))
   };
 
-  const handleSave = () => {
-    try {
-      updateUserDoc(currentUser.docid, { skills: stackList });
-      setChangeDone("change")
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    setStackList(currentUser.skills?currentUser.skills:[]);
-  }, []);
+
 
   const formatResult = (item) => {
     return (

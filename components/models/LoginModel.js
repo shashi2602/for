@@ -2,6 +2,9 @@ import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import GoogleBtn from "../buttons/google_btn";
 import GithubBtn from "../buttons/github_btn";
+import Image from "next/image";
+import loginImage from "/public/login.png";
+
 function LoginModel() {
   let [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +29,7 @@ function LoginModel() {
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto "
+          className="fixed inset-0 z-10 overflow-y-auto backdrop-blur-sm "
           onClose={closeModal}
         >
           <div className="min-h-screen px-4 text-center dark:bg-gray-900 ">
@@ -58,27 +61,28 @@ function LoginModel() {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full dark:bg-gray-800 bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform  shadow-xl rounded-2xl">
-                <Dialog.Title
+                {/* <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 dark:text-white"
                 >
                   Welcome back.
-                </Dialog.Title>
-                <div className="mt-2">
-                  <GoogleBtn/>
-                  <br/>
-                  <GithubBtn/>
+                </Dialog.Title> */}
+               
+                <div className="mt-3 flex gap-2 w-full justify-center ">
+                  <GoogleBtn />
+                  <br />
+                  <GithubBtn />
                 </div>
 
-                <div className="mt-4">
+                {/* <div className="mt-4">
                   <button
                     type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-black border-black bg-yellow-400 border  rounded-md hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border  rounded-md hover:bg-red-500"
                     onClick={closeModal}
                   >
-                    Got it, thanks!
+                    close
                   </button>
-                </div>
+                </div> */}
               </div>
             </Transition.Child>
           </div>

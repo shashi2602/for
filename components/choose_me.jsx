@@ -1,7 +1,8 @@
+import { useState } from "react";
 import SaveButton from "./buttons/save_btn";
 import {chooseMeTypes} from "./utiles/choose_me_types"
 function ChooseMe(props) {
-
+    const [type,setType]=useState()
     
     return (
         <div className="h-auto w-full ">
@@ -10,12 +11,14 @@ function ChooseMe(props) {
                    return <button 
                    key={type.type_name}
                    className={`px-4 py-1  border-2 border-solid border-black font-semibold rounded hover:bg-black hover:text-yellow-300  transition duration-300 ease-in-out ${props.typeSelected===type.type_name?"bg-yellow-300 border-b-4 shadow-lg shadow-yellow-200":''}`}
-                   onClick={()=>props.handleChange(type.type_name)}
+                   onClick={()=>{
+                    setType(type.type_name)   
+                    props.handleChange(type.type_name)}}
                    >
                    {type.icon} {type.name}
                 </button>
                 })}
-                <SaveButton/>
+                {type==="MYWISH"?<>        </>:<SaveButton/>}
             </div>
         </div>
     )
