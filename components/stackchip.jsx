@@ -4,8 +4,8 @@ function StackChip({ stack ,onDeleteClick}) {
         <Image
         alt={stack?.name}
         src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${stack?.name}/${stack?.name}-${stack?.svg}.svg`}
-        height={100}
-        width={100}
+        height={20}
+        width={20}
         />
         <p className=" font-semibold text-sm">{stack?.name}</p>
         <button
