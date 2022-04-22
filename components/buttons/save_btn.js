@@ -25,12 +25,11 @@ export default function SaveButton() {
       last_visited_tab: currentTab,
     };
     try {
-      updateUserDoc(currentUser.docid,updateData);
-      console.log(updateData)
-      toast.success("😍 successfully published ")
-    } 
-    catch (e) {
-      toast.error(" 😭 error occured")
+      updateUserDoc(currentUser.docid, updateData);
+      console.log(updateData);
+      toast.success("😍 successfully published ");
+    } catch (e) {
+      toast.error(" 😭 error occured");
     }
   };
   return (

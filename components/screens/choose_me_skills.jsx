@@ -7,24 +7,24 @@ import { updateUserDoc } from "../../services/user.services";
 import useSWR from "swr";
 
 function ChooseMeSkills() {
-  const {stackList, setStackList ,setChangeDone} = useSimplyContext();
+  const { stackList, setStackList, setChangeDone } = useSimplyContext();
   const fetcher = (url) => fetch(url).then((res) => res.json());
-  const {data} = useSWR('https://raw.githubusercontent.com/shashi2602/devicon/master/devicon.json', fetcher)
+  const { data } = useSWR(
+    "https://raw.githubusercontent.com/shashi2602/devicon/master/devicon.json",
+    fetcher
+  );
 
-  
   const handleOnSelect = (item) => {
     setStackList((items) => [
       ...items,
       { name: item.name, color: item.color, svg: item.versions.svg[0] },
     ]);
-    setChangeDone(true)
+    setChangeDone(true);
   };
   const handleRemoveStackFromList = (item) => {
     setStackList(stackList.filter((items) => items.name != item.name));
-    setChangeDone((true))
+    setChangeDone(true);
   };
-
-
 
   const formatResult = (item) => {
     return (

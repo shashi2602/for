@@ -21,7 +21,6 @@ function GithubBtn(props) {
         history.push("dashboard");
         toast.success("🙏 welcome back ");
       });
-      
     } catch (err) {
       toast.error("😭 error occured");
     }

@@ -67,7 +67,7 @@ function LoginModel() {
                 >
                   Welcome back.
                 </Dialog.Title> */}
-               
+
                 <div className="mt-3 flex gap-2 w-full justify-center ">
                   <GoogleBtn />
                   <br />

@@ -2,7 +2,7 @@
 import React from "react";
 
 function UserDetails(props) {
-  const profile=props.details
+  const profile = props.details;
   return (
     <div>
       <h1 align="center" className="text-3xl font-bold text-red-500 p-3">

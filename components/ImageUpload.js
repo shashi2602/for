@@ -5,7 +5,8 @@ import Image from "next/image";
 import sampleProfile from "../public/avatar-2.png";
 
 function ImageUpload() {
-  const { CloudinaryImage, setCloudinaryImage, user,currentUser } = useSimplyContext();
+  const { CloudinaryImage, setCloudinaryImage, user, currentUser } =
+    useSimplyContext();
   useEffect(() => {
     setCloudinaryImage(currentUser?.profile_img);
     // eslint-disable-next-line react-hooks/exhaustive-deps

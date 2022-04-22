@@ -14,7 +14,7 @@ function ChooseMeSocialMedia() {
 
   function closeModel() {
     setIsOpen(false);
-    setInputError(false)
+    setInputError(false);
   }
 
   function openModal(clicked) {
@@ -44,10 +44,10 @@ function ChooseMeSocialMedia() {
             }
           })
         );
-        setChangeDone(true)
+        setChangeDone(true);
       } else {
         setSelectedSocial((item) => [...item, final_selected_social]);
-        setChangeDone(true)
+        setChangeDone(true);
       }
       closeModel();
     }
@@ -55,7 +55,7 @@ function ChooseMeSocialMedia() {
 
   const handleRemoveSocial = (e) => {
     setSelectedSocial(selectedSocial.filter((item) => item.value != e.value));
-    setChangeDone(true)
+    setChangeDone(true);
   };
 
   return (
@@ -135,7 +135,7 @@ export function Model({
   clickedSocial,
   setClickedSocial,
   handleLinkSubmit,
-  error
+  error,
 }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -192,11 +192,15 @@ export function Model({
                   type="text"
                   name="link"
                   placeholder="https://"
-                  className={`w-full h-10 p-2 border-2 border-black ${error&&"border-red-600"} rounded`}
+                  className={`w-full h-10 p-2 border-2 border-black ${
+                    error && "border-red-600"
+                  } rounded`}
                   value={clickedSocial?.link}
                   onChange={handleChange}
                 />
-                {error&&<p className="text-red-600 font-semibold">required field</p>}
+                {error && (
+                  <p className="text-red-600 font-semibold">required field</p>
+                )}
               </div>
 
               <div className="mt-4 ">

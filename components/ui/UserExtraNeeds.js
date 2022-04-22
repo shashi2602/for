@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function UserExtraNeeds() {
-    return (
-        <div>
-            Extra need goes here
-        </div>
-    )
+  return <div>Extra need goes here</div>;
 }
 
-export default UserExtraNeeds
+export default UserExtraNeeds;

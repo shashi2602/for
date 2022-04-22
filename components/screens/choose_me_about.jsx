@@ -1,14 +1,8 @@
-
 import md from "markdown-it";
 import { useSimplyContext } from "../../context/SimplyContext";
 
-
 function ChooseMeAbout() {
-  const {about,setAbout,setChangeDone} = useSimplyContext();
-
-
-
-
+  const { about, setAbout, setChangeDone } = useSimplyContext();
 
   return (
     <div className="w-full m-2">
@@ -17,12 +11,12 @@ function ChooseMeAbout() {
         placeholder="Till Your Story..✏️ "
         onChange={(e) => {
           setAbout(e.target.value);
-          setChangeDone(true)
+          setChangeDone(true);
         }}
         value={about}
       ></textarea>
       <h4 className="font-semibold">🖨 Preview</h4>
-      {about.length? (
+      {about.length ? (
         <div className="bg-gray-100 rounded  mt-2 p-2 ">
           <div
             className="prose"
@@ -32,7 +26,6 @@ function ChooseMeAbout() {
       ) : (
         <h2>start typing</h2>
       )}
-
     </div>
   );
 }

@@ -33,20 +33,16 @@ export default function NavBar() {
                 <div className="flex-shrink-0 flex items-center">
                   <div className="block lg:hidden ">
                     <Link href="/" passHref={true}>
-                      <span className="text-3xl font-bold ">
-                      ..-. O .-.
-                      </span>
+                      <span className="text-3xl font-bold ">..-. O .-.</span>
                     </Link>
                   </div>
                   <Link href="/" passHref={true}>
-                  <div
-                    className="hidden lg:block h-8 w-auto dark:text-white text-2xl cursor-pointer"
-                  >
-                    <span className="font-bold">
-                      ..-. --- .-.
-                      <span className=" font-bold">{"DEV"}</span>
-                    </span>
-                  </div>
+                    <div className="hidden lg:block h-8 w-auto dark:text-white text-2xl cursor-pointer">
+                      <span className="font-bold">
+                        ..-. --- .-.
+                        <span className=" font-bold">{"DEV"}</span>
+                      </span>
+                    </div>
                   </Link>
                 </div>
               </div>
@@ -83,48 +79,48 @@ export default function NavBar() {
                         <Menu.Item>
                           {({ active }) => (
                             <span>
-                            <Link href="/">
-                              <a
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-white hover:text-gray-700 "
-                                )}
-                              >
-                                {currentUser.displayName}
-                              </a>
-                            </Link>
+                              <Link href="/">
+                                <a
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-white hover:text-gray-700 "
+                                  )}
+                                >
+                                  {currentUser.displayName}
+                                </a>
+                              </Link>
                             </span>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
                             <span>
-                            <Link href="/dashboard">
-                              <a
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-white hover:text-gray-700"
-                                )}
-                              >
-                                Dashboard
-                              </a>
-                            </Link>
+                              <Link href="/dashboard">
+                                <a
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-white hover:text-gray-700"
+                                  )}
+                                >
+                                  Dashboard
+                                </a>
+                              </Link>
                             </span>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
                             <span>
-                            <Link href="/@shashippk">
-                              <a
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-white hover:text-gray-700"
-                                )}
-                              >
-                                Go live
-                              </a>
-                            </Link>
+                              <Link href="/@shashippk">
+                                <a
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-white hover:text-gray-700"
+                                  )}
+                                >
+                                  Go live
+                                </a>
+                              </Link>
                             </span>
                           )}
                         </Menu.Item>
@@ -134,7 +130,7 @@ export default function NavBar() {
                               onClick={() => {
                                 signOut();
                                 localStorage.removeItem("userDoc");
-                                localStorage.removeItem("current_user")
+                                localStorage.removeItem("current_user");
                                 history.push("/");
                               }}
                               className={classNames(

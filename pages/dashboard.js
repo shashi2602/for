@@ -9,18 +9,9 @@ import unfi from "/public/tokyo-binoculars-in-web-space.png";
 import Image from "next/image";
 
 function DashBoard() {
-  const { user, userNamesList, currentUser, signOut } = useSimplyContext();
-  const [userNameNotFound, setUserNameNotFound] = useState(true);
-  const router = useRouter();
+  const { user, userNameNotFound, currentUser, signOut } = useSimplyContext();
 
-  useEffect(() => {
-    const find = userNamesList.some((u) => u.uid === user.uid);
-    if (find) {
-      setUserNameNotFound(false);
-    } else {
-      setUserNameNotFound(true);
-    }
-  }, [userNamesList]);
+  const router = useRouter();
 
   useEffect(() => {
     if (!user) {
