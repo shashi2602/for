@@ -13,7 +13,10 @@ function ChooseMeProfile() {
 
   const handelChange = (e) => {
     const { name, value } = e.target;
-    setProfileData((prev) => ({ ...prev, [name]: value }));
+    setProfileData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
     setChangeDone(true);
   };
 
@@ -47,11 +50,11 @@ function ChooseMeProfile() {
                   ? profileData?.profile_img
                   : sampleProfile
               }
-              alt={profileData?.username}
+              alt={currentUser?.username}
               className="rounded-full object-cover"
               height={350}
               width={350}
-            ></Image>
+            />
           </div>
           <label
             htmlFor="profile_img"
@@ -106,7 +109,7 @@ function InputField(props) {
     <input
       id={props.name}
       type="text"
-      className=" bg-gray-200 rounded border-2 border-black h-15 py-2 px-3  mb-3"
+      className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3"
       placeholder={props.name}
       value={props.value}
       name={props.name}

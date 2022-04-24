@@ -1,6 +1,6 @@
 import React from "react";
 import { useSimplyContext } from "../../context/SimplyContext";
-import { WriteUser } from "../../services/user.services";
+import { addUser } from "../../services/user.services";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
@@ -17,7 +17,7 @@ function GithubBtn(props) {
           user_id: result.uid,
           email: result.email,
         };
-        props.username && WriteUser(user_details);
+        props.username && addUser(user_details);
         history.push("dashboard");
         toast.success("🙏 welcome back ");
       });

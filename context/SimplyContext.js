@@ -3,6 +3,7 @@ import { GoogleProvider, GithubProvider, auth } from "../firebase";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { getAllUsers, getUserDoc } from "../services/user.services";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { setCookie, destroyCookie } from "nookies";
 
 const Simply = React.createContext();
 
@@ -25,22 +26,21 @@ function SimplyContext({ children }) {
   //auth state change
   const [user, loading] = useAuthState(auth);
 
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+    setCookie(null, "UID", user?.uid);
+  }, [user]);
+
   //Fetching the usernames
   useEffect(() => {
     getAllUsers().then((users) => {
-      setUserNamesList(
-        users.docs.map((doc) => ({
-          site_username: doc.data().site_username,
-          docid: doc.id,
-          uid: doc.data().user_id,
-        }))
-      );
+      setUserNamesList(users.docs.map((doc) => ({ ...doc.data() })));
     });
   }, [user]);
 
   useEffect(() => {
-    const find = userNamesList.some((u) => u.uid === user?.uid);
-    if (find) {
+    const found = userNamesList.some((u) => u.uid === user?.uid);
+    if (found) {
       setUserNameNotFound(false);
     } else {
       setUserNameNotFound(true);
@@ -48,15 +48,21 @@ function SimplyContext({ children }) {
   }, [userNamesList, user]);
 
   useEffect(() => {
-    const cuser = userNamesList.find((u) => u.uid === user?.uid);
-    cuser &&
-      getUserDoc(cuser.docid).then((current_user) => {
-        setCurrentUser({ ...current_user.data(), docid: current_user.id });
+    if (user) {
+      getUserDoc(user?.uid).then((current_user) => {
+        setCurrentUser({
+          ...current_user.data(),
+          docid: current_user.data().uid,
+        });
         localStorage.setItem(
           "current_user",
-          JSON.stringify({ ...current_user.data(), docid: current_user.id })
+          JSON.stringify({
+            ...current_user.data(),
+            docid: current_user.data().uid,
+          })
         );
       });
+    }
   }, [userNamesList, user, changeDone]);
 
   useEffect(() => {
@@ -65,11 +71,11 @@ function SimplyContext({ children }) {
     setStackList(currentUser?.skills ? currentUser.skills : []);
     setSelectedSocial(currentUser?.social ? currentUser.social : []);
     setProfileData({
-      username: currentUser?.username,
-      expertise: currentUser?.expertise,
-      country: currentUser?.country,
-      status: currentUser?.status,
-      profile_img: currentUser?.profile_img,
+      username: currentUser?.username ? currentUser.username : "",
+      expertise: currentUser?.expertise ? currentUser.expertise : "",
+      country: currentUser?.country ? currentUser.country : "",
+      status: currentUser?.status ? currentUser.status : "",
+      profile_img: currentUser?.profile_img ? currentUser.profile_img : "",
     });
   }, [currentUser]);
 
@@ -84,6 +90,7 @@ function SimplyContext({ children }) {
   const signOut = () => {
     auth.signOut();
     localStorage.removeItem("current_user");
+    destroyCookie(null, "UID");
     setCurrentUser("");
     setChangeDone(false);
   };

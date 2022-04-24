@@ -3,7 +3,7 @@ import React from "react";
 import sampleimg from "../../public/avatar-male.png";
 
 function UserImage(props) {
-  const profile = props.image;
+  const profile = props.details;
   return (
     <div className="flex justify-center pt-3">
       <Image

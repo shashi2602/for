@@ -35,16 +35,17 @@ function HomePage() {
   }, [username]);
 
   const handleChange = (e) => {
-    setUsername(e);
+    e.preventDefault();
+    setUsername(e.target.value);
   };
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (user) {
-      router.replace("/dashboard");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     router.replace("/dashboard");
+  //   }
+  // }, [user]);
 
   return (
     <>
@@ -131,7 +132,7 @@ function HomePage() {
                         placeholder="for.dev/@"
                         style={{ width: "60%" }}
                         onChange={(e) => {
-                          handleChange(e.target.value);
+                          handleChange(e);
                         }}
                       />
                       <p className="text-red-600 font-semibold">

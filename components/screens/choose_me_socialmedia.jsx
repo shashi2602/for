@@ -1,9 +1,12 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, Fragment, useRef, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { social } from "../utiles/social_types";
 import { useSimplyContext } from "../../context/SimplyContext";
 import Link from "next/link";
+import Image from "next/image";
+import { firstLetterUpper } from "../utiles/textutils";
 
 function ChooseMeSocialMedia() {
   let [isOpen, setIsOpen] = useState(false);
@@ -61,15 +64,14 @@ function ChooseMeSocialMedia() {
   return (
     <>
       {selectedSocial?.length != 0 ? (
-        <div className="w-full bg-gray-100 rounded my-4 p-2">
+        <div className="w-full bg-gray-100 dark:bg-gray-700 rounded my-4 p-2">
+          <p className="font-semibold text-lg px-1 mb-2">👇Your's</p>
           <div className="flex flex-wrap  gap-3">
             {selectedSocial?.map((s, i) => {
               return (
                 <div key={i}>
-                  <div className=" p-2 flex gap-2 bg-gray-200 rounded ">
-                    <i
-                      className={`fa fa-${s.value} text-${s.color}  text-lg`}
-                    ></i>
+                  <div className=" p-2 flex gap-2 bg-gray-200 dark:bg-gray-800 rounded ">
+                    <Image alt={s.value} src={s.icon} height={20} width={20} />
                     <Link
                       href={`${
                         s.link_placeholder
@@ -79,7 +81,7 @@ function ChooseMeSocialMedia() {
                       passHref={true}
                     >
                       <a target="_blank" className=" font-semibold text-lg">
-                        {s?.label}
+                        {firstLetterUpper(s?.value)}
                       </a>
                     </Link>
 
@@ -93,7 +95,9 @@ function ChooseMeSocialMedia() {
           </div>
         </div>
       ) : (
-        <></>
+        <p className="text-center py-4 font-semibold">
+          Click below social icon to add social account
+        </p>
       )}
       <div className=" w-full  rounded py-2">
         <div className="flex flex-wrap justify-center gap-3">
@@ -101,14 +105,14 @@ function ChooseMeSocialMedia() {
             return (
               <div
                 key={i}
-                className="bg-gray-300 cursor-pointer h-24 w-24 rounded flex justify-center"
+                className="bg-gray-300 dark:bg-gray-700 cursor-pointer hover:bg-yellow-300 h-24 w-24 rounded flex justify-center  transition duration-300 ease-in-out"
                 onClick={() => {
                   openModal(s);
                 }}
               >
                 <div className="py-4 flex items-center ">
                   <div>
-                    <i className={`fa fa-${s.value} text- text-3xl`}></i>
+                    <Image alt={s.value} src={s.icon} height={40} width={40} />
                   </div>
                 </div>
               </div>
@@ -158,7 +162,7 @@ export function Model({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0" />
+            <Dialog.Overlay className="fixed inset-0 " />
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}
@@ -177,22 +181,26 @@ export function Model({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white border-2 border-black rounded-md">
+            <div className="inline-block w-full dark:bg-gray-700 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white border-2 border-black  dark:border-gray-800 rounded-md">
               <Dialog.Title
                 as="h3"
-                className="text-lg font-medium leading-6 text-gray-900"
+                className="text-lg flex font-medium leading-6 text-gray-900 dark:text-gray-900"
               >
-                <i
-                  className={`fa fa-${clickedSocial.value} text-${clickedSocial.color}`}
-                ></i>{" "}
-                {clickedSocial.label}
+                <Image
+                  alt={clickedSocial.value}
+                  src={clickedSocial.icon}
+                  height={15}
+                  width={15}
+                />
+
+                <p className="px-2">{clickedSocial.value}</p>
               </Dialog.Title>
               <div className="mt-4">
                 <input
                   type="text"
                   name="link"
-                  placeholder="https://"
-                  className={`w-full h-10 p-2 border-2 border-black ${
+                  placeholder={clickedSocial.placeholder}
+                  className={`w-full h-10 p-2 border-2 border-black  dark:border-gray-800 ${
                     error && "border-red-600"
                   } rounded`}
                   value={clickedSocial?.link}

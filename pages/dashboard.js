@@ -7,12 +7,13 @@ import NavBar from "../components/NavBar";
 
 import unfi from "/public/tokyo-binoculars-in-web-space.png";
 import Image from "next/image";
+import { userRef } from "../services/user.services";
+import { getDocs } from "firebase/firestore";
+import nookies from "nookies";
 
-function DashBoard() {
+function DashBoard({ found }) {
   const { user, userNameNotFound, currentUser, signOut } = useSimplyContext();
-
   const router = useRouter();
-
   useEffect(() => {
     if (!user) {
       router.replace("/");
@@ -20,8 +21,8 @@ function DashBoard() {
   }, [user]);
 
   return (
-    <div>
-      {userNameNotFound ? (
+    <div className="dark:bg-gray-800">
+      {!found ? (
         <div>
           <NavBar />
           <div className="text-center mt-[5rem]">
@@ -58,3 +59,19 @@ function DashBoard() {
 }
 
 export default DashBoard;
+
+export async function getServerSideProps(context) {
+  const snapshot = await getDocs(userRef);
+  let users = [];
+  snapshot.docs.forEach((doc) => {
+    users.push({ ...doc.data() });
+  });
+  const cookies = nookies.get(context);
+  const found = users.some((u) => u.uid === cookies.UID);
+  return {
+    props: {
+      usernameslist: users,
+      found: found,
+    }, // will be passed to the page component as props
+  };
+}

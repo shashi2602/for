@@ -7,64 +7,31 @@ import UserDetails from "../components/ui/UserDetails";
 import UserImage from "../components/ui/UserImage";
 import UserSocial from "../components/ui/UserSocial";
 import UserStack from "../components/ui/UserStack";
-import { useRouter } from "next/router";
-import { useSimplyContext } from "../context/SimplyContext";
-import { getUserDoc } from "../services/user.services";
+import { userRef } from "../services/user.services";
+import { getDocs } from "firebase/firestore";
+import NormalTemplete from "../components/ui/normal_templete";
 
-function User(props) {
-  const router = useRouter();
-  const username = router.query.username;
-  const { userNamesList } = useSimplyContext();
-  const [userData, setUserData] = useState();
-  const [userFound, setUserFound] = useState(true);
-  console.log(props.posts);
-  const getdata = () => {
-    const userdoc = userNamesList.find(
-      (user) => user.site_username === username
-    );
-    if (userdoc) {
-      setUserFound(true);
-      getUserDoc(userdoc.docid)
-        .then((userdata) => {
-          console.log(userdata.data());
-          setUserData(userdata.data());
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-  useEffect(() => {
-    const unsubscribe = getdata();
-    return () => {
-      unsubscribe;
-    };
-  }, [userNamesList]);
-
+function User({ data }) {
+  console.log(data);
   return (
     <>
-      {userFound && userData ? (
-        <>
-          <DarkMode />
-          <div className=" sm:px-7 lg:px-72 md:7 2xl:7 px-7">
-            <UserImage image={userData} />
-            <UserDetails details={userData} />
-            <UserSocial />
-            <UserAboutMarkdown />
-            <UserStack />
-          </div>
-          <Footer />
-        </>
-      ) : (
-        <div>NO USER FOUND,PLEASE CREATE ONE</div>
-      )}
+      <DarkMode />
+      <NormalTemplete profile={data} />
     </>
   );
 }
 
-// export async function getServerSideProps(context) {
-//   return {
-//     props: {}, // will be passed to the page component as props
-//   }
-// }
+export async function getServerSideProps({ params }) {
+  const snapshot = await getDocs(userRef);
+  let users = [];
+  snapshot.docs.forEach((doc) => {
+    users.push({ ...doc.data() });
+  });
+  const data = users.find((user) => user.site_username == params.username);
+  return {
+    props: {
+      data: data,
+    }, // will be passed to the page component as props
+  };
+}
 export default User;

@@ -11,4 +11,3 @@ export default app
 export const GoogleProvider =new GoogleAuthProvider()
 export const GithubProvider= new GithubAuthProvider()
 export const firestoreDB=getFirestore()
-

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSimplyContext } from "../../context/SimplyContext";
-import { WriteUser } from "../../services/user.services";
+import { addUser, addUsername } from "../../services/user.services";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
@@ -14,10 +14,12 @@ function GoogleBtn(props) {
           site_username: props.username,
           username: result.user.displayName,
           profile_img: result.user.photoURL,
-          user_id: result.user.uid,
+          uid: result.user.uid,
           email: result.user.email,
         };
-        props.username && WriteUser(user_details);
+        props.username &&
+          addUsername({ site_username: props.username, uid: result.user.uid });
+        props.username && addUser(user_details);
         history.push("dashboard");
         toast.success(`🙏 welcome back ${result.user.displayName}`);
       });

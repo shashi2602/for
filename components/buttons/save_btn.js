@@ -6,6 +6,7 @@ import { updateUserDoc } from "../../services/user.services";
 export default function SaveButton() {
   const {
     changeDone,
+    setChangeDone,
     selectedSocial,
     projectList,
     about,
@@ -28,13 +29,14 @@ export default function SaveButton() {
       updateUserDoc(currentUser.docid, updateData);
       console.log(updateData);
       toast.success("😍 successfully published ");
+      setChangeDone(false);
     } catch (e) {
       toast.error(" 😭 error occured");
     }
   };
   return (
     <button
-      className="text-white bg-black font-semibold px-3 py-2 rounded disabled:bg-gray-200 "
+      className="text-white bg-black font-semibold px-3 py-2 rounded disabled:bg-gray-700 "
       onClick={handleSubmit}
       disabled={!changeDone}
     >

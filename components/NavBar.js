@@ -20,8 +20,7 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
-  const { signOut, user } = useSimplyContext();
-  const currentUser = user;
+  const { signOut, user, currentUser } = useSimplyContext();
   const history = useRouter();
   return (
     <Disclosure as="nav" className="dark:bg-gray-900 bg-gray-100">
@@ -46,7 +45,7 @@ export default function NavBar() {
                   </Link>
                 </div>
               </div>
-              {currentUser ? (
+              {user ? (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
@@ -56,11 +55,11 @@ export default function NavBar() {
                         <Image
                           className="rounded-full"
                           src={
-                            currentUser.photoURL
-                              ? currentUser.photoURL
+                            user.photoURL
+                              ? user.photoURL
                               : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                           }
-                          alt={currentUser?.displayName}
+                          alt={user?.displayName}
                           height={40}
                           width={40}
                         />
@@ -86,7 +85,7 @@ export default function NavBar() {
                                     "block px-4 py-2 text-sm text-white hover:text-gray-700 "
                                   )}
                                 >
-                                  {currentUser.displayName}
+                                  {user.displayName}
                                 </a>
                               </Link>
                             </span>
@@ -111,7 +110,7 @@ export default function NavBar() {
                         <Menu.Item>
                           {({ active }) => (
                             <span>
-                              <Link href="/@shashippk">
+                              <Link href={`/${currentUser.site_username}`}>
                                 <a
                                   className={classNames(
                                     active ? "bg-gray-100" : "",

@@ -1,14 +1,15 @@
 import Image from "next/image";
+import { firstLetterUpper } from "./utiles/textutils";
 function StackChip({ stack, onDeleteClick }) {
   return (
-    <div className=" p-2 flex gap-2 bg-gray-200 rounded ">
+    <div className=" p-2 flex gap-2 bg-gray-200  dark:bg-gray-700 rounded ">
       <Image
         alt={stack?.name}
         src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${stack?.name}/${stack?.name}-${stack?.svg}.svg`}
         height={20}
         width={20}
       />
-      <p className=" font-semibold text-sm">{stack?.name}</p>
+      <p className=" font-semibold text-sm">{firstLetterUpper(stack?.name)}</p>
       <button onClick={() => onDeleteClick(stack)}>
         <svg
           viewBox="0 0 15 15"

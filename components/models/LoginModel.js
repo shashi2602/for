@@ -32,7 +32,7 @@ function LoginModel() {
           className="fixed inset-0 z-10 overflow-y-auto backdrop-blur-sm "
           onClose={closeModal}
         >
-          <div className="min-h-screen px-4 text-center dark:bg-gray-900 ">
+          <div className="min-h-screen px-4 text-center  ">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -60,7 +60,7 @@ function LoginModel() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full dark:bg-gray-800 bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform  shadow-xl rounded-2xl">
+              <div className="inline-block w-full dark:bg-gray-700 bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform  shadow-xl rounded-2xl">
                 {/* <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 dark:text-white"

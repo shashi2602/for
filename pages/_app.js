@@ -1,16 +1,15 @@
 import SimplyContext from "../context/SimplyContext";
 import "../styles/globals.css";
-import store from "../store/userStore";
-import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "next-themes";
 
 function MyApp({ Component, pageProps }) {
   return (
     <SimplyContext>
-      {/* <Provider store={store}> */}
-      <Component {...pageProps} />
-      <Toaster position="top-right" />
-      {/* </Provider> */}
+      <ThemeProvider attribute="class">
+        <Component {...pageProps} />
+        <Toaster position="top-right" />
+      </ThemeProvider>
     </SimplyContext>
   );
 }

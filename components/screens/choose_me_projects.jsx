@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSimplyContext } from "../../context/SimplyContext";
 import { updateUserDoc } from "../../services/user.services";
+import GithubProjectsBtn from "../buttons/githubProjectsBtn";
+import { firstLetterUpper } from "../utiles/textutils";
 
 function ChooseMeProjects() {
-  const { projectList, setProjectList, currentUser, setChangeDone } =
-    useSimplyContext();
+  const { projectList, setProjectList, setChangeDone } = useSimplyContext();
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDesc, setProjectDesc] = useState("");
   const [projectStacks, setProjectStacks] = useState("");
@@ -25,15 +27,17 @@ function ChooseMeProjects() {
       }
     } else {
       const new_proj = {
-        id: "project-" + (projectList.length + 1),
-        title: projectTitle,
-        short_info: projectDesc,
+        id: "project-" + projectList.length + 1,
+        title: firstLetterUpper(projectTitle),
+        short_info: firstLetterUpper(projectDesc),
         stacks: projectStacks,
         live_link: projectLive,
         source_code_link: projectSource,
       };
+      console.log(new_proj);
       setProjectList((prev) => [...prev, new_proj]);
     }
+    setChangeDone(true);
     setProjectTitle("");
     setProjectDesc("");
     setProjectStacks("");
@@ -43,6 +47,7 @@ function ChooseMeProjects() {
   };
   const handleDelete = (id) => {
     setProjectList(projectList.filter((p) => p.id != id));
+    setChangeDone(true);
   };
 
   const handleEdit = (id) => {
@@ -53,15 +58,17 @@ function ChooseMeProjects() {
     setProjectStacks(edit_project.stacks);
     setProjectSource(edit_project.live_link);
     setProjectLive(edit_project.source_code_link);
+    setChangeDone(true);
   };
 
   return (
     <div className="w-full  m-2 p-2">
+      <GithubProjectsBtn />
       <div className="grid grid-row">
         <input
           id="project title"
           type="text"
-          className=" bg-gray-200 rounded border-2 border-black h-15 py-2 px-3 w-full sm:w-auto mb-3"
+          className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black h-15 py-2 px-3 w-full sm:w-auto mb-3"
           placeholder="Project name"
           value={projectTitle}
           onChange={(e) => {
@@ -71,7 +78,7 @@ function ChooseMeProjects() {
         />
         <textarea
           id="project title"
-          className=" bg-gray-200 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full"
+          className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full"
           placeholder="About project in short"
           value={projectDesc}
           onChange={(e) => {
@@ -81,7 +88,7 @@ function ChooseMeProjects() {
         <div className="grid sm:grid-cols-3 sm:gap-2 ">
           <input
             type="text"
-            className=" bg-gray-200 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full  "
+            className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full  "
             placeholder="used to build project ',' separated  "
             value={projectStacks}
             onChange={(e) => {
@@ -90,7 +97,7 @@ function ChooseMeProjects() {
           />
           <input
             type="text"
-            className=" bg-gray-200 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full "
+            className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full "
             placeholder="source link(Github..etc)"
             value={projectSource}
             onChange={(e) => {
@@ -99,7 +106,7 @@ function ChooseMeProjects() {
           />
           <input
             type="text"
-            className=" bg-gray-200 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full "
+            className=" bg-gray-200 dark:bg-gray-700  rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full "
             placeholder="Does project is live? Then provide link"
             value={projectLive}
             onChange={(e) => {
@@ -116,34 +123,42 @@ function ChooseMeProjects() {
       </div>
 
       <div className="flex flex-wrap xl:flex-none gap-3 justify-center pt-4 mx-4">
-        {projectList?.map((p, i) => {
+        {projectList?.map((p) => {
           return (
             <div
               className=" w-80  border-2 border-black rounded p-4"
               key={p.id}
             >
               <div className="flex justify-between">
-                <i className="fa fa-folder-o text-2xl"></i>
+                <Link href={p?.source_code_link} passHref>
+                  <a target={"_blank"}>
+                    <i className="fa fa-folder-o text-2xl "></i>
+                  </a>
+                </Link>
                 <div className="flex gap-2 pt-2">
                   <i
-                    className="fa fa-pencil"
+                    className="fa fa-pencil pt-1"
                     onClick={() => {
                       handleEdit(p.id);
                     }}
                   ></i>
                   <i
-                    className="fa fa-trash text-red-500"
+                    className="fa fa-trash pt-1 text-red-500"
                     onClick={() => {
                       handleDelete(p.id);
                     }}
                   ></i>
-                  <i className="fa fa-external-link "></i>
+                  <Link href={p.live_link} passHref>
+                    <a target={"_blank"}>
+                      <i className="fa fa-external-link pt-1 "></i>
+                    </a>
+                  </Link>
                 </div>
               </div>
-              <p className="font-semibold my-2">{p.title}</p>
+              <p className="font-semibold my-2">{firstLetterUpper(p.title)}</p>
               <p>{p.short_info}</p>
               <div className="flex flex-wrap gap-2 mt-2">
-                {p.stacks.split(",").map((s, i) => {
+                {p?.stacks?.split(",").map((s, i) => {
                   return (
                     <p
                       key={i}
