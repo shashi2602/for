@@ -1,4 +1,4 @@
-import { firestoreDB, auth } from "../firebase";
+import { firestoreDB } from "../firebase";
 import {
   collection,
   addDoc,
@@ -15,7 +15,7 @@ const addUsername = (username) => {
   return addDoc(usernamesRef, username);
 };
 
-const addUser = async (user) => {
+const addUser = (user) => {
   const docRef = doc(firestoreDB, "users", user?.uid);
   setDoc(docRef, user, { merge: true });
 };

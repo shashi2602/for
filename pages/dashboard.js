@@ -21,11 +21,11 @@ function DashBoard({ found }) {
   }, [user]);
 
   return (
-    <div className="dark:bg-gray-800">
+    <div className="h-screen">
       {!found ? (
         <div>
           <NavBar />
-          <div className="text-center mt-[5rem]">
+          <div className="text-center mt-[5rem] ">
             <Image
               alt="username_not_found_image"
               src={unfi}

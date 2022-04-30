@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
 function GoogleBtn(props) {
-  const { GoogleSignInWithPopUP, setError } = useSimplyContext();
+  const { GoogleSignInWithPopUP } = useSimplyContext();
   const history = useRouter();
   const handleClick = () => {
     try {

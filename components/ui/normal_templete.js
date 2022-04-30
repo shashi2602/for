@@ -5,12 +5,13 @@ import { firstLetterUpper } from "../utiles/textutils";
 import md from "markdown-it";
 import Link from "next/link";
 import DarkMode from "./DarkMode";
+import { MarkdownPreview } from "../markdownPreview";
 
 function NormalTemplete({ profile }) {
   return (
     <div className=" sm:px-7 lg:px-72 md:7 2xl:7 px-7 pt-5 ">
       <div className="flex flex-wrap lg:flex-none gap-4">
-        <div className="grid place-content-center  lg:justify-start  lg:w-auto w-full flex-none lg:flex-1 auto-rows-max ">
+        <div className="grid  lg:sticky top-0 lg:justify-start  lg:w-auto w-full flex-none lg:flex-1 auto-rows-max ">
           {/* image  */}
           <div className="flex justify-center pt-3">
             <Image
@@ -89,12 +90,9 @@ function NormalTemplete({ profile }) {
         {/* right side */}
         <div className="py-4 lg:py-8 flex-1">
           <h1 className="text-xl font-semibold ">About</h1>
-          <div
-            className="prose text-justify max-w-none py-2 prose-strong:underline dark:prose-invert"
-            dangerouslySetInnerHTML={{
-              __html: md().render(profile.about_markdown),
-            }}
-          ></div>
+          <div className="prose text-justify max-w-none py-2 prose-strong:underline dark:prose-invert">
+            <MarkdownPreview about={profile.about_markdown} />
+          </div>
           <hr />
           <div className="grid pt-2">
             <h1 className="text-xl font-semibold py-2">Projects</h1>

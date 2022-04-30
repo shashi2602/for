@@ -7,6 +7,7 @@ const nextConfig = {
       "res.cloudinary.com",
       "cdn.jsdelivr.net",
       "raw.githubusercontent.com",
+      "avatars.githubusercontent.com",
     ],
   },
 };

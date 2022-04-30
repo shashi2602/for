@@ -50,7 +50,7 @@ function HomePage() {
   return (
     <>
       <div
-        className="dark:bg-gray-800 h-screen"
+        className=" h-screen"
         style={{ backgroundImage: `url(/footer.png)`, backgroundSize: "cover" }}
       >
         <Head>
@@ -128,7 +128,7 @@ function HomePage() {
                       <input
                         type="text"
                         name="username"
-                        className="appearance-none bg-gray-100 rounded w-full py-4 px-3 text-grey-darker mb-2 border-2 border-yellow-500"
+                        className="appearance-none dark:text-black bg-gray-100 rounded w-full py-4 px-3 text-grey-darker mb-2 border-2 border-yellow-500"
                         placeholder="for.dev/@"
                         style={{ width: "60%" }}
                         onChange={(e) => {

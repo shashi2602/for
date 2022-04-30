@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GoogleProvider, GithubProvider, auth } from "../firebase";
-import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { getAllUsers, getUserDoc } from "../services/user.services";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { setCookie, destroyCookie } from "nookies";
@@ -9,7 +9,7 @@ const Simply = React.createContext();
 
 function SimplyContext({ children }) {
   const [currentUser, setCurrentUser] = useState();
-  const [userNamesList, setUserNamesList] = useState([]); //TODO: change usernamelist to AllUsers
+  const [userNamesList, setUserNamesList] = useState([]);
   const [selectedSocial, setSelectedSocial] = useState([]);
   const [projectList, setProjectList] = useState([]);
   const [about, setAbout] = useState("");
@@ -52,13 +52,13 @@ function SimplyContext({ children }) {
       getUserDoc(user?.uid).then((current_user) => {
         setCurrentUser({
           ...current_user.data(),
-          docid: current_user.data().uid,
+          docid: current_user.data()?.uid,
         });
         localStorage.setItem(
           "current_user",
           JSON.stringify({
             ...current_user.data(),
-            docid: current_user.data().uid,
+            docid: current_user.data()?.uid,
           })
         );
       });
@@ -83,10 +83,6 @@ function SimplyContext({ children }) {
     return signInWithPopup(auth, GoogleProvider);
   };
 
-  const GitHubSignInWithPopup = () => {
-    return signInWithPopup(auth, GithubProvider);
-  };
-
   const signOut = () => {
     auth.signOut();
     localStorage.removeItem("current_user");
@@ -99,7 +95,6 @@ function SimplyContext({ children }) {
     <Simply.Provider
       value={{
         GoogleSignInWithPopUP,
-        GitHubSignInWithPopup,
         signOut,
         user,
         currentUser,

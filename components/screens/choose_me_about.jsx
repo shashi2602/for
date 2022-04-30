@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
-import md from "markdown-it";
+
 import { useSimplyContext } from "../../context/SimplyContext";
+import { MarkdownPreview } from "../markdownPreview";
 
 function ChooseMeAbout() {
   const { about, setAbout, setChangeDone } = useSimplyContext();
@@ -24,11 +25,8 @@ function ChooseMeAbout() {
 
       <h4 className="font-semibold">🖨 Preview</h4>
       {about.length ? (
-        <div className="bg-gray-100 rounded  mt-2 p-4 ">
-          <div
-            className="prose max-w-full"
-            dangerouslySetInnerHTML={{ __html: md().render(about) }}
-          />
+        <div className="prose text-justify max-w-none mt-2 p-4 prose-strong:underline dark:prose-invert rounded">
+          <MarkdownPreview about={about} />
         </div>
       ) : (
         <h2 className="py-2 font-semibold">start typing...</h2>

@@ -1,28 +1,32 @@
 import React from "react";
-import { useSimplyContext } from "../../context/SimplyContext";
-import { addUser } from "../../services/user.services";
+import { addUser, addUsername } from "../../services/user.services";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { signInWithPopup } from "firebase/auth";
+import { auth, GithubProvider } from "../../firebase";
 
 function GithubBtn(props) {
-  const { GitHubSignInWithPopup } = useSimplyContext;
   const history = useRouter();
   const handleClick = () => {
     try {
-      GitHubSignInWithPopup().then((result) => {
+      signInWithPopup(auth, GithubProvider).then((result) => {
         const user_details = {
           site_username: props.username,
-          username: result.displayName,
-          profile_img: result.photoURL,
-          user_id: result.uid,
-          email: result.email,
+          username: result.user.displayName,
+          profile_img: result.user.photoURL,
+          uid: result.user.uid,
+          email: result.user.email,
         };
+        console.log(user_details);
+        props.username &&
+          addUsername({ site_username: props.username, uid: result.user.uid });
         props.username && addUser(user_details);
         history.push("dashboard");
         toast.success("🙏 welcome back ");
       });
     } catch (err) {
       toast.error("😭 error occured");
+      console.log(err);
     }
   };
   return (
