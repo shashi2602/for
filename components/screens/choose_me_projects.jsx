@@ -62,13 +62,13 @@ function ChooseMeProjects() {
   };
 
   return (
-    <div className="w-full  m-2 p-2">
+    <div className=" m-2 p-4 bg-gray-200 dark:bg-[#1c1c1f] rounded">
       <GithubProjectsBtn />
       <div className="grid grid-row">
         <input
           id="project title"
           type="text"
-          className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black h-15 py-2 px-3 w-full sm:w-auto mb-3"
+          className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3 w-full sm:w-auto mb-3"
           placeholder="Project name"
           value={projectTitle}
           onChange={(e) => {
@@ -78,7 +78,7 @@ function ChooseMeProjects() {
         />
         <textarea
           id="project title"
-          className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full"
+          className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3 w-full"
           placeholder="About project in short"
           value={projectDesc}
           onChange={(e) => {
@@ -88,7 +88,7 @@ function ChooseMeProjects() {
         <div className="grid sm:grid-cols-3 sm:gap-2 ">
           <input
             type="text"
-            className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full  "
+            className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3 w-full  "
             placeholder="used to build project ',' separated  "
             value={projectStacks}
             onChange={(e) => {
@@ -97,7 +97,7 @@ function ChooseMeProjects() {
           />
           <input
             type="text"
-            className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full "
+            className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3 w-full "
             placeholder="source link(Github..etc)"
             value={projectSource}
             onChange={(e) => {
@@ -106,7 +106,7 @@ function ChooseMeProjects() {
           />
           <input
             type="text"
-            className=" bg-gray-200 dark:bg-gray-700  rounded border-2 border-black h-15 py-2 px-3  mb-3 w-full "
+            className=" bg-gray-200 dark:bg-[#18181B]  rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3 w-full "
             placeholder="Does project is live? Then provide link"
             value={projectLive}
             onChange={(e) => {
@@ -115,7 +115,7 @@ function ChooseMeProjects() {
           />
         </div>
         <button
-          className="border-solid border-black border-2 font-bold py-1 px-2 rounded hover:bg-yellow-300 border-b-4 transition duration-300 ease-in-out"
+          className="border-solid  dark:bg-yellow-300 dark:text-black hover:text-black border-black dark:border-none border-2 font-bold py-1 px-2 rounded hover:bg-yellow-300 border-b-4 transition duration-300 ease-in-out"
           onClick={handleAdd}
         >
           ✔️Add
@@ -126,7 +126,7 @@ function ChooseMeProjects() {
         {projectList?.map((p) => {
           return (
             <div
-              className=" w-80  border-2 border-black rounded p-4"
+              className=" w-80  border-2 border-black dark:border-none rounded p-4"
               key={p.id}
             >
               <div className="flex justify-between">

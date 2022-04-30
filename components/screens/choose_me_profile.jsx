@@ -109,7 +109,7 @@ function InputField(props) {
     <input
       id={props.name}
       type="text"
-      className=" bg-gray-200 dark:bg-gray-700 rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3"
+      className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3"
       placeholder={props.name}
       value={props.value}
       name={props.name}

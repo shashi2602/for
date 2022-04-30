@@ -23,7 +23,7 @@ export default function NavBar() {
   const { signOut, user, currentUser } = useSimplyContext();
   const history = useRouter();
   return (
-    <Disclosure as="nav" className="dark:bg-gray-900 bg-gray-100">
+    <Disclosure as="nav" className="dark:bg-[#18181B] bg-gray-100">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">

@@ -64,13 +64,13 @@ function ChooseMeSocialMedia() {
   return (
     <>
       {selectedSocial?.length != 0 ? (
-        <div className="w-full bg-gray-100 dark:bg-gray-700 rounded my-4 p-2">
-          <p className="font-semibold text-lg px-1 mb-2">👇Your's</p>
+        <div className="w-full bg-gray-100 dark:bg-[#18181B] rounded my-4 p-2">
+          {/* <p className="font-semibold text-lg px-1 mb-4">👇Your's</p> */}
           <div className="flex flex-wrap  gap-3">
             {selectedSocial?.map((s, i) => {
               return (
                 <div key={i}>
-                  <div className=" p-2 flex gap-2 bg-gray-200 dark:bg-gray-800 rounded ">
+                  <div className=" p-2 flex gap-2 bg-gray-200 dark:bg-white dark:text-[#18181B] rounded ">
                     <Image alt={s.value} src={s.icon} height={20} width={20} />
                     <Link
                       href={`${
@@ -105,7 +105,7 @@ function ChooseMeSocialMedia() {
             return (
               <div
                 key={i}
-                className="bg-gray-300 dark:bg-gray-700 cursor-pointer hover:bg-yellow-300 h-24 w-24 rounded flex justify-center  transition duration-300 ease-in-out"
+                className="bg-gray-300 dark:bg-[#18181B] cursor-pointer hover:bg-yellow-300 h-24 w-24 rounded flex justify-center  transition duration-300 ease-in-out"
                 onClick={() => {
                   openModal(s);
                 }}
@@ -181,10 +181,10 @@ export function Model({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full dark:bg-gray-700 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white border-2 border-black  dark:border-gray-800 rounded-md">
+            <div className="inline-block w-full dark:bg-[#18181B] max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white border-2 border-black  dark:border-[#18181B] rounded-md">
               <Dialog.Title
                 as="h3"
-                className="text-lg flex font-medium leading-6 text-gray-900 dark:text-gray-900"
+                className="text-lg flex font-medium leading-6 text-gray-900 dark:text-white"
               >
                 <Image
                   alt={clickedSocial.value}
@@ -200,7 +200,7 @@ export function Model({
                   type="text"
                   name="link"
                   placeholder={clickedSocial.placeholder}
-                  className={`w-full h-10 p-2 border-2 border-black  dark:border-gray-800 ${
+                  className={`w-full h-10 p-2 border-2 border-black  dark:border-[#18181B] ${
                     error && "border-red-600"
                   } rounded`}
                   value={clickedSocial?.link}
@@ -221,7 +221,7 @@ export function Model({
                 </button>
                 <button
                   type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium  bg-yellow-400 border border-transparent rounded-md hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium dark:text-black bg-yellow-400 border border-transparent rounded-md hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                   onClick={() => {
                     handleLinkSubmit(clickedSocial);
                   }}

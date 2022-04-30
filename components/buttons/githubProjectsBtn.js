@@ -33,7 +33,7 @@ function GithubProjectsBtn() {
   };
   return (
     <button
-      className=" bg-gray-900 hover:text-white mb-2  text-white hover:bg-gray-800  p-1 font-semibold inline-flex items-center rounded"
+      className=" bg-[#18181B]  mb-2  text-white hover:bg-yellow-300 hover:text-black p-1 font-semibold inline-flex items-center rounded"
       onClick={handleGet}
     >
       <span>

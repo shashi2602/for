@@ -121,15 +121,15 @@ function HomePage() {
                       Pick your name for the <br />
                       <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
                         For.-.. . ...-/
-                        <span className="dark:text-white">@{username}</span>
+                        <span className="dark:text-white">{username}</span>
                       </span>
                     </h1>
                     <div className="py-3">
                       <input
                         type="text"
                         name="username"
-                        className="appearance-none dark:text-black bg-gray-100 rounded w-full py-4 px-3 text-grey-darker mb-2 border-2 border-yellow-500"
-                        placeholder="for.dev/@"
+                        className="appearance-none dark:text-black dark:bg-[#18181B] dark:border-none bg-gray-100 rounded w-full py-4 px-3 text-grey-darker mb-2 border-2 border-yellow-500"
+                        placeholder="for.dev/your_username"
                         style={{ width: "60%" }}
                         onChange={(e) => {
                           handleChange(e);

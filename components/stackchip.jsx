@@ -2,7 +2,7 @@ import Image from "next/image";
 import { firstLetterUpper } from "./utiles/textutils";
 function StackChip({ stack, onDeleteClick }) {
   return (
-    <div className=" p-2 flex gap-2 bg-gray-200  dark:bg-gray-700 rounded ">
+    <div className=" p-2 flex gap-2 bg-gray-200  dark:bg-[#18181B] rounded ">
       <Image
         alt={stack?.name}
         src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${stack?.name}/${stack?.name}-${stack?.svg}.svg`}

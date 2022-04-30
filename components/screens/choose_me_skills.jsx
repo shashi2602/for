@@ -56,7 +56,7 @@ function ChooseMeSkills() {
   return (
     <div>
       <div className=" w-full  m-2 rounded ">
-        <p className="font-semibold text-lg px-1">👇Your's</p>
+        {/* <p className="font-semibold text-lg px-1">👇Your's</p> */}
         {stackList?.length != 0 ? (
           <div className="flex flex-wrap gap-2 mt-4">
             {stackList?.map((item, i) => {
@@ -74,7 +74,7 @@ function ChooseMeSkills() {
             Search the stack you love
           </p>
         )}
-        <div className="bg-gray-100  dark:bg-gray-700 p-2 mt-4 rounded">
+        <div className="bg-gray-100  dark:bg-[#18181B] p-2 mt-4 rounded">
           <h2 className="font-semibold text-lg px-1">🧠Search stacks</h2>
           <div className="mt-4">
             <ReactSearchAutocomplete

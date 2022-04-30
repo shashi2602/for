@@ -14,7 +14,7 @@ function ChooseMeAbout() {
         </p>
       </a>
       <textarea
-        className="w-full h-56 border-2 border-black p-4 rounded dark:bg-gray-700"
+        className="w-full h-56 border-2 border-black dark:border-[#18181B] p-4 rounded dark:bg-[#18181B]"
         placeholder="Till Your Story..✏️ "
         onChange={(e) => {
           setAbout(e.target.value);
@@ -23,7 +23,7 @@ function ChooseMeAbout() {
         value={about}
       ></textarea>
 
-      <h4 className="font-semibold">🖨 Preview</h4>
+      <h4 className="font-semibold mt-2">🖨 Preview</h4>
       {about.length ? (
         <div className="prose text-justify max-w-none mt-2 p-4 prose-strong:underline dark:prose-invert rounded">
           <MarkdownPreview about={about} />
