@@ -102,7 +102,7 @@ function NormalTemplete({ profile }) {
             <h1 className="text-xl font-semibold py-2">Projects</h1>
             {profile.projects.map((project, i) => {
               return (
-                <div key={project.id} className="p-2">
+                <div key={i} className="p-2">
                   <div className="flex">
                     <p className="text-5xl p-4 font-bold text-gray-400">{i}</p>
                     <div className="flex-auto">
