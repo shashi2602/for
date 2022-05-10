@@ -7,7 +7,6 @@ import NormalTemplete from "../components/Themes/DefaultTheme";
 import Head from "next/head";
 
 function User({ data }) {
-  console.log(data);
   return (
     <>
       <Head>

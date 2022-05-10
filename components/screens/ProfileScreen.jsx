@@ -28,8 +28,11 @@ function ChooseMeProfile() {
     const fetch = axios
       .post("https://api.cloudinary.com/v1_1/dtpdc2bhh/image/upload", data)
       .then((res) => {
-        setProfileData((prev) => ({ ...prev, profile_img: res.data.url }));
-        updateUserDoc(currentUser.docid, { profile_img: res.data.url });
+        setProfileData((prev) => ({
+          ...prev,
+          profile_img: res.data.secure_url,
+        }));
+        updateUserDoc(currentUser.docid, { profile_img: res.data.secure_url });
       });
 
     toast.promise(fetch, {
