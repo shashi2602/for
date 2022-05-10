@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import DarkMode from "../components/ui/DarkMode";
-import Footer from "../components/ui/Footer";
-import UserAboutMarkdown from "../components/ui/UserAboutMarkdown";
-import UserDetails from "../components/ui/UserDetails";
-import UserImage from "../components/ui/UserImage";
-import UserSocial from "../components/ui/UserSocial";
-import UserStack from "../components/ui/UserStack";
+import DarkMode from "../components/Themes/DarkMode";
+// import Footer from "../components/Themes/Footer";
+// import UserAboutMarkdown from "../components/Themes/UserAboutMarkdown";
+// import UserDetails from "../components/Themes/UserDetails";
+// import UserImage from "../components/Themes/UserImage";
+// import UserSocial from "../components/Themes/UserSocial";
+// import UserStack from "../components/Themes/UserStack";
 import { userRef } from "../services/user.services";
 import { getDocs } from "firebase/firestore";
-import NormalTemplete from "../components/ui/normal_templete";
+import NormalTemplete from "../components/Themes/DefaultTheme";
 
 function User({ data }) {
   console.log(data);

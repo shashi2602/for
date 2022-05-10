@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, Fragment, useRef, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { social } from "../utiles/social_types";
+import { social } from "../utiles/SocialTypes";
 import { useSimplyContext } from "../../context/SimplyContext";
 import Link from "next/link";
 import Image from "next/image";
@@ -64,13 +64,15 @@ function ChooseMeSocialMedia() {
   return (
     <>
       {selectedSocial?.length != 0 ? (
-        <div className="w-full bg-gray-100 dark:bg-[#18181B] rounded my-4 p-2">
-          {/* <p className="font-semibold text-lg px-1 mb-4">👇Your's</p> */}
-          <div className="flex flex-wrap  gap-3">
+        <div className="w-full  dark:bg-[#18181B] rounded my-4 p-2">
+          {/* <p className="font-semibold text-lg text-center px-1 mb-4">
+            
+          </p> */}
+          <div className="flex flex-wrap   gap-3">
             {selectedSocial?.map((s, i) => {
               return (
                 <div key={i}>
-                  <div className=" p-2 flex gap-2 bg-gray-200 dark:bg-white dark:text-[#18181B] rounded ">
+                  <div className=" p-2 flex gap-2 bg-gray-100  border-2  transition   shadow-[3px_3px_0_0_#000] border-black dark:bg-[#18181B] rounded-md ">
                     <Image alt={s.value} src={s.icon} height={20} width={20} />
                     <Link
                       href={`${
@@ -105,7 +107,7 @@ function ChooseMeSocialMedia() {
             return (
               <div
                 key={i}
-                className="bg-gray-300 dark:bg-[#18181B] cursor-pointer hover:bg-yellow-300 h-24 w-24 rounded flex justify-center  transition duration-300 ease-in-out"
+                className="bg-gray-300 dark:bg-[#252528] border-2 border-black dark:hover:bg-yellow-300 cursor-pointer hover:bg-yellow-300 h-24 w-24 rounded-md flex justify-center  transition duration-300 ease-in-out  shadow-[3px_3px_0_0_#000]  hover:shadow-none"
                 onClick={() => {
                   openModal(s);
                 }}
@@ -181,7 +183,7 @@ export function Model({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full dark:bg-[#18181B] max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white border-2 border-black  dark:border-[#18181B] rounded-md">
+            <div className="inline-block w-full dark:bg-[#18181B] max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white border-2   dark:border-white dark:shadow-[3px_3px_0_0_#fff]  shadow-[3px_3px_0_0_#000] border-black  rounded-md">
               <Dialog.Title
                 as="h3"
                 className="text-lg flex font-medium leading-6 text-gray-900 dark:text-white"
@@ -214,14 +216,14 @@ export function Model({
               <div className="mt-4 ">
                 <button
                   type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium  bg-red-500 border border-transparent rounded-md hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500 mr-2 text-white"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium  bg-red-500   border-2  transition  border-black rounded-md shadow-[3px_3px_0_0_#000] hover:shadow-none hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500 mr-2 text-white"
                   onClick={closeModel}
                 >
                   close
                 </button>
                 <button
                   type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium dark:text-black bg-yellow-400 border border-transparent rounded-md hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium dark:text-black bg-yellow-400 border-2  transition  border-black rounded-md shadow-[3px_3px_0_0_#000] hover:shadow-none hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                   onClick={() => {
                     handleLinkSubmit(clickedSocial);
                   }}

@@ -58,7 +58,7 @@ function ChooseMeProfile() {
           </div>
           <label
             htmlFor="profile_img"
-            className="border-black border-2 px-2 py-1 rounded font-semibold text-center bg-black text-white cursor-pointer hover:bg-yellow-300 hover:text-black transition duration-300 ease-in-out"
+            className=" px-2 py-1 border-2  border-black dark:border-white  rounded-md shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#fff] hover:shadow-none font-semibold text-center  cursor-pointer hover:bg-yellow-300 hover:text-black transition duration-300 ease-in-out"
           >
             📸 Choose Photo
           </label>

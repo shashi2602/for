@@ -4,6 +4,8 @@ import { signInWithPopup } from "firebase/auth";
 import { getAllUsers, getUserDoc } from "../services/user.services";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { setCookie, destroyCookie } from "nookies";
+import { fetchHashnodeBlogs } from "../fetchAPI/hashnodeFetch";
+import toast from "react-hot-toast";
 
 const Simply = React.createContext();
 
@@ -22,6 +24,8 @@ function SimplyContext({ children }) {
   });
   const [userNameNotFound, setUserNameNotFound] = useState(true);
   const [profileData, setProfileData] = useState();
+  const [ispublished, setIsPublished] = useState(false);
+  const [blogSites, setBlogSites] = useState("");
 
   //auth state change
   const [user, loading] = useAuthState(auth);
@@ -49,21 +53,25 @@ function SimplyContext({ children }) {
 
   useEffect(() => {
     if (user) {
-      getUserDoc(user?.uid).then((current_user) => {
-        setCurrentUser({
-          ...current_user.data(),
-          docid: current_user.data()?.uid,
-        });
-        localStorage.setItem(
-          "current_user",
-          JSON.stringify({
+      try {
+        getUserDoc(user?.uid).then((current_user) => {
+          setCurrentUser({
             ...current_user.data(),
             docid: current_user.data()?.uid,
-          })
-        );
-      });
+          });
+          localStorage.setItem(
+            "current_user",
+            JSON.stringify({
+              ...current_user.data(),
+              docid: current_user.data()?.uid,
+            })
+          );
+        });
+      } catch (err) {
+        toast.error("something went wrong");
+      }
     }
-  }, [userNamesList, user, changeDone]);
+  }, [user, ispublished]);
 
   useEffect(() => {
     setAbout(currentUser?.about_markdown ? currentUser?.about_markdown : "");
@@ -77,6 +85,7 @@ function SimplyContext({ children }) {
       status: currentUser?.status ? currentUser.status : "",
       profile_img: currentUser?.profile_img ? currentUser.profile_img : "",
     });
+    setBlogSites(currentUser?.blog_site);
   }, [currentUser]);
 
   const GoogleSignInWithPopUP = () => {
@@ -85,7 +94,6 @@ function SimplyContext({ children }) {
 
   const signOut = () => {
     auth.signOut();
-    localStorage.removeItem("current_user");
     destroyCookie(null, "UID");
     setCurrentUser("");
     setChangeDone(false);
@@ -118,6 +126,10 @@ function SimplyContext({ children }) {
         currentTab,
         setCurrentTab,
         userNameNotFound,
+        ispublished,
+        setIsPublished,
+        blogSites,
+        setBlogSites,
       }}
     >
       {!loading && children}

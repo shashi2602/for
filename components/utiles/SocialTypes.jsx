@@ -31,7 +31,7 @@ export const social = [
     value: "hashnode",
     icon: "https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/hashnode.svg",
     link: "",
-    link_placeholder: "https://hashnode.com/",
+    link_placeholder: "https://hashnode.com/@",
     placeholder: "hashnode username",
   },
   {
@@ -110,5 +110,12 @@ export const social = [
     link: "",
     link_placeholder: "",
     placeholder: "Enter codepen link",
+  },
+  {
+    value: "medium",
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/medium.svg",
+    link: "",
+    link_placeholder: "https://medium.com/@",
+    placeholder: "Enter medium username",
   },
 ];

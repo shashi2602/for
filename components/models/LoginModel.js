@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import GoogleBtn from "../buttons/google_btn";
-import GithubBtn from "../buttons/github_btn";
+import GoogleBtn from "../buttons/GoogleButton";
+import GithubBtn from "../buttons/GithubButton";
 import Image from "next/image";
 import loginImage from "/public/login.png";
 
@@ -21,7 +21,7 @@ function LoginModel() {
       <button
         type="button"
         onClick={openModal}
-        className="px-4 py-2 text-sm font-semibold text-black bg-yellow-400  rounded-md "
+        className="px-4 py-2 text-sm font-semibold text-black bg-yellow-400    p-3 transition border-2 border-black  dark:border-white rounded-md shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#fff] hover:shadow-none"
       >
         Login
       </button>
@@ -60,13 +60,13 @@ function LoginModel() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full dark:bg-[#18181B] bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform  shadow-xl rounded-2xl">
-                {/* <Dialog.Title
+              <div className="inline-block w-full dark:bg-[#18181B] bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform   shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#fff] dark:border-white border-black border-2  rounded-md ">
+                <h1
                   as="h3"
-                  className="text-lg font-medium leading-6 dark:text-white"
+                  className="text-lg font-medium leading-6 text-center dark:text-white"
                 >
-                  Welcome back.
-                </Dialog.Title> */}
+                  what to see the wonders?
+                </h1>
 
                 <div className="mt-3 flex gap-2 w-full justify-center ">
                   <GoogleBtn />

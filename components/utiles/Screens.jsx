@@ -24,7 +24,11 @@ export const chooseMeTypes = [
     name: "Projects",
     type_name: "PROJECTS",
   },
-
+  {
+    icon: "✍️",
+    name: "Blogs",
+    type_name: "BLOGS",
+  },
   {
     icon: "😎",
     name: "WishTo",

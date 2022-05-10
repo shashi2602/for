@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import ChooseMe from "../choose_me";
-import ChooseMeInBrife from "../choose_me_in_brief";
+import ChooseMe from "../ScreenSelectionButtons";
+import ChooseMeInBrife from "../ScreenSelection";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar";
 import { updateUserDoc } from "../../services/user.services";

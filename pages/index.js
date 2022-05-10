@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState, Fragment } from "react";
-import GithubBtn from "../components/buttons/github_btn";
-import GoogleBtn from "../components/buttons/google_btn";
+import GithubBtn from "../components/buttons/GithubButton";
+import GoogleBtn from "../components/buttons/GoogleButton";
 import { Transition } from "@headlessui/react";
 import { useSimplyContext } from "../context/SimplyContext";
 import Link from "next/link";
@@ -86,13 +86,13 @@ function HomePage() {
                     <div>
                       {user ? (
                         <Link href="/dashboard">
-                          <a className="btn  text-black   bg-yellow-400 p-3 rounded-lg  w-full mb-4 sm:w-auto sm:mb-0">
+                          <a className="btn text-black dark:text-white w-full font-semibold  p-3 transition border-2 dark:border-white border-black rounded-md shadow-[3px_3px_0_0_#000]  dark:shadow-[3px_3px_0_0_#FFF] hover:shadow-none   mb-4 sm:w-auto sm:mb-0">
                             Goto Dashboard
                           </a>
                         </Link>
                       ) : (
                         <button
-                          className="btn text-black  bg-yellow-400 p-3 rounded-lg  w-full mb-4 sm:w-auto sm:mb-0"
+                          className="btn text-black dark:text-white w-full font-semibold p-3 transition border-2 dark:border-white border-black rounded-md shadow-[3px_3px_0_0_#000]  dark:shadow-[3px_3px_0_0_#FFF] hover:shadow-none   mb-4 sm:w-auto sm:mb-0"
                           onClick={() => sethide(false)}
                         >
                           GetStarted
@@ -128,7 +128,7 @@ function HomePage() {
                       <input
                         type="text"
                         name="username"
-                        className="appearance-none dark:text-black dark:bg-[#18181B] dark:border-none bg-gray-100 rounded w-full py-4 px-3 text-grey-darker mb-2 border-2 border-yellow-500"
+                        className="appearance-none text-semibold  dark:text-white dark:bg-[#18181B] dark:border-white bg-gray-100 w-full py-4 px-3 text-grey-darker mb-2 border-2  transition  border-black rounded-md shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#FFF]  "
                         placeholder="for.dev/your_username"
                         style={{ width: "60%" }}
                         onChange={(e) => {

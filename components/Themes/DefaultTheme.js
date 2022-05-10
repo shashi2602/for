@@ -2,12 +2,16 @@
 import Image from "next/image";
 import React from "react";
 import { firstLetterUpper } from "../utiles/textutils";
-import md from "markdown-it";
 import Link from "next/link";
-import DarkMode from "./DarkMode";
-import { MarkdownPreview } from "../markdownPreview";
+import sampleimg from "../../public/avatar-male.png";
+import { MarkdownPreview } from "../MarkdownPreview";
+import { fetchHashnodeBlogs } from "../../fetchAPI/hashnodeFetch";
+import { devtofetch } from "../../fetchAPI/devtofetch";
 
 function NormalTemplete({ profile }) {
+  // const data = fetchHashnodeBlogs("chrisdevcode");
+  // const dev = devtofetch("chrisdevcode");
+  // console.log(dev, data);
   return (
     <div className=" sm:px-7 lg:px-72 md:7 2xl:7 px-7 pt-5 ">
       <div className="flex flex-wrap lg:flex-none gap-4">

@@ -1,9 +1,10 @@
-import ChooseMeProfile from "./screens/choose_me_profile";
-import ChooseMeAbout from "./screens/choose_me_about";
-import ChooseMeSkills from "./screens/choose_me_skills";
-import ChooseMeProjects from "./screens/choose_me_projects";
-import ChooseMeSocialMedia from "./screens/choose_me_socialmedia";
-import ChooseMeMyWish from "./screens/choose_me_mywish";
+import ChooseMeProfile from "./screens/ProfileScreen";
+import ChooseMeAbout from "./screens/AboutScreen";
+import ChooseMeSkills from "./screens/SkillsScreen";
+import ChooseMeProjects from "./screens/ProjectsScreen";
+import ChooseMeSocialMedia from "./screens/SocialmediaScreen";
+import ChooseMeMyWish from "./screens/MywishScreen";
+import ChooseMeBlogs from "./screens/BlogsScreen";
 
 function ChooseMeInBrife(props) {
   // const [state,setState]=useState("")
@@ -21,6 +22,8 @@ function ChooseMeInBrife(props) {
         return <ChooseMeSocialMedia />;
       case "MYWISH":
         return <ChooseMeMyWish />;
+      case "BLOGS":
+        return <ChooseMeBlogs />;
       default:
         return <ChooseMeProfile />;
     }

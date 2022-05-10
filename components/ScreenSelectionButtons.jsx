@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SaveButton from "./buttons/save_btn";
-import { chooseMeTypes } from "./utiles/choose_me_types";
+import PublishButton from "./buttons/PublishButton";
+import { chooseMeTypes } from "./utiles/Screens";
 function ChooseMe(props) {
   const [type, setType] = useState();
 
@@ -11,9 +11,9 @@ function ChooseMe(props) {
           return (
             <button
               key={type.type_name}
-              className={`px-4 py-1 dark:bg-[#18181B] border-2 border-solid border-black dark:border-none font-semibold rounded hover:bg-black hover:text-yellow-300  transition duration-300 ease-in-out ${
+              className={`px-4 py-1 dark:bg-[#18181B] border-2 border-solid border-black  shadow-[3px_3px_0_0_#000] dark:border-white dark:shadow-[3px_3px_0_0_#fff] hover:shadow-none font-semibold rounded-md  transition duration-300 ease-in-out ${
                 props.typeSelected === type.type_name
-                  ? "bg-yellow-300  border-b-4 shadow-lg dark:text-yellow-300 shadow-yellow-200 dark:shadow-none"
+                  ? "bg-yellow-300  border-b-4 shadow-lg dark:bg-yellow-300 dark:text-black  dark:shadow-none dark:hover:shadow-none"
                   : ""
               }`}
               onClick={() => {
@@ -25,7 +25,7 @@ function ChooseMe(props) {
             </button>
           );
         })}
-        {type === "MYWISH" ? <> </> : <SaveButton />}
+        {type === "MYWISH" ? <> </> : <PublishButton />}
       </div>
     </div>
   );

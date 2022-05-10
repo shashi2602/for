@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 
 import { useSimplyContext } from "../../context/SimplyContext";
-import { MarkdownPreview } from "../markdownPreview";
+import { MarkdownPreview } from "../MarkdownPreview";
 
 function ChooseMeAbout() {
   const { about, setAbout, setChangeDone } = useSimplyContext();
@@ -14,7 +14,7 @@ function ChooseMeAbout() {
         </p>
       </a>
       <textarea
-        className="w-full h-56 border-2 border-black dark:border-[#18181B] p-4 rounded dark:bg-[#18181B]"
+        className="w-full h-56 border-2  p-4  dark:bg-[#18181B]  transition dark:border-white dark:shadow-[3px_3px_0_0_#fff] border-black rounded-md shadow-[3px_3px_0_0_#000] "
         placeholder="Till Your Story..✏️ "
         onChange={(e) => {
           setAbout(e.target.value);
