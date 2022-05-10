@@ -1,5 +1,5 @@
 import md from "markdown-it";
-export function MarkdownPreview(props) {
+export default function MarkdownPreview(props) {
   return (
     <div
       dangerouslySetInnerHTML={{

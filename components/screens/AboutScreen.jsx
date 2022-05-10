@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 
 import { useSimplyContext } from "../../context/SimplyContext";
-import { MarkdownPreview } from "../MarkdownPreview";
+import MarkdownPreview from "../MarkdownPreview";
 
 function ChooseMeAbout() {
   const { about, setAbout, setChangeDone } = useSimplyContext();

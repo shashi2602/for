@@ -4,9 +4,10 @@ import React from "react";
 import { firstLetterUpper } from "../utiles/textutils";
 import Link from "next/link";
 import sampleimg from "../../public/avatar-male.png";
-import { MarkdownPreview } from "../MarkdownPreview";
+
 import { fetchHashnodeBlogs } from "../../fetchAPI/hashnodeFetch";
 import { devtofetch } from "../../fetchAPI/devtofetch";
+import MarkdownPreview from "../MarkdownPreview";
 
 function NormalTemplete({ profile }) {
   // const data = fetchHashnodeBlogs("chrisdevcode");
