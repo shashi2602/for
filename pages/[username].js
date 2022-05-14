@@ -16,27 +16,30 @@ function User({ data }) {
           {data.username} | {data.expertise}
         </title>
         <link rel="icon" href={data.profile_img} />
-        <meta name="title" content={data?.seo_settings.seo_title} />
-        <meta name="description" content={data?.seo_settings.seo_description} />
+        <meta name="title" content={data?.seo_settings?.seo_title} />
+        <meta
+          name="description"
+          content={data?.seo_settings?.seo_description}
+        />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content={SITE_ENDPOINT + data.site_username} />
-        <meta property="og:title" content={data?.seo_settings.seo_title} />
+        <meta property="og:title" content={data?.seo_settings?.seo_title} />
         <meta
           property="og:description"
-          content={data?.seo_settings.seo_description}
+          content={data?.seo_settings?.seo_description}
         />
         <meta property="og:image" content={data.profile_img} />
 
         <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={"@" + twitter.link} />
         <meta
-          property="twitter:url"
-          content={twitter.link_placeholder + twitter.link}
+          property="twitter:title"
+          content={data?.seo_settings?.seo_title}
         />
-        <meta property="twitter:title" content={data?.seo_settings.seo_title} />
         <meta
           property="twitter:description"
-          content={data?.seo_settings.seo_description}
+          content={data?.seo_settings?.seo_description}
         />
         <meta property="twitter:image" content={data.profile_img} />
       </Head>

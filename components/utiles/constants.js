@@ -1,1 +1,1 @@
-export const SITE_ENDPOINT = process?.env?.NEXT_PUBLIC_VERCEL_URL;
+export const SITE_ENDPOINT = "https://for-nu.vercel.app/";
