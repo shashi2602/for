@@ -7,6 +7,7 @@ import LoginModel from "./models/LoginModel";
 import { useSimplyContext } from "../context/SimplyContext";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import PublishButton from "./buttons/PublishButton";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -49,9 +50,8 @@ export default function NavBar() {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
-                    <div>
-                      <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                        <span className="sr-only">Open user menu</span>
+                    <div className="flex gap-3">
+                      <Menu.Button className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <Image
                           className="rounded-full"
                           src={
@@ -64,6 +64,13 @@ export default function NavBar() {
                           width={40}
                         />
                       </Menu.Button>
+                      {history.pathname == "/" ? (
+                        <></>
+                      ) : (
+                        <div className="hidden lg:block">
+                          <PublishButton />
+                        </div>
+                      )}
                     </div>
                     <Transition
                       as={Fragment}

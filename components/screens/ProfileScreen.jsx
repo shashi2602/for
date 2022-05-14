@@ -10,7 +10,6 @@ import axios from "axios";
 function ChooseMeProfile() {
   const { currentUser, profileData, setProfileData, setChangeDone } =
     useSimplyContext();
-
   const handelChange = (e) => {
     const { name, value } = e.target;
     setProfileData((prev) => ({
@@ -43,7 +42,7 @@ function ChooseMeProfile() {
   };
 
   return (
-    <div className="m-2 w-full">
+    <div className="m-2 w-full ">
       <div className="flex justify-center pt-3">
         <div className="grid grid-rows gap-3 justify-items-center">
           <div>

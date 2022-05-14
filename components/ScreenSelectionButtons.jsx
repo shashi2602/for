@@ -5,7 +5,7 @@ function ChooseMe(props) {
   const [type, setType] = useState();
 
   return (
-    <div className="h-auto w-full ">
+    <div className="h-auto w-full bg-gray-100 dark:bg-[#18181B]  rounded-lg mt-2 ">
       <div className="flex flex-wrap gap-2 sm:gap-4 p-5 justify-center">
         {chooseMeTypes.map((type) => {
           return (
@@ -25,7 +25,9 @@ function ChooseMe(props) {
             </button>
           );
         })}
-        {type === "MYWISH" ? <> </> : <PublishButton />}
+        <div className="lg:hidden">
+          <PublishButton />
+        </div>
       </div>
     </div>
   );

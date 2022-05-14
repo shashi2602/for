@@ -3,8 +3,9 @@ import ChooseMeAbout from "./screens/AboutScreen";
 import ChooseMeSkills from "./screens/SkillsScreen";
 import ChooseMeProjects from "./screens/ProjectsScreen";
 import ChooseMeSocialMedia from "./screens/SocialmediaScreen";
-import ChooseMeMyWish from "./screens/MywishScreen";
+import ChooseMeMyExtra from "./screens/ExtraScreen";
 import ChooseMeBlogs from "./screens/BlogsScreen";
+import Settings from "./screens/Settings";
 
 function ChooseMeInBrife(props) {
   // const [state,setState]=useState("")
@@ -20,10 +21,12 @@ function ChooseMeInBrife(props) {
         return <ChooseMeProjects />;
       case "SOCIALMEDIA":
         return <ChooseMeSocialMedia />;
-      case "MYWISH":
-        return <ChooseMeMyWish />;
+      case "EXTRA":
+        return <ChooseMeMyExtra />;
       case "BLOGS":
         return <ChooseMeBlogs />;
+      case "SETTINGS":
+        return <Settings />;
       default:
         return <ChooseMeProfile />;
     }

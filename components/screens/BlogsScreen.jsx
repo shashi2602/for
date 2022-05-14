@@ -1,14 +1,20 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useSimplyContext } from "../../context/SimplyContext";
 function ChooseMeBlogs() {
-  const { blogSites, setBlogSites, setChangeDone } = useSimplyContext();
+  const { blogSites, setBlogSites, setChangeDone, selectedSocial } =
+    useSimplyContext();
   const handleSelectBlogSite = (siteName) => {
     if (blogSites == siteName) {
       setBlogSites("");
     } else {
-      setBlogSites(siteName);
+      if (selectedSocial.some((s) => s.value == siteName)) {
+        setBlogSites(siteName);
+        setChangeDone(true);
+      } else {
+        toast.error(`😜 Add ${siteName} in social media`);
+      }
     }
-    setChangeDone(true);
   };
   return (
     <div className="w-full  my-4 p-4  ">

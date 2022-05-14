@@ -31,7 +31,12 @@ export const chooseMeTypes = [
   },
   {
     icon: "😎",
-    name: "WishTo",
-    type_name: "MYWISH",
+    name: "Extra",
+    type_name: "EXTRA",
+  },
+  {
+    icon: "⚙️",
+    name: "Settings",
+    type_name: "SETTINGS",
   },
 ];

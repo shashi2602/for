@@ -5,8 +5,10 @@ import { userRef } from "../services/user.services";
 import { getDocs } from "firebase/firestore";
 import NormalTemplete from "../components/Themes/DefaultTheme";
 import Head from "next/head";
+import { SITE_ENDPOINT } from "../components/utiles/constants";
 
 function User({ data }) {
+  const twitter = data.social.find((t) => t.value == "twitter");
   return (
     <>
       <Head>
@@ -14,41 +16,29 @@ function User({ data }) {
           {data.username} | {data.expertise}
         </title>
         <link rel="icon" href={data.profile_img} />
-        {/* <meta name="title" content="" />
-        <meta
-          name="description"
-          content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!"
-        />
+        <meta name="title" content={data?.seo_settings.seo_title} />
+        <meta name="description" content={data?.seo_settings.seo_description} />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://metatags.io/" />
-        <meta
-          property="og:title"
-          content="Meta Tags — Preview, Edit and Generate"
-        />
+        <meta property="og:url" content={SITE_ENDPOINT + data.site_username} />
+        <meta property="og:title" content={data?.seo_settings.seo_title} />
         <meta
           property="og:description"
-          content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!"
+          content={data?.seo_settings.seo_description}
         />
-        <meta
-          property="og:image"
-          content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"
-        />
+        <meta property="og:image" content={data.profile_img} />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://metatags.io/" />
         <meta
-          property="twitter:title"
-          content="Meta Tags — Preview, Edit and Generate"
+          property="twitter:url"
+          content={twitter.link_placeholder + twitter.link}
         />
+        <meta property="twitter:title" content={data?.seo_settings.seo_title} />
         <meta
           property="twitter:description"
-          content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!"
+          content={data?.seo_settings.seo_description}
         />
-        <meta
-          property="twitter:image"
-          content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"
-        /> */}
+        <meta property="twitter:image" content={data.profile_img} />
       </Head>
       <DarkMode />
       <NormalTemplete profile={data} />
@@ -66,7 +56,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       data: data,
-    }, // will be passed to the page component as props
+    },
     revalidate: 10,
   };
 }

@@ -40,11 +40,11 @@ export default function PublishButton() {
   };
   return (
     <button
-      className="text-white bg-black font-semibold px-3 py-2  rounded-md disabled:bg-red-400  border-2 border-black disabled:text-black shadow-[3px_3px_0_0_#000] hover:shadow-none transition"
+      className=" text-black bg-yellow-300 font-semibold px-3 py-2  rounded-md disabled:cursor-no-drop   transition"
       onClick={handleSubmit}
       disabled={!changeDone}
     >
-      ✈️ Publish
+      ✈️ Save changes
     </button>
   );
 }

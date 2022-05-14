@@ -85,7 +85,7 @@ function HomePage() {
                   >
                     <div>
                       {user ? (
-                        <Link href="/dashboard">
+                        <Link href="/dashboard" passHref={true}>
                           <a className="btn text-black dark:text-white w-full font-semibold  p-3 transition border-2 dark:border-white border-black rounded-md shadow-[3px_3px_0_0_#000]  dark:shadow-[3px_3px_0_0_#FFF] hover:shadow-none   mb-4 sm:w-auto sm:mb-0">
                             Goto Dashboard
                           </a>

@@ -33,7 +33,7 @@ function GithubProjectsBtn() {
   };
   return (
     <button
-      className=" mb-2 border-2 border-black  dark:hover:text-white hover:text-black p-2 font-semibold inline-flex items-center rounded transition ease-out shadow-[3px_3px_0_0_#000] hover:shadow-none dark:hover:shadow-none dark:border-white dark:shadow-[3px_3px_0_0_#FFF]"
+      className=" mb-2 border-2 border-black  dark:hover:text-white hover:text-black p-2 font-semibold inline-flex items-center rounded-md transition ease-out shadow-[3px_3px_0_0_#000] hover:shadow-none dark:hover:shadow-none dark:border-white dark:shadow-[3px_3px_0_0_#FFF]"
       onClick={handleGet}
     >
       <span>
