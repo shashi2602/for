@@ -12,7 +12,7 @@ import { getDocs } from "firebase/firestore";
 import nookies from "nookies";
 
 function DashBoard({ found }) {
-  const { user, userNameNotFound, currentUser, signOut } = useSimplyContext();
+  const { user, currentUser, signOut } = useSimplyContext();
   const router = useRouter();
   useEffect(() => {
     if (!user) {

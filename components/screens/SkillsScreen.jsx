@@ -7,7 +7,7 @@ import { useSimplyContext } from "../../context/SimplyContext";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
-import { firstLetterUpper } from "../utiles/textutils";
+import { firstLetterUpper } from "../utils/textutils";
 import Image from "next/image";
 
 function ChooseMeSkills() {
@@ -55,7 +55,7 @@ function ChooseMeSkills() {
   };
   return (
     <div>
-      <div className=" w-full  m-2 rounded ">
+      <div className=" w-full  rounded ">
         {/* <p className="font-semibold text-lg px-1">👇Your's</p> */}
         {stackList?.length != 0 ? (
           <div className="flex flex-wrap gap-2 mt-4">

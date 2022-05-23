@@ -1,9 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
+
 import Link from "next/link";
-import LoginModel from "./models/LoginModel";
+import LoginModal from "./modals/LoginModal";
 import { useSimplyContext } from "../context/SimplyContext";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -154,7 +154,7 @@ export default function NavBar() {
                 </div>
               ) : (
                 <div className="flex">
-                  <LoginModel />
+                  <LoginModal />
                 </div>
               )}
             </div>

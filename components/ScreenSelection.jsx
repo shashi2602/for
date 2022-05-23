@@ -7,7 +7,7 @@ import ChooseMeMyExtra from "./screens/ExtraScreen";
 import ChooseMeBlogs from "./screens/BlogsScreen";
 import Settings from "./screens/Settings";
 
-function ChooseMeInBrife(props) {
+function ChooseMeInBrief(props) {
   // const [state,setState]=useState("")
   function switchChooseMe(chooseMeType) {
     switch (chooseMeType) {
@@ -34,4 +34,4 @@ function ChooseMeInBrife(props) {
   return <div>{switchChooseMe(props.type)}</div>;
 }
 
-export default ChooseMeInBrife;
+export default ChooseMeInBrief;

@@ -17,11 +17,11 @@ function ChooseMeBlogs() {
     }
   };
   return (
-    <div className="w-full  my-4 p-4  ">
+    <div className="w-full  my-4   ">
       <p className="pb-3 font-semibold text-center">
         Select to add blogs to your for.dev page
       </p>
-      <div className="flex gap-2 justify-center">
+      <div className="flex gap-3 flex-wrap justify-center">
         <button
           className={`flex gap-3 items-center justify-center px-8 py-4 font-bold transition border-2 border-black rounded-md dark:border-white dark:shadow-[3px_3px_0_0_#fff]  shadow-[6px_6px_0_0_#000] hover:shadow-none ${
             blogSites == "hashnode" ? "" : ""

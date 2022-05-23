@@ -102,7 +102,6 @@ function SeoSettings() {
         >
           Submit
         </button>
-        
       </div>
     </div>
   );
@@ -116,6 +115,10 @@ function Themes() {
 }
 
 function Appearance() {
-  return <div>Appearance Settings</div>;
+  return (
+    <div className="w-full flex place-content-center bg-gray-100 p-4 rounded-md">
+      coming soon
+    </div>
+  );
 }
 export default Settings;

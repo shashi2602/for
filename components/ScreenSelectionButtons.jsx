@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PublishButton from "./buttons/PublishButton";
-import { chooseMeTypes } from "./utiles/Screens";
+import { chooseMeTypes } from "./utils/Screens";
 function ChooseMe(props) {
   const [type, setType] = useState();
 

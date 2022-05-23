@@ -5,7 +5,7 @@ import { userRef } from "../services/user.services";
 import { getDocs } from "firebase/firestore";
 import NormalTemplete from "../components/Themes/DefaultTheme";
 import Head from "next/head";
-import { SITE_ENDPOINT } from "../components/utiles/constants";
+import { SITE_ENDPOINT } from "../components/utils/constants";
 
 function User({ data }) {
   const twitter = data.social.find((t) => t.value == "twitter");

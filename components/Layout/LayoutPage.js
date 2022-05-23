@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import ChooseMe from "../ScreenSelectionButtons";
-import ChooseMeInBrife from "../ScreenSelection";
+import ChooseMeInBrief from "../ScreenSelection";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar";
 import { updateUserDoc } from "../../services/user.services";
@@ -20,9 +20,9 @@ function LayoutPage() {
   return (
     <>
       <NavBar />
-      <div className="h-screen mx-0 sm:mx-20 md:mx-56">
+      <div className="h-screen mx-2 sm:mx-20 md:mx-56">
         <ChooseMe handleChange={handleSelectType} typeSelected={currentTab} />
-        <ChooseMeInBrife type={currentTab} />
+        <ChooseMeInBrief type={currentTab} />
       </div>
     </>
   );

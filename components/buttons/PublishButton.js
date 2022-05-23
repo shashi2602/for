@@ -16,6 +16,7 @@ export default function PublishButton() {
     currentTab,
     setIsPublished,
     blogSites,
+    certifications,
   } = useSimplyContext();
 
   const handleSubmit = () => {
@@ -27,6 +28,7 @@ export default function PublishButton() {
       social: selectedSocial,
       last_visited_tab: currentTab,
       blog_site: blogSites,
+      certifications: certifications,
     };
     try {
       updateUserDoc(currentUser.docid, updateData);
@@ -35,7 +37,7 @@ export default function PublishButton() {
       setChangeDone(false);
       setIsPublished(true);
     } catch (e) {
-      toast.error(" 😭 error occured");
+      toast.error(" 😭 error occurred");
     }
   };
   return (

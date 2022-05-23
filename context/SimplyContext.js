@@ -26,6 +26,8 @@ function SimplyContext({ children }) {
   const [profileData, setProfileData] = useState();
   const [ispublished, setIsPublished] = useState(false);
   const [blogSites, setBlogSites] = useState("");
+  const [certifications, setCertifications] = useState([]);
+  const [experienceList, setExperienceList] = useState([]);
 
   //auth state change
   const [user, loading] = useAuthState(auth);
@@ -86,6 +88,7 @@ function SimplyContext({ children }) {
       profile_img: currentUser?.profile_img ? currentUser.profile_img : "",
     });
     setBlogSites(currentUser?.blog_site);
+    setCertifications(currentUser?.certifications);
   }, [currentUser]);
 
   const GoogleSignInWithPopUP = () => {
@@ -130,6 +133,10 @@ function SimplyContext({ children }) {
         setIsPublished,
         blogSites,
         setBlogSites,
+        certifications,
+        setCertifications,
+        experienceList,
+        setExperienceList,
       }}
     >
       {!loading && children}

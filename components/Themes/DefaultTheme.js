@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import Image from "next/image";
 import React from "react";
-import { firstLetterUpper } from "../utiles/textutils";
+import { firstLetterUpper } from "../utils/textutils";
 import Link from "next/link";
 import sampleimg from "../../public/avatar-male.png";
 

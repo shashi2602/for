@@ -24,7 +24,7 @@ function GoogleBtn(props) {
         toast.success(`🙏 welcome back ${result.user.displayName}`);
       });
     } catch (err) {
-      toast.error(" 😭 error occured");
+      toast.error(" 😭 error occurred");
     }
   };
   return (

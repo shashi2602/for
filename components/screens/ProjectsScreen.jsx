@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSimplyContext } from "../../context/SimplyContext";
 import { updateUserDoc } from "../../services/user.services";
 import GithubProjectsBtn from "../buttons/GithubProjectsButton";
-import { firstLetterUpper } from "../utiles/textutils";
+import { firstLetterUpper } from "../utils/textutils";
 
 function ChooseMeProjects() {
   const { projectList, setProjectList, setChangeDone } = useSimplyContext();
@@ -127,7 +127,7 @@ function ChooseMeProjects() {
         {projectList?.map((p, i) => {
           return (
             <div
-              className=" w-80  border-2 border-black  border-b-4 dark:border-white rounded-md p-4"
+              className=" w-full sm:w-80 md:w-80  border-2 border-black  border-b-4 dark:border-white rounded-md p-4"
               key={i}
             >
               <div className="flex justify-between">
