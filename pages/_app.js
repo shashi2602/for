@@ -6,7 +6,7 @@ import { ThemeProvider } from "next-themes";
 function MyApp({ Component, pageProps }) {
   return (
     <SimplyContext>
-      <ThemeProvider attribute="class">
+      <ThemeProvider attribute="class" >
         <Component {...pageProps} />
         <Toaster position="top-right" />
       </ThemeProvider>

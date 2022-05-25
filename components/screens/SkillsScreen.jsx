@@ -108,7 +108,7 @@ function ChooseMeSkills() {
 
 function StackChip({ stack, onDeleteClick }) {
   return (
-    <div className=" p-2 flex gap-2 bg-gray-100  border-2  transition   shadow-[3px_3px_0_0_#000] border-black dark:bg-[#18181B] rounded-md ">
+    <div className=" p-2 flex gap-2 bg-gray-100  border-2  transition   shadow-[3px_3px_0_0_#000] border-black dark:bg-[#18181B] dark:shadow-[3px_3px_0_0]  dark:shadow-black/40 dark:border-black/40 rounded-md ">
       <Image
         alt={stack?.name}
         src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${stack?.name}/${stack?.name}-${stack?.svg}.svg`}

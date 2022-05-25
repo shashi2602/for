@@ -78,7 +78,7 @@ function ChooseMeSocialMedia() {
             {selectedSocial?.map((s, i) => {
               return (
                 <div key={i}>
-                  <div className=" p-2 flex gap-2 bg-gray-100  border-2  transition   shadow-[3px_3px_0_0_#000] border-black dark:bg-[#18181B] rounded-md ">
+                  <div className=" p-2 flex gap-2 bg-gray-100  border-2  transition   shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0]   border-black dark:bg-[#18181B] dark:shadow-[3px_3px_0_0]  dark:shadow-black/40 dark:border-black/40 rounded-md ">
                     <Image alt={s.value} src={s.icon} height={20} width={20} />
                     <Link
                       href={`${

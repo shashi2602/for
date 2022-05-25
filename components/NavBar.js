@@ -8,6 +8,7 @@ import { useSimplyContext } from "../context/SimplyContext";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import PublishButton from "./buttons/PublishButton";
+import DarkMode from "./buttons/DarkMode";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -71,6 +72,7 @@ export default function NavBar() {
                           <PublishButton />
                         </div>
                       )}
+                      <DarkMode />
                     </div>
                     <Transition
                       as={Fragment}

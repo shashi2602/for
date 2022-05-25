@@ -6,6 +6,10 @@ import Image from "next/image";
 import sampleProfile from "../../public/avatar-2.png";
 import toast from "react-hot-toast";
 import axios from "axios";
+import InputField from "../forms/InputField";
+import Label from "../forms/Label";
+import FormGroup from "../forms/FormGroup";
+import TextArea from "../forms/TextArea";
 
 function ChooseMeProfile() {
   const { currentUser, profileData, setProfileData, setChangeDone } =
@@ -42,22 +46,22 @@ function ChooseMeProfile() {
   };
 
   return (
-    <div className="m-2 w-full ">
-      <div className="flex justify-center pt-3">
-        <div className="grid grid-rows gap-3 justify-items-center">
-          <div>
-            <Image
-              src={
-                profileData?.profile_img
-                  ? profileData?.profile_img
-                  : sampleProfile
-              }
-              alt={currentUser?.username}
-              className="rounded-full object-cover"
-              height={350}
-              width={350}
-            />
-          </div>
+    <div className="m-2 flex justify-center items-center">
+      <div className="flex flex-col gap-2 items-center justify-center">
+        <div>
+          <Image
+            src={
+              profileData?.profile_img
+                ? profileData?.profile_img
+                : sampleProfile
+            }
+            alt={currentUser?.username}
+            className="rounded-full object-cover"
+            height={350}
+            width={350}
+          />
+        </div>
+        <div>
           <label
             htmlFor="profile_img"
             className=" px-2 py-1 border-2  border-black dark:border-white  rounded-md shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#fff] hover:shadow-none font-semibold text-center  cursor-pointer hover:bg-yellow-300 hover:text-black transition duration-300 ease-in-out"
@@ -74,50 +78,46 @@ function ChooseMeProfile() {
             }}
           />
         </div>
-      </div>
-
-      <div className="flex justify-center gap-2 mt-4 ">
-        <InputField
-          name="username"
-          value={profileData?.username}
-          onchange={handelChange}
-        />
-      </div>
-      <div className="flex flex-wrap gap-2 justify-center">
-        <InputField
-          name="status"
-          value={profileData?.status}
-          onchange={handelChange}
-        />
-        <InputField
-          name="expertise"
-          value={profileData?.expertise}
-          onchange={handelChange}
-        />
-      </div>
-      <div className="flex justify-center pt-1">
-        <InputField
-          name="country"
-          value={profileData?.country}
-          onchange={handelChange}
-        />
+        <div className="flex gap-3 mt-4 mb-4 ">
+          <FormGroup>
+            <Label text={"👋 Name"} />
+            <InputField
+              name="username"
+              value={profileData?.username}
+              onchange={handelChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label text={"💡 Expertise "} />
+            <InputField
+              name="expertise"
+              value={profileData?.expertise}
+              onchange={handelChange}
+            />
+          </FormGroup>
+        </div>
+        <div className="mb-4">
+          <FormGroup>
+            <Label text={"✏️ Describe "} />
+            <TextArea
+              name="status"
+              value={profileData?.status}
+              onchange={handelChange}
+              width={"w-[27rem]"}
+            />
+          </FormGroup>
+        </div>
+        <FormGroup>
+          <Label text={"🌍 From"} />
+          <InputField
+            name="country"
+            value={profileData?.country}
+            onchange={handelChange}
+            size={"w-[27rem]"}
+          />
+        </FormGroup>
       </div>
     </div>
-  );
-}
-
-function InputField(props) {
-  return (
-    <input
-      id={props.name}
-      type="text"
-      className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3"
-      placeholder={props.name}
-      value={props.value}
-      name={props.name}
-      required
-      onChange={props.onchange}
-    />
   );
 }
 

@@ -19,7 +19,7 @@ function ChooseMeBlogs() {
   return (
     <div className="w-full  my-4   ">
       <p className="pb-3 font-semibold text-center">
-        Select to add blogs to your for.dev page
+        ✍️ Select to add blogs to your for.dev page
       </p>
       <div className="flex gap-3 flex-wrap justify-center">
         <button
@@ -38,7 +38,7 @@ function ChooseMeBlogs() {
           <p className="font-semibold">Hashnode</p>
           {blogSites == "hashnode" ? (
             <svg
-              className=" w-5 h-5 text-black top-4 right-4 "
+              className=" w-5 h-5 text-black dark:text-white top-4 right-4 "
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -72,7 +72,7 @@ function ChooseMeBlogs() {
           <p className="font-semibold">Dev.to</p>
           {blogSites == "devto" ? (
             <svg
-              className=" w-5 h-5 text-black top-4 right-4 "
+              className=" w-5 h-5 text-black dark:text-white top-4 right-4 "
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -108,7 +108,7 @@ function ChooseMeBlogs() {
           <p className="font-semibold">Medium</p>
           {blogSites == "medium" ? (
             <svg
-              className=" w-5 h-5 text-black top-4 right-4 "
+              className=" w-5 h-5 text-black dark:text-white top-4 right-4 "
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"

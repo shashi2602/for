@@ -64,7 +64,19 @@ function ChooseMeProjects() {
 
   return (
     <div className=" m-2 p-4 dark:bg-[#1c1c1f] rounded">
-      <GithubProjectsBtn />
+      <div className="flex justify-between m-b-4">
+        <h1 className="font-semibold text-lg">🛠️ Projects</h1>
+        <div>
+          <GithubProjectsBtn />
+          <button
+            className="ml-4 bg-black/5 dark:bg-yellow-300 dark:text-black rounded-md p-2 text-sm"
+            onClick={handleAdd}
+          >
+            ✔️Add
+          </button>
+        </div>
+      </div>
+
       <div className="grid grid-row pt-2">
         <input
           id="project title"
@@ -79,7 +91,7 @@ function ChooseMeProjects() {
         />
         <textarea
           id="project title"
-          className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3 w-full"
+          className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 py-2 px-3  mb-3 w-full"
           placeholder="About project in short"
           value={projectDesc}
           onChange={(e) => {
@@ -89,7 +101,7 @@ function ChooseMeProjects() {
         <div className="grid sm:grid-cols-3 sm:gap-2 ">
           <input
             type="text"
-            className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3 w-full  "
+            className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 py-2 px-3  mb-3 w-full  "
             placeholder="used to build project ',' separated  "
             value={projectStacks}
             onChange={(e) => {
@@ -98,7 +110,7 @@ function ChooseMeProjects() {
           />
           <input
             type="text"
-            className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3 w-full "
+            className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 py-2 px-3  mb-3 w-full "
             placeholder="source link(Github..etc)"
             value={projectSource}
             onChange={(e) => {
@@ -107,7 +119,7 @@ function ChooseMeProjects() {
           />
           <input
             type="text"
-            className=" bg-gray-200 dark:bg-[#18181B]  rounded border-2 border-black dark:border-none h-15 py-2 px-3  mb-3 w-full "
+            className=" bg-gray-200 dark:bg-[#18181B]  rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 py-2 px-3  mb-3 w-full "
             placeholder="Does project is live? Then provide link"
             value={projectLive}
             onChange={(e) => {
@@ -115,19 +127,13 @@ function ChooseMeProjects() {
             }}
           />
         </div>
-        <button
-          className="border-solid  dark:bg-yellow-300 dark:border-white dark:shadow-[3px_3px_0_0_#fff] dark:text-black hover:text-black border-black dark:border-none border-2 font-bold py-1 px-2 rounded hover:bg-yellow-300 ease-in-out shadow-[3px_3px_0_0_#000] hover:shadow-none transition"
-          onClick={handleAdd}
-        >
-          ✔️Add
-        </button>
       </div>
 
-      <div className="flex flex-wrap xl:flex-none gap-3 justify-center pt-4 mx-4">
+      <div className="grid grid-cols-3 gap-2  pt-4 mx-4">
         {projectList?.map((p, i) => {
           return (
             <div
-              className=" w-full sm:w-80 md:w-80  border-2 border-black  border-b-4 dark:border-white rounded-md p-4"
+              className=" w-full sm:w-auto md:w-auto  border-2 border-black  border-b-4 dark:border-white rounded-md p-4"
               key={i}
             >
               <div className="flex justify-between">

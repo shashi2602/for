@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import DarkMode from "../components/Themes/DarkMode";
+import DarkMode from "../components/buttons/DarkMode";
 import { userRef } from "../services/user.services";
 import { getDocs } from "firebase/firestore";
 import NormalTemplete from "../components/Themes/DefaultTheme";

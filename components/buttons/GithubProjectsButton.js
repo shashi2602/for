@@ -32,12 +32,9 @@ function GithubProjectsBtn() {
     }
   };
   return (
-    <button
-      className=" mb-2 border-2 border-black  dark:hover:text-white hover:text-black p-2 font-semibold inline-flex items-center rounded-md transition ease-out shadow-[3px_3px_0_0_#000] hover:shadow-none dark:hover:shadow-none dark:border-white dark:shadow-[3px_3px_0_0_#FFF]"
-      onClick={handleGet}
-    >
+    <button className=" " onClick={handleGet}>
       <span>
-        <i className="fa fa-github" aria-hidden="true"></i> Github Projects
+        <i className="fa fa-github" aria-hidden="true"></i> github
       </span>
     </button>
   );
