@@ -78,7 +78,7 @@ function ChooseMeProfile() {
             }}
           />
         </div>
-        <div className="flex gap-3 mt-4 mb-4 ">
+        <div className="flex gap-3 mt-4">
           <FormGroup>
             <Label text={"👋 Name"} />
             <InputField
@@ -96,7 +96,7 @@ function ChooseMeProfile() {
             />
           </FormGroup>
         </div>
-        <div className="mb-4">
+        <div>
           <FormGroup>
             <Label text={"✏️ Describe "} />
             <TextArea

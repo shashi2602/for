@@ -6,13 +6,13 @@ function InputField({
   placeholder,
   value,
   onchange,
-  size,
+  size = "w-full",
 }) {
   return (
     <input
       id={name}
       type={type}
-      className={` dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3 capitalize ${
+      className={` dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3 mb-2 capitalize ${
         size ? size : ""
       }`}
       placeholder={placeholder}

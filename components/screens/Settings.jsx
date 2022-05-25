@@ -35,7 +35,7 @@ function Settings() {
             return (
               <div
                 key={i}
-                className="p-2  font-semibold hover:bg-gray-100 transition border-b-2"
+                className="p-4  font-semibold hover:bg-gray-100 dark:hover:text-black transition border-b-2"
                 onClick={() => setTabSelected(tab)}
               >
                 {tab.icon} {tab.name}
@@ -68,7 +68,7 @@ function SeoSettings() {
   }
   return (
     <div>
-      <h1 className="font-semibold text-lg ">Seo Settings</h1>
+      <h1 className="font-semibold text-lg ">🔍 Seo Settings</h1>
       <div className="mt-4">
         <p className="font-semibold">Seo title</p>
         <span className="font-thin text-gray-500 ">
@@ -108,7 +108,7 @@ function SeoSettings() {
 }
 function Themes() {
   return (
-    <div className="w-full flex place-content-center bg-gray-100 p-4 rounded-md">
+    <div className="w-full flex place-content-center bg-gray-100 dark:bg-black/40  p-4 rounded-md">
       coming soon
     </div>
   );
@@ -116,7 +116,7 @@ function Themes() {
 
 function Appearance() {
   return (
-    <div className="w-full flex place-content-center bg-gray-100 p-4 rounded-md">
+    <div className="w-full flex place-content-center bg-gray-100 dark:bg-black/40  p-4 rounded-md">
       coming soon
     </div>
   );

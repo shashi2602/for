@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useSimplyContext } from "../../context/SimplyContext";
 import { updateUserDoc } from "../../services/user.services";
 import GithubProjectsBtn from "../buttons/GithubProjectsButton";
+import InputField from "../forms/InputField";
+import TextArea from "../forms/TextArea";
 import { firstLetterUpper } from "../utils/textutils";
 
 function ChooseMeProjects() {
@@ -63,13 +65,13 @@ function ChooseMeProjects() {
   };
 
   return (
-    <div className=" m-2 p-4 dark:bg-[#1c1c1f] rounded">
+    <div className=" mt-2 ">
       <div className="flex justify-between m-b-4">
         <h1 className="font-semibold text-lg">🛠️ Projects</h1>
         <div>
           <GithubProjectsBtn />
           <button
-            className="ml-4 bg-black/5 dark:bg-yellow-300 dark:text-black rounded-md p-2 text-sm"
+            className="ml-4 bg-black/5 dark:bg-black/40 dark:text-white font-semibold rounded-md p-2 text-sm"
             onClick={handleAdd}
           >
             ✔️Add
@@ -77,63 +79,51 @@ function ChooseMeProjects() {
         </div>
       </div>
 
-      <div className="grid grid-row pt-2">
-        <input
-          id="project title"
-          type="text"
-          className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-none h-15 py-2 px-3 w-full sm:w-auto mb-3"
+      <div className="grid grid-row p-4">
+        <InputField
           placeholder="Project name"
           value={projectTitle}
-          onChange={(e) => {
+          onchange={(e) => {
             setProjectTitle(e.target.value);
           }}
-          required
         />
-        <textarea
-          id="project title"
-          className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 py-2 px-3  mb-3 w-full"
-          placeholder="About project in short"
+        <TextArea
+          placeholder="About project "
           value={projectDesc}
-          onChange={(e) => {
+          onchange={(e) => {
             setProjectDesc(e.target.value);
           }}
-        ></textarea>
+        ></TextArea>
         <div className="grid sm:grid-cols-3 sm:gap-2 ">
-          <input
-            type="text"
-            className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 py-2 px-3  mb-3 w-full  "
+          <InputField
             placeholder="used to build project ',' separated  "
             value={projectStacks}
-            onChange={(e) => {
+            onchange={(e) => {
               setProjectStacks(e.target.value);
             }}
           />
-          <input
-            type="text"
-            className=" bg-gray-200 dark:bg-[#18181B] rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 py-2 px-3  mb-3 w-full "
+          <InputField
             placeholder="source link(Github..etc)"
             value={projectSource}
-            onChange={(e) => {
+            onchange={(e) => {
               setProjectSource(e.target.value);
             }}
           />
-          <input
-            type="text"
-            className=" bg-gray-200 dark:bg-[#18181B]  rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 py-2 px-3  mb-3 w-full "
+          <InputField
             placeholder="Does project is live? Then provide link"
             value={projectLive}
-            onChange={(e) => {
+            onchange={(e) => {
               setProjectLive(e.target.value);
             }}
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2  pt-4 mx-4">
+      <div className="grid sm:grid-cols-3 md:grid-cols-3 gap-2  pt-4 mx-4">
         {projectList?.map((p, i) => {
           return (
             <div
-              className=" w-full sm:w-auto md:w-auto  border-2 border-black  border-b-4 dark:border-white rounded-md p-4"
+              className=" w-full grid grid-flow-row justify-between sm:w-auto md:w-auto  dark:border-none dark:bg-black/40 bg-gray-100 rounded-md p-4"
               key={i}
             >
               <div className="flex justify-between">
@@ -147,7 +137,7 @@ function ChooseMeProjects() {
                   <Link href={p.live_link} passHref>
                     <a target={"_blank"}>
                       <button
-                        className="z-10 block p-2 text-green-700 transition-all bg-green-100 border-2 border-black rounded-full active:bg-green-50 hover:scale-110 focus:outline-none focus:ring"
+                        className="z-10 block p-2 text-green-700 transition-all bg-green-100  rounded-full active:bg-green-50 hover:scale-110 focus:outline-none focus:ring"
                         type="button"
                       >
                         <svg
@@ -169,7 +159,7 @@ function ChooseMeProjects() {
                   </Link>
 
                   <button
-                    className="z-20 block p-2 text-blue-700 transition-all bg-blue-100 border-2 border-black  rounded-full active:bg-blue-50 hover:scale-110 focus:outline-none focus:ring"
+                    className="z-20 block p-2 text-blue-700 transition-all bg-blue-100   rounded-full active:bg-blue-50 hover:scale-110 focus:outline-none focus:ring"
                     type="button"
                     onClick={() => {
                       handleEdit(p.id);
@@ -192,7 +182,7 @@ function ChooseMeProjects() {
                   </button>
 
                   <button
-                    className="z-30 block p-2 text-red-700 transition-all bg-red-100 border-2 border-black  rounded-full hover:scale-110 focus:outline-none focus:ring active:bg-red-50"
+                    className="z-30 block p-2 text-red-700 transition-all bg-red-100   rounded-full hover:scale-110 focus:outline-none focus:ring active:bg-red-50"
                     type="button"
                     onClick={() => {
                       handleDelete(p.id);
@@ -215,14 +205,20 @@ function ChooseMeProjects() {
                   </button>
                 </div>
               </div>
-              <p className="font-semibold my-2">{firstLetterUpper(p.title)}</p>
-              <p className="text-justify">{p.short_info}</p>
-              <div className="flex flex-wrap gap-2 mt-2">
+
+              <div>
+                <p className="font-semibold my-2">
+                  {firstLetterUpper(p.title)}
+                </p>
+                <p className="text-justify">{p.short_info}</p>
+              </div>
+
+              <div className="flex flex-wrap items-start gap-2 mt-2">
                 {p?.stacks?.split(",").map((s, i) => {
                   return (
                     <p
                       key={i}
-                      className="p-1 text-sm bg-black text-white rounded"
+                      className="p-1 text-xs font-semibold bg-gray-900 dark:bg-yellow-500 dark:text-yellow-500 dark:bg-opacity-10 text-white rounded"
                     >
                       {s}
                     </p>

@@ -47,7 +47,7 @@ export default function Modal({ children, show, showAdd, handleAdd }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full dark:bg-[#18181B] bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform   shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#fff] dark:border-white border-black border-2  rounded-md ">
+              <div className="inline-block w-full dark:bg-black bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform   shadow-[3px_3px_0_0_#000] dark:shadow-none dark:border-none border-black border-2  rounded-md ">
                 {children}
 
                 {showAdd && (

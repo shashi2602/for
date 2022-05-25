@@ -8,11 +8,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { firstLetterUpper } from "../utils/textutils";
 import Modal from "../modals/Modal";
+import { useTheme } from "next-themes";
+import InputField from "../forms/InputField";
 
 function ChooseMeSocialMedia() {
   let [isOpen, setIsOpen] = useState(false);
   let [clickedSocial, setClickedSocial] = useState({});
   const [inputError, setInputError] = useState(false);
+  const { theme } = useTheme();
   const { selectedSocial, setSelectedSocial, setChangeDone } =
     useSimplyContext();
 
@@ -70,16 +73,27 @@ function ChooseMeSocialMedia() {
   return (
     <>
       {selectedSocial?.length != 0 ? (
-        <div className="w-full  dark:bg-[#18181B] rounded my-4 p-2">
+        <div className="w-full  dark:bg-[#18181B] bg-black/5 rounded my-4 p-2">
           {/* <p className="font-semibold text-lg text-center px-1 mb-4">
             
           </p> */}
-          <div className="flex flex-wrap   gap-3">
+          <div className="flex flex-wrap justify-center rounded-md gap-3">
             {selectedSocial?.map((s, i) => {
               return (
                 <div key={i}>
-                  <div className=" p-2 flex gap-2 bg-gray-100  border-2  transition   shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0]   border-black dark:bg-[#18181B] dark:shadow-[3px_3px_0_0]  dark:shadow-black/40 dark:border-black/40 rounded-md ">
-                    <Image alt={s.value} src={s.icon} height={20} width={20} />
+                  <div className=" p-2 flex gap-2   border-2  transition bg-white   dark:shadow-none   border-black dark:bg-black/40   dark:border-none rounded-md ">
+                    <Image
+                      alt={s.value}
+                      src={
+                        s.darkPath
+                          ? theme == "dark"
+                            ? `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${s.value}-dark.svg`
+                            : `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${s.value}.svg`
+                          : `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${s.value}.svg`
+                      }
+                      height={20}
+                      width={20}
+                    />
                     <Link
                       href={`${
                         s.link_placeholder
@@ -120,20 +134,31 @@ function ChooseMeSocialMedia() {
           Click below social icon to add social account
         </p>
       )}
-      <div className=" w-full  rounded py-2">
+      <div className=" w-full rounded py-2">
         <div className="flex flex-wrap justify-center gap-3">
           {social.map((s, i) => {
             return (
               <div
                 key={i}
-                className="bg-gray-300 dark:bg-[#252528] border-2 border-black dark:hover:bg-yellow-300 cursor-pointer hover:bg-yellow-300 h-24 w-24 rounded-md flex justify-center  transition duration-300 ease-in-out  shadow-[3px_3px_0_0_#000]  hover:shadow-none"
+                className="  dark:shadow-none  dark:bg-black/40   dark:border-none border-2 border-black dark:hover:bg-yellow-300 cursor-pointer hover:bg-yellow-300 h-24 w-24 rounded-md flex justify-center  transition duration-300 ease-in-out  shadow-[3px_3px_0_0_#000]  hover:shadow-none"
                 onClick={() => {
                   openModal(s);
                 }}
               >
                 <div className="py-4 flex items-center ">
                   <div>
-                    <Image alt={s.value} src={s.icon} height={40} width={40} />
+                    <Image
+                      alt={s.value}
+                      src={
+                        s.darkPath
+                          ? theme == "dark"
+                            ? `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${s.value}-dark.svg`
+                            : `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${s.value}.svg`
+                          : `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${s.value}.svg`
+                      }
+                      height={40}
+                      width={40}
+                    />
                   </div>
                 </div>
               </div>
@@ -147,11 +172,17 @@ function ChooseMeSocialMedia() {
         >
           <Dialog.Title
             as="h3"
-            className="text-lg flex font-medium leading-6 text-gray-900 dark:text-white"
+            className="text-lg flex font-medium leading-6 text-gray-900 dark:text-white capitalize"
           >
             <Image
               alt={clickedSocial.value}
-              src={clickedSocial.icon}
+              src={
+                clickedSocial.darkPath
+                  ? theme == "dark"
+                    ? `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${clickedSocial.value}-dark.svg`
+                    : `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${clickedSocial.value}.svg`
+                  : `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${clickedSocial.value}.svg`
+              }
               height={15}
               width={15}
             />
@@ -159,15 +190,12 @@ function ChooseMeSocialMedia() {
             <p className="px-2">{clickedSocial.value}</p>
           </Dialog.Title>
           <div className="mt-4">
-            <input
-              type="text"
+            <InputField
               name="link"
               placeholder={clickedSocial.placeholder}
-              className={`w-full h-10 p-2 border-2 border-black  dark:border-[#18181B] ${
-                inputError && "border-red-600"
-              } rounded`}
               value={clickedSocial?.link}
-              onChange={handleChange}
+              onchange={handleChange}
+              size={"w-full"}
             />
             {inputError && (
               <p className="text-red-600 font-semibold">required field</p>

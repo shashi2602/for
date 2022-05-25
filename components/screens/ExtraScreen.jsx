@@ -6,6 +6,8 @@ import Modal from "../modals/Modal";
 import { GET_FAVICON_FROM_SITE_LINK } from "../utils/constants";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import InputField from "../forms/InputField";
+import TextArea from "../forms/TextArea";
 function ChooseMeMyExtra() {
   const {
     certifications,
@@ -69,7 +71,7 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
             return (
               <div
                 key={i}
-                className=" rounded-md w-full grid grid-flow-col bg-slate-100/50  dark:bg-[#18181B] p-2 justify-between sm:w-[22rem] gap-2"
+                className=" rounded-md w-full grid grid-flow-col bg-gray-100  dark:bg-black/40 p-2 justify-between sm:w-[22rem] gap-2"
               >
                 <div className="flex ">
                   <img
@@ -101,13 +103,13 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
         </div>
       )}
       <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit}>
-        <h1 className="text-lg font-medium leading-6 text-center dark:text-white ">
+        <h1 className="text-lg font-medium leading-6 text-center dark:text-white  ">
           Add Certificate
         </h1>
-        <div className="">
+        <div className="mt-2">
           <InputField
-            text="Certificate title"
-            inputType={"text"}
+            placeholder="Certificate title"
+            type={"text"}
             onchange={(e) => {
               setCertificate((prev) => ({
                 ...prev,
@@ -116,8 +118,8 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
             }}
           />
           <InputField
-            text="Certificate link"
-            inputType={"text"}
+            placeholder="Certificate link"
+            type={"text"}
             onchange={(e) => {
               setCertificate((prev) => ({
                 ...prev,
@@ -126,8 +128,8 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
             }}
           />
           <InputField
-            text="Certificate issued on"
-            inputType={"date"}
+            placeholder="Certificate issued on"
+            type={"date"}
             onchange={(e) => {
               setCertificate((prev) => ({
                 ...prev,
@@ -210,8 +212,8 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
         </h1>
         <p className="text-gray-700 dark:text-white mt-2">Title</p>
         <InputField
-          text={"Ex:Tech lead"}
-          inputType={"text"}
+          placeholder={"Ex:Tech lead"}
+          type={"text"}
           onchange={(e) => {
             setExperience((prev) => ({
               ...prev,
@@ -221,8 +223,8 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
         />
         <p className="text-gray-700 dark:text-white">Company Name</p>
         <InputField
-          text={"Ex:Google"}
-          inputType={"text"}
+          placeholder={"Ex:Google"}
+          type={"text"}
           onchange={(e) =>
             setExperience((prev) => ({
               ...prev,
@@ -231,8 +233,8 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
           }
         />
         <p className="text-gray-700 dark:text-white">Description</p>
-        <textarea
-          className="  dark:bg-[#18181B] rounded border-2 border-black dark:border-2 dark:border-black/20 h-15 p-2 mt-2 mb-3 w-full"
+        <TextArea
+          placeholder="Ex:worked on Data Science"
           onChange={(e) =>
             setExperience((prev) => ({
               ...prev,
@@ -242,8 +244,8 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
         />
         <p className="text-gray-700 dark:text-white">Start date</p>
         <InputField
-          text={"Start date"}
-          inputType={"date"}
+          placeholder={"Start date"}
+          type={"date"}
           onchange={(e) =>
             setExperience((prev) => ({
               ...prev,
@@ -273,8 +275,8 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
           <>
             <p className="text-gray-700 dark:text-white">End date</p>
             <InputField
-              text={"End date"}
-              inputType={"date"}
+              placeholder={"End date"}
+              type={"date"}
               onchange={(e) =>
                 setExperience((prev) => ({
                   ...prev,
@@ -289,19 +291,19 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
   );
 }
 
-function InputField({ text, onchange, inputType }) {
-  return (
-    <div>
-      <input
-        type={inputType}
-        className="  dark:bg-[#18181B] rounded border-2 border-black  h-15 p-2 mt-2 mb-3 w-full"
-        placeholder={text}
-        name={text}
-        required
-        onChange={onchange}
-      />
-    </div>
-  );
-}
+// function InputField({ placeholder, onchange, type }) {
+//   return (
+//     <div>
+//       <input
+//         type={type}
+//         className="  dark:bg-[#18181B] rounded border-2 border-black  h-15 p-2 mt-2 mb-3 w-full"
+//         placeholder={placeholder}
+//         name={placeholder}
+//         required
+//         onChange={onchange}
+//       />
+//     </div>
+//   );
+// }
 
 export default ChooseMeMyExtra;

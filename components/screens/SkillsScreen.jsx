@@ -74,7 +74,7 @@ function ChooseMeSkills() {
             Search the stack you love
           </p>
         )}
-        <div className="bg-gray-100  dark:bg-[#18181B] p-2 mt-4  border-2  transition  dark:border-white dark:shadow-[3px_3px_0_0_#fff] border-black rounded-md shadow-[3px_3px_0_0_#000]">
+        <div className="  dark:bg-[#18181B] p-4 mt-4 bg-gray-100 transition  dark:border-none  border-black rounded-md ">
           <h2 className="font-semibold text-lg px-1">🧠Search stacks</h2>
           <div className="mt-4">
             <ReactSearchAutocomplete
@@ -87,7 +87,7 @@ function ChooseMeSkills() {
               // autoFocus
               styling={{
                 borderRadius: "5px",
-                border: "1px solid gray",
+                border: "2px solid black",
                 boxShadow: "0px",
               }}
             ></ReactSearchAutocomplete>
@@ -108,7 +108,7 @@ function ChooseMeSkills() {
 
 function StackChip({ stack, onDeleteClick }) {
   return (
-    <div className=" p-2 flex gap-2 bg-gray-100  border-2  transition   shadow-[3px_3px_0_0_#000] border-black dark:bg-[#18181B] dark:shadow-[3px_3px_0_0]  dark:shadow-black/40 dark:border-black/40 rounded-md ">
+    <div className=" p-2 flex gap-2 border-2  transition   border-black   dark:shadow-none dark:bg-black/40   dark:border-none rounded-md ">
       <Image
         alt={stack?.name}
         src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${stack?.name}/${stack?.name}-${stack?.svg}.svg`}
