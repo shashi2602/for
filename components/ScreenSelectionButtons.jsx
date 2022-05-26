@@ -11,9 +11,9 @@ function ChooseMe(props) {
           return (
             <button
               key={type.type_name}
-              className={`px-4 py-1 dark:bg-[#18181B] border-2 border-solid border-black  shadow-[3px_3px_0_0_#000] dark:border-white dark:shadow-[3px_3px_0_0_#fff] hover:shadow-none font-semibold rounded-md  transition duration-300 ease-in-out ${
+              className={`px-4 py-1 dark:bg-[#18181B] rounded-md font-semibold transition duration-300 ease-in-out  border-2  border-black  shadow-[3px_3px_0_0_#000] dark:border-white/10 dark:shadow-[3px_3px_0_0_#303032] hover:shadow-none dark:hover:shadow-none${
                 props.typeSelected === type.type_name
-                  ? "bg-yellow-300  border-b-4 shadow-lg dark:bg-yellow-300 dark:text-black  dark:shadow-none dark:hover:shadow-none"
+                  ? "bg-yellow-300 shadow-lg dark:bg-yellow-300 dark:text-black  dark:shadow-none dark:hover:shadow-none"
                   : ""
               }`}
               onClick={() => {

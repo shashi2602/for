@@ -42,7 +42,7 @@ export default function PublishButton() {
   };
   return (
     <button
-      className=" text-black bg-yellow-300 font-semibold px-3 py-2  rounded-md disabled:cursor-no-drop   transition"
+      className=" text-black bg-yellow-300 font-semibold capitalize px-3 py-2 hover:bg-yellow-200 rounded-md disabled:cursor-no-drop   transition"
       onClick={handleSubmit}
       disabled={!changeDone}
     >

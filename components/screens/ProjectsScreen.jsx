@@ -65,13 +65,13 @@ function ChooseMeProjects() {
   };
 
   return (
-    <div className=" mt-2 ">
+    <div className="mt-2">
       <div className="flex justify-between m-b-4">
         <h1 className="font-semibold text-lg">🛠️ Projects</h1>
         <div>
           <GithubProjectsBtn />
           <button
-            className="ml-4 bg-black/5 dark:bg-black/40 dark:text-white font-semibold rounded-md p-2 text-sm"
+            className="ml-4 bg-black/5 dark:bg-[#18181B] dark:text-white font-semibold rounded-md p-2 text-sm"
             onClick={handleAdd}
           >
             ✔️Add
@@ -218,7 +218,7 @@ function ChooseMeProjects() {
                   return (
                     <p
                       key={i}
-                      className="p-1 text-xs font-semibold bg-gray-900 dark:bg-yellow-500 dark:text-yellow-500 dark:bg-opacity-10 text-white rounded"
+                      className="p-1 text-xs font-semibold bg-gray-900 dark:bg-gray-900/30 dark:text-white dark:bg-opacity-10 text-white rounded"
                     >
                       {s}
                     </p>

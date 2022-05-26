@@ -31,7 +31,7 @@ function GithubBtn(props) {
   };
   return (
     <button
-      className=" bg-gray-900 hover:text-white  text-white hover:bg-gray-800  p-2 font-semibold inline-flex items-center border-2  transition dark:border-white border-black rounded-md shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#fff] hover:shadow-none"
+      className=" bg-gray-900 hover:text-white  text-white hover:bg-gray-800  p-2 font-semibold inline-flex items-center  transition border-shadow"
       onClick={handleClick}
     >
       <svg

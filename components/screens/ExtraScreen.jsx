@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import InputField from "../forms/InputField";
 import TextArea from "../forms/TextArea";
+import Label from "../forms/Label";
 function ChooseMeMyExtra() {
   const {
     certifications,
@@ -50,6 +51,7 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
     setCertifications(
       certifications.filter((prev) => prev.certi_title != c.certi_title)
     );
+    setChangeDone(true);
   };
 
   return (
@@ -107,7 +109,9 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
           Add Certificate
         </h1>
         <div className="mt-2">
+          <Label text={"Certificate title"} />
           <InputField
+            name={"Certificate title"}
             placeholder="Certificate title"
             type={"text"}
             onchange={(e) => {
@@ -117,7 +121,9 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
               }));
             }}
           />
+          <Label text={"Certificate link"} />
           <InputField
+            name={"Certificate link"}
             placeholder="Certificate link"
             type={"text"}
             onchange={(e) => {
@@ -127,7 +133,9 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
               }));
             }}
           />
+          <Label text={"Certificate issued on"} />
           <InputField
+            name={"Certificate issued on"}
             placeholder="Certificate issued on"
             type={"date"}
             onchange={(e) => {
@@ -210,8 +218,9 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
         <h1 className="text-lg font-medium leading-6 text-center dark:text-white">
           Add Experience
         </h1>
-        <p className="text-gray-700 dark:text-white mt-2">Title</p>
+        <Label text={"Title"} />
         <InputField
+          name={"title"}
           placeholder={"Ex:Tech lead"}
           type={"text"}
           onchange={(e) => {
@@ -221,8 +230,9 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
             }));
           }}
         />
-        <p className="text-gray-700 dark:text-white">Company Name</p>
+        <Label text="Company Name" />
         <InputField
+          name={"Company Nam"}
           placeholder={"Ex:Google"}
           type={"text"}
           onchange={(e) =>
@@ -232,8 +242,9 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
             }))
           }
         />
-        <p className="text-gray-700 dark:text-white">Description</p>
+        <Label text={"Description"} />
         <TextArea
+          name={"Description"}
           placeholder="Ex:worked on Data Science"
           onChange={(e) =>
             setExperience((prev) => ({
@@ -242,8 +253,9 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
             }))
           }
         />
-        <p className="text-gray-700 dark:text-white">Start date</p>
+        <Label text={"Start date"} />
         <InputField
+          name={"Start date"}
           placeholder={"Start date"}
           type={"date"}
           onchange={(e) =>
@@ -273,8 +285,9 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
           <></>
         ) : (
           <>
-            <p className="text-gray-700 dark:text-white">End date</p>
+            <Label text={"End date"} />
             <InputField
+              name={"End date"}
               placeholder={"End date"}
               type={"date"}
               onchange={(e) =>

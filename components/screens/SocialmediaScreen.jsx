@@ -73,7 +73,7 @@ function ChooseMeSocialMedia() {
   return (
     <>
       {selectedSocial?.length != 0 ? (
-        <div className="w-full  dark:bg-[#18181B] bg-black/5 rounded my-4 p-2">
+        <div className="w-full   rounded my-4 p-2">
           {/* <p className="font-semibold text-lg text-center px-1 mb-4">
             
           </p> */}
@@ -81,7 +81,7 @@ function ChooseMeSocialMedia() {
             {selectedSocial?.map((s, i) => {
               return (
                 <div key={i}>
-                  <div className=" p-2 flex gap-2   border-2  transition bg-white   dark:shadow-none   border-black dark:bg-black/40   dark:border-none rounded-md ">
+                  <div className=" p-2 flex gap-2  bg-gray-100 dark:bg-[#18181B]  rounded-md ">
                     <Image
                       alt={s.value}
                       src={
@@ -140,7 +140,7 @@ function ChooseMeSocialMedia() {
             return (
               <div
                 key={i}
-                className="  dark:shadow-none  dark:bg-black/40   dark:border-none border-2 border-black dark:hover:bg-yellow-300 cursor-pointer hover:bg-yellow-300 h-24 w-24 rounded-md flex justify-center  transition duration-300 ease-in-out  shadow-[3px_3px_0_0_#000]  hover:shadow-none"
+                className=" dark:bg-black/40   cursor-pointer  h-24 w-24  flex justify-center border-shadow  transition duration-300 ease-in-out"
                 onClick={() => {
                   openModal(s);
                 }}

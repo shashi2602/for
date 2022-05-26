@@ -47,14 +47,14 @@ export default function Modal({ children, show, showAdd, handleAdd }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full dark:bg-black bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform   shadow-[3px_3px_0_0_#000] dark:shadow-none dark:border-none border-black border-2  rounded-md ">
+              <div className="inline-block w-full dark:bg-[#121212] bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform   shadow-[3px_3px_0_0_#000] dark:shadow-none  border-black border-2  rounded-md ">
                 {children}
 
                 {showAdd && (
                   <div className=" mt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center py-2 px-4 text-sm font-medium bg-red-500   border-2  transition  border-black rounded-md shadow-[3px_3px_0_0_#000] hover:shadow-none hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500 mr-2 text-white"
+                      className=" py-2 px-4 text-sm font-medium bg-red-500  transition  border-shadow hover:bg-red-600 focus:outline-none  mr-2 text-white"
                       onClick={(e) => {
                         e.preventDefault();
                         closeModal();
@@ -64,7 +64,7 @@ export default function Modal({ children, show, showAdd, handleAdd }) {
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center px-4 py-2 text-sm font-medium dark:text-black bg-yellow-400 border-2  transition  border-black rounded-md shadow-[3px_3px_0_0_#000] hover:shadow-none hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      className=" px-4 py-2 text-sm font-medium dark:text-black bg-yellow-400 transition border-shadow hover:bg-yellow-300 focus:outline-none  "
                       onClick={(e) => {
                         e.preventDefault();
                         handleAdd();

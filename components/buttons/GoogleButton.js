@@ -29,7 +29,7 @@ function GoogleBtn(props) {
   };
   return (
     <button
-      className="text-white bg-red-600 hover:bg-red-700  p-2 font-semibold inline-flex items-center border-2  transition  dark:border-white border-black rounded-md shadow-[3px_3px_0_0_#000] dark:shadow-[3px_3px_0_0_#fff] hover:shadow-none"
+      className="text-white bg-red-600 hover:bg-red-700  p-2 font-semibold inline-flex items-center transition  border-shadow"
       onClick={handleClick}
     >
       <svg

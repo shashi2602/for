@@ -33,7 +33,7 @@ function GithubProjectsBtn() {
   };
   return (
     <button
-      className="ml-4 bg-black/5 dark:bg-black/40 dark:text-white font-semibold rounded-md p-2 text-sm"
+      className="ml-4 bg-black/5 dark:bg-[#18181B] dark:text-white font-semibold rounded-md p-2 text-sm"
       onClick={handleGet}
     >
       <span>

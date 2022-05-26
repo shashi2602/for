@@ -10,7 +10,21 @@ import toast from "react-hot-toast";
 const Simply = React.createContext();
 
 function SimplyContext({ children }) {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState({
+    username: "",
+    expertise: "",
+    country: "",
+    status: "",
+    profile_img: "",
+    about_markdown: "",
+    projects: [],
+    skills: [],
+    social: [],
+    blog_site: [],
+    certifications: [],
+    experience: [],
+    seo_settings: {},
+  });
   const [userNamesList, setUserNamesList] = useState([]);
   const [selectedSocial, setSelectedSocial] = useState([]);
   const [projectList, setProjectList] = useState([]);
@@ -31,7 +45,7 @@ function SimplyContext({ children }) {
 
   //auth state change
   const [user, loading] = useAuthState(auth);
-
+  // const [initialData, setInitialData] = useState();
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
     setCookie(null, "UID", user?.uid);
@@ -137,6 +151,8 @@ function SimplyContext({ children }) {
         setCertifications,
         experienceList,
         setExperienceList,
+        // initialData,
+        // setInitialData,
       }}
     >
       {!loading && children}

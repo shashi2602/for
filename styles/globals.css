@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .border-shadow {
+      @apply border-2 dark:border-[#18181B] border-black rounded-md shadow-[3px_3px_0_0_#000]  dark:shadow-[3px_3px_0_0_#18181B] hover:shadow-none dark:hover:shadow-none;
+    }
+  }
