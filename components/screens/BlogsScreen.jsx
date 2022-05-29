@@ -4,15 +4,20 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useSimplyContext } from "../../context/SimplyContext";
 function ChooseMeBlogs() {
-  const { blogSites, setBlogSites, setChangeDone, selectedSocial } =
-    useSimplyContext();
+  const { setChangeDone, currentUser, setCurrentUser } = useSimplyContext();
   const { theme } = useTheme();
   const handleSelectBlogSite = (siteName) => {
-    if (blogSites == siteName) {
-      setBlogSites("");
+    if (currentUser.blog_site == siteName) {
+      setCurrentUser((prev) => ({
+        ...prev,
+        blog_site: "",
+      }));
     } else {
-      if (selectedSocial.some((s) => s.value == siteName)) {
-        setBlogSites(siteName);
+      if (currentUser.social.some((s) => s.value == siteName)) {
+        setCurrentUser((prev) => ({
+          ...prev,
+          blog_site: siteName,
+        }));
         setChangeDone(true);
       } else {
         toast.error(`😜 Add ${siteName} in social media`);
@@ -28,14 +33,14 @@ function ChooseMeBlogs() {
         <BlogSelectButton
           onclick={() => handleSelectBlogSite("hashnode")}
           name="hashnode"
-          blogSites={blogSites}
+          blogSites={currentUser.blog_site}
           theme={theme}
         />
 
         <BlogSelectButton
           onclick={() => handleSelectBlogSite("devto")}
           name="devto"
-          blogSites={blogSites}
+          blogSites={currentUser.blog_site}
           isdark={true}
           theme={theme}
         />
@@ -43,7 +48,7 @@ function ChooseMeBlogs() {
         <BlogSelectButton
           onclick={() => handleSelectBlogSite("medium")}
           name="medium"
-          blogSites={blogSites}
+          blogSites={currentUser.blog_site}
           isdark={true}
           theme={theme}
         />

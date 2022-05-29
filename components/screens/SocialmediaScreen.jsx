@@ -1,23 +1,21 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, Fragment, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { social } from "../utils/SocialTypes";
 import { useSimplyContext } from "../../context/SimplyContext";
 import Link from "next/link";
 import Image from "next/image";
-import { firstLetterUpper } from "../utils/textutils";
 import Modal from "../modals/Modal";
 import { useTheme } from "next-themes";
 import InputField from "../forms/InputField";
 
 function ChooseMeSocialMedia() {
-  let [isOpen, setIsOpen] = useState(false);
-  let [clickedSocial, setClickedSocial] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [clickedSocial, setClickedSocial] = useState({});
   const [inputError, setInputError] = useState(false);
   const { theme } = useTheme();
-  const { selectedSocial, setSelectedSocial, setChangeDone } =
-    useSimplyContext();
+  const { currentUser, setCurrentUser, setChangeDone } = useSimplyContext();
 
   function closeModal() {
     setIsOpen(false);
@@ -27,9 +25,11 @@ function ChooseMeSocialMedia() {
   function openModal(clicked) {
     setIsOpen(!isOpen);
     setClickedSocial({ ...clicked });
-    if (selectedSocial.some((socials) => socials.value === clicked.value)) {
+    if (
+      currentUser?.social.some((socials) => socials.value === clicked.value)
+    ) {
       setClickedSocial({
-        ...selectedSocial.filter(
+        ...currentUser?.social.filter(
           (socials) => socials.value === clicked.value
         )[0],
       });
@@ -37,23 +37,27 @@ function ChooseMeSocialMedia() {
   }
 
   const handleLinkSubmit = (s) => {
-    const final_selected_social = { ...s, id: selectedSocial?.length + 1 };
+    const final_selected_social = { ...s, id: currentUser?.social?.length + 1 };
     if (s.link == "") {
       setInputError(true);
     } else {
-      if (selectedSocial.some((item) => item.value === s.value)) {
-        setSelectedSocial(
-          selectedSocial.map((item) => {
+      if (currentUser.social.some((item) => item.value === s.value)) {
+        setCurrentUser((prev) => ({
+          ...prev,
+          social: prev.social.map((item) => {
             if (item.value == s.value) {
               return { ...item, link: s.link };
             } else {
               return item;
             }
-          })
-        );
+          }),
+        }));
         setChangeDone(true);
       } else {
-        setSelectedSocial((item) => [...item, final_selected_social]);
+        setCurrentUser((prev) => ({
+          ...prev,
+          social: [...prev.social, final_selected_social],
+        }));
         setChangeDone(true);
       }
       closeModal();
@@ -61,7 +65,12 @@ function ChooseMeSocialMedia() {
   };
 
   const handleRemoveSocial = (e) => {
-    setSelectedSocial(selectedSocial.filter((item) => item.value != e.value));
+    setCurrentUser(
+      (prev = {
+        ...prev,
+        social: prev.social.filter((item) => item.value != e.value),
+      })
+    );
     setChangeDone(true);
   };
 
@@ -72,13 +81,11 @@ function ChooseMeSocialMedia() {
 
   return (
     <>
-      {selectedSocial?.length != 0 ? (
+      {currentUser?.social?.length != 0 ? (
         <div className="w-full   rounded my-4 p-2">
-          {/* <p className="font-semibold text-lg text-center px-1 mb-4">
-            
-          </p> */}
+
           <div className="flex flex-wrap justify-center rounded-md gap-3">
-            {selectedSocial?.map((s, i) => {
+            {currentUser?.social?.map((s, i) => {
               return (
                 <div key={i}>
                   <div className=" p-2 flex gap-2  bg-gray-100 dark:bg-[#18181B]  rounded-md ">
@@ -102,8 +109,11 @@ function ChooseMeSocialMedia() {
                       }`}
                       passHref={true}
                     >
-                      <a target="_blank" className=" font-semibold text-lg">
-                        {firstLetterUpper(s?.value)}
+                      <a
+                        target="_blank"
+                        className=" font-semibold text-lg capitalize"
+                      >
+                        {s?.value}
                       </a>
                     </Link>
 
@@ -168,7 +178,7 @@ function ChooseMeSocialMedia() {
         <Modal
           show={isOpen}
           showAdd={true}
-          handleAdd={() => handleLinkSubmit(clickedSocial)}
+          handleAdd={()=>handleLinkSubmit(clickedSocial)}
         >
           <Dialog.Title
             as="h3"

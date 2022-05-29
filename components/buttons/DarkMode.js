@@ -12,7 +12,7 @@ const DarkMode = () => {
     if (currentTheme === "dark") {
       return (
         <svg
-          className="w-5 h-5 transition-all duration-300 ease-in-out  dark:flex hidden"
+          className="w-5 h-5 transition-all duration-300 ease-in-out"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -28,7 +28,7 @@ const DarkMode = () => {
     } else {
       return (
         <svg
-          className="w-5 h-5 transition-all duration-350 ease-in-out  flex dark:hidden"
+          className="w-5 h-5 transition-all duration-350 ease-in-out"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -53,7 +53,7 @@ const DarkMode = () => {
       onClick={() => {
         setTheme(currentTheme == "dark" ? "light" : "dark");
       }}
-      className={`bg-gray-200 dark:bg-black dark:bg-opacity-25 dark:text-white px-3 py-2 rounded-md `}
+      className={`bg-gray-200 dark:bg-black dark:bg-opacity-25 dark:text-white px-3 py-2  rounded-md `}
     >
       {renderThemeChanger()}
     </button>

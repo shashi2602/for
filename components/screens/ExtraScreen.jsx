@@ -9,32 +9,75 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import InputField from "../forms/InputField";
 import TextArea from "../forms/TextArea";
 import Label from "../forms/Label";
+import MarkdownPreview from "../MarkdownPreview";
 function ChooseMeMyExtra() {
-  const {
-    certifications,
-    setCertifications,
-    setChangeDone,
-    experienceList,
-    setExperienceList,
-  } = useSimplyContext();
+  const { setChangeDone, currentUser, setCurrentUser } = useSimplyContext();
   dayjs.extend(relativeTime);
+
+  const tabs = [
+    {
+      name: "Certifications",
+      component: (
+        <Certification
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setChangeDone={setChangeDone}
+        />
+      ),
+      icon: "🎓",
+    },
+    {
+      name: "Experience",
+      component: (
+        <Experience
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setChangeDone={setChangeDone}
+        />
+      ),
+      icon: "💼",
+    },
+  ];
+  const [tabSelected, setTabSelected] = useState(tabs[0]);
+  function handleChangeTab(tab) {
+    return tab.component;
+  }
   return (
-    <div className="mt-4">
-      <Certification
-        certifications={certifications}
-        setCertifications={setCertifications}
-        setChangeDone={setChangeDone}
-      />
-      <Experience
-        experienceList={experienceList}
-        setExperienceList={setExperienceList}
-        setChangeDone={setChangeDone}
-      />
+    <div className="w-full mt-4">
+      <div className="hidden md:block">
+        <div className="flex flex-wrap lg:flex-nowrap">
+          <div className="w-[20rem] border-2 border-gray-200 rounded-md h-full ">
+            {tabs.map((tab, i) => {
+              return (
+                <div
+                  key={i}
+                  className={`p-4  font-semibold hover:bg-gray-100 dark:hover:text-black transition ${
+                    tabSelected?.name === tab.name
+                      ? "bg-gray-100 text-black"
+                      : ""
+                  } ${i + 1 === tabs.length ? "border-b-0" : "border-b-2"}`}
+                  onClick={() => setTabSelected(tab)}
+                >
+                  {tab.icon} {tab.name}
+                </div>
+              );
+            })}
+          </div>
+          <div className="h-screen w-full px-3 pl-5">
+            {handleChangeTab(tabSelected)}
+          </div>
+        </div>
+      </div>
+      <div className="lg:hidden">
+        {tabs.map((tab, i) => {
+          return tab.component;
+        })}
+      </div>
     </div>
   );
 }
 
-function Certification({ certifications, setCertifications, setChangeDone }) {
+function Certification({ currentUser, setCurrentUser, setChangeDone }) {
   const [showAdd, setShowAdd] = useState(false);
   const [certificate, setCertificate] = useState({
     certi_link: "",
@@ -43,39 +86,45 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
   });
 
   const handleSubmit = () => {
-    setCertifications((prev) => [...prev, { ...certificate }]);
+    setCurrentUser((prev) => ({
+      ...prev,
+      certifications: [...prev.certifications, certificate],
+    }));
     setChangeDone(true);
   };
 
   const handleRemoveCertificate = (c) => {
-    setCertifications(
-      certifications.filter((prev) => prev.certi_title != c.certi_title)
-    );
+    setCurrentUser((prev) => ({
+      ...prev,
+      certifications: prev.certifications.filter(
+        (p) => p.certi_title != c.certi_title
+      ),
+    }));
     setChangeDone(true);
   };
 
   return (
     <div className="">
-      <div className="flex justify-between m-b-4">
+      <div className="flex justify-between m-b-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
         <h1 className="font-semibold text-lg">🎓 Certifications</h1>
         <button onClick={() => setShowAdd(!showAdd)}>
           <i className="fa fa-plus"></i> Add Certification
         </button>
       </div>
 
-      {certifications?.length == 0 ? (
+      {currentUser?.certifications?.length == 0 ? (
         <div className="text-center font-semibold p-4 h-16">
           😰 No Certifications Added
         </div>
       ) : (
-        <div className="mt-4 flex flex-wrap gap-3 ">
-          {certifications.map((certi, i) => {
+        <div className="mt-4 ">
+          {currentUser?.certifications.map((certi, i) => {
             return (
               <div
                 key={i}
-                className=" rounded-md w-full grid grid-flow-col bg-gray-100  dark:bg-black/40 p-2 justify-between sm:w-[22rem] gap-2"
+                className=" rounded-md w-full grid grid-flow-col p-2 justify-between gap-2"
               >
-                <div className="flex ">
+                <div className="flex justify-between">
                   <img
                     alt={certi.certi_title}
                     src={GET_FAVICON_FROM_SITE_LINK + certi.certi_link}
@@ -91,14 +140,14 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
                         ? dayjs(certi.certi_issued).format("MMM YYYY")
                         : "No issue date"}
                     </p>
+                    <button
+                      className="rounded-md text-xs text-red-500 font-bold dark:text-red-400"
+                      onClick={() => handleRemoveCertificate(certi)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
-                <button
-                  className="p-1 rounded-md text-xs text-red-500 font-bold dark:text-red-400"
-                  onClick={() => handleRemoveCertificate(certi)}
-                >
-                  Delete
-                </button>
               </div>
             );
           })}
@@ -106,7 +155,7 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
       )}
       <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit}>
         <h1 className="text-lg font-medium leading-6 text-center dark:text-white  ">
-          Add Certificate
+          🎓 Certificate
         </h1>
         <div className="mt-2">
           <Label text={"Certificate title"} />
@@ -147,18 +196,12 @@ function Certification({ certifications, setCertifications, setChangeDone }) {
           />
         </div>
       </Modal>
-      {/* <div className="p-4 text-center w-[20rem] bg-yellow-200  text-yellow-500 rounded-md mt-4 ">
-        <button className="font-bold " onClick={() => setShowAdd(!showAdd)}>
-          <i className="fa fa-plus"></i> Add Certification
-        </button>
-      </div> */}
     </div>
   );
 }
 
-function Experience({ experienceList, setExperienceList, setChangeDone }) {
+function Experience({ currentUser, setCurrentUser, setChangeDone }) {
   const [showAdd, setShowAdd] = useState(false);
-  const [currentlyWorking, setCurrentlyWorking] = useState(false);
   const [experience, setExperience] = useState({
     title: "",
     company_name: "",
@@ -168,7 +211,11 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
     is_currently_working: "",
   });
   const handleSubmit = () => {
-    setExperienceList((prev) => [...prev, { ...experience }]);
+    setCurrentUser((prev) => ({
+      ...prev,
+      experiences: [...prev.experiences, experience],
+    }));
+
     setExperience({
       title: "",
       company_name: "",
@@ -176,38 +223,72 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
       start_date: "",
       end_date: "",
       is_currently_working: "",
+      company_link: "",
     });
     setChangeDone(true);
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console;
+    setExperience((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
-    <div className="mt-4">
-      <div className="flex justify-between mb-4">
+    <div className="mt-4 sm:mt-0">
+      <div className="flex justify-between mb-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
         <h1 className="font-semibold text-lg ">💼 Experience</h1>
         <button onClick={() => setShowAdd(!showAdd)}>
           <i className="fa fa-plus"></i> Add Experience
         </button>
       </div>
-      {experienceList.length == 0 ? (
+      {currentUser?.experiences?.length == 0 ? (
         <div className="text-center font-semibold p-4 h-16">
           😢 No Experience Added
         </div>
       ) : (
-        <div className="grid grid-flow-col auto-cols-max gap-2">
-          {experienceList.map((e, i) => {
+        <div className="grid gap-2">
+          {currentUser?.experiences?.map((e, i) => {
             return (
-              <div key={i}>
-                <h2 className="font-bold">{e.title}</h2>
-                <p>{e.company_name}</p>
-                <p>{e.description}</p>
-                <p>
-                  {dayjs(e.start_date).format("MMM YYYY")}-
-                  {e.end_date
-                    ? dayjs(e.end_date).format("MMM YYYY")
-                    : "present"}{" "}
-                  {e.end_date
-                    ? dayjs(e.start_date).from(dayjs(e.end_date), true)
-                    : dayjs(e.start_date).fromNow(true)}
-                </p>
+              <div key={i} className="flex flex-col border-b-2  p-4">
+                <div className="flex gap-2">
+                  <div>
+                    {e?.company_link ? (
+                      <Image
+                        alt={e.company_name}
+                        src={GET_FAVICON_FROM_SITE_LINK + e.company_link}
+                        height={20}
+                        width={20}
+                        layout={"fixed"}
+                      />
+                    ) : (
+                      <i className="fa fa-building" aria-hidden="true"></i>
+                    )}
+                  </div>
+                  <div>
+                    <h1 className="capitalize">
+                      {e?.title}{" "}
+                      <a
+                        href={e?.company_link}
+                        className="text-yellow-500 dark:text-yellow-300 font-semibold hover:underline"
+                      >
+                        @{e?.company_name}
+                      </a>
+                    </h1>
+                    <p className="capitalize  text-gray-500">
+                      {dayjs(e.start_date).format("MMM YYYY")} {" - "}
+                      {e.end_date
+                        ? dayjs(e.end_date).format("MMM YYYY")
+                        : "present"}{" "}
+                    </p>
+                  </div>
+                </div>
+                <div className="prose text-justify dark:prose-invert max-w-max">
+                  <MarkdownPreview about={e.description} />
+                </div>
               </div>
             );
           })}
@@ -215,55 +296,45 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
       )}
 
       <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit}>
-        <h1 className="text-lg font-medium leading-6 text-center dark:text-white">
-          Add Experience
+        <h1 className="text-lg font-medium leading-6 text-center dark:text-white m-2">
+          💼 Experience
         </h1>
         <Label text={"Title"} />
         <InputField
           name={"title"}
           placeholder={"Ex:Tech lead"}
           type={"text"}
-          onchange={(e) => {
-            setExperience((prev) => ({
-              ...prev,
-              title: e.target.value,
-            }));
-          }}
+          onchange={handleChange}
         />
         <Label text="Company Name" />
         <InputField
-          name={"Company Nam"}
+          name={"company_name"}
           placeholder={"Ex:Google"}
           type={"text"}
-          onchange={(e) =>
-            setExperience((prev) => ({
-              ...prev,
-              company_name: e.target.value,
-            }))
-          }
+          onchange={handleChange}
         />
-        <Label text={"Description"} />
+        <div className="flex justify-between">
+          <Label text={"Description"} />
+          <p className="text-xs ">Markdown support</p>
+        </div>
         <TextArea
-          name={"Description"}
+          name={"description"}
           placeholder="Ex:worked on Data Science"
-          onChange={(e) =>
-            setExperience((prev) => ({
-              ...prev,
-              description: e.target.value,
-            }))
-          }
+          onchange={handleChange}
         />
         <Label text={"Start date"} />
         <InputField
-          name={"Start date"}
+          name={"start_date"}
           placeholder={"Start date"}
           type={"date"}
-          onchange={(e) =>
-            setExperience((prev) => ({
-              ...prev,
-              start_date: e.target.value,
-            }))
-          }
+          onchange={handleChange}
+        />
+        <Label text="Company url"></Label>
+        <InputField
+          name={"company_link"}
+          placeholder={"https://somecompany.com"}
+          type={"text"}
+          onchange={handleChange}
         />
         <label className="flex mt-3 mb-3">
           <input
@@ -287,15 +358,10 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
           <>
             <Label text={"End date"} />
             <InputField
-              name={"End date"}
+              name={"end_date"}
               placeholder={"End date"}
               type={"date"}
-              onchange={(e) =>
-                setExperience((prev) => ({
-                  ...prev,
-                  end_date: e.target.value,
-                }))
-              }
+              onchange={handleChange}
             />
           </>
         )}
@@ -303,20 +369,5 @@ function Experience({ experienceList, setExperienceList, setChangeDone }) {
     </div>
   );
 }
-
-// function InputField({ placeholder, onchange, type }) {
-//   return (
-//     <div>
-//       <input
-//         type={type}
-//         className="  dark:bg-[#18181B] rounded border-2 border-black  h-15 p-2 mt-2 mb-3 w-full"
-//         placeholder={placeholder}
-//         name={placeholder}
-//         required
-//         onChange={onchange}
-//       />
-//     </div>
-//   );
-// }
 
 export default ChooseMeMyExtra;

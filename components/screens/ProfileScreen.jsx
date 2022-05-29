@@ -12,11 +12,10 @@ import FormGroup from "../forms/FormGroup";
 import TextArea from "../forms/TextArea";
 
 function ChooseMeProfile() {
-  const { currentUser, profileData, setProfileData, setChangeDone } =
-    useSimplyContext();
+  const { currentUser, setCurrentUser, setChangeDone } = useSimplyContext();
   const handelChange = (e) => {
     const { name, value } = e.target;
-    setProfileData((prev) => ({
+    setCurrentUser((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -31,11 +30,11 @@ function ChooseMeProfile() {
     const fetch = axios
       .post("https://api.cloudinary.com/v1_1/dtpdc2bhh/image/upload", data)
       .then((res) => {
-        setProfileData((prev) => ({
+        setCurrentUser((prev) => ({
           ...prev,
           profile_img: res.data.secure_url,
         }));
-        updateUserDoc(currentUser.docid, { profile_img: res.data.secure_url });
+        // updateUserDoc(currentUser.docid, { profile_img: res.data.secure_url });
       });
 
     toast.promise(fetch, {
@@ -51,8 +50,8 @@ function ChooseMeProfile() {
         <div>
           <Image
             src={
-              profileData?.profile_img
-                ? profileData?.profile_img
+              currentUser?.profile_img
+                ? currentUser?.profile_img
                 : sampleProfile
             }
             alt={currentUser?.username}
@@ -83,7 +82,7 @@ function ChooseMeProfile() {
             <Label text={"👋 Name"} />
             <InputField
               name="username"
-              value={profileData?.username}
+              value={currentUser?.username}
               onchange={handelChange}
             />
           </FormGroup>
@@ -91,7 +90,7 @@ function ChooseMeProfile() {
             <Label text={"💡 Expertise "} />
             <InputField
               name="expertise"
-              value={profileData?.expertise}
+              value={currentUser?.expertise}
               onchange={handelChange}
             />
           </FormGroup>
@@ -101,7 +100,7 @@ function ChooseMeProfile() {
             <Label text={"✏️ Describe "} />
             <TextArea
               name="status"
-              value={profileData?.status}
+              value={currentUser?.status}
               onchange={handelChange}
               width={"w-[27rem]"}
             />
@@ -111,7 +110,7 @@ function ChooseMeProfile() {
           <Label text={"🌍 From"} />
           <InputField
             name="country"
-            value={profileData?.country}
+            value={currentUser?.country}
             onchange={handelChange}
             size={"w-[27rem]"}
           />

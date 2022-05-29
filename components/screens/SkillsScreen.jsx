@@ -11,7 +11,7 @@ import { firstLetterUpper } from "../utils/textutils";
 import Image from "next/image";
 
 function ChooseMeSkills() {
-  const { stackList, setStackList, setChangeDone } = useSimplyContext();
+  const { currentUser, setCurrentUser, setChangeDone } = useSimplyContext();
   const { data } = useFetch(
     "https://raw.githubusercontent.com/shashi2602/devicon/master/devicon.json"
   );
@@ -24,21 +24,28 @@ function ChooseMeSkills() {
   }, [data]);
 
   const handleRemoveStackFromList = (item) => {
-    setStackList(stackList.filter((items) => items.name != item.name));
+    setCurrentUser((prev) => ({
+      ...prev,
+      skills: prev.skills.filter((items) => items.name != item.name),
+    }));
+
     setChangeDone(true);
   };
   const handleOnSelect = (item) => {
-    if (stackList.some((i) => i.name == item.name)) {
+    if (currentUser.skills.some((i) => i.name == item.name)) {
       handleRemoveStackFromList(item);
     } else {
-      setStackList((items) => [
-        ...items,
-        {
-          name: item.name,
-          color: item.color,
-          svg: item.versions.svg[0],
-        },
-      ]);
+      setCurrentUser((prev) => ({
+        ...prev,
+        skills: [
+          ...prev.skills,
+          {
+            name: item.name,
+            color: item.color,
+            svg: item.versions.svg[0],
+          },
+        ],
+      }));
     }
     setChangeDone(true);
   };
@@ -49,7 +56,7 @@ function ChooseMeSkills() {
         <i
           className={`devicon-${item.name}-${item.versions.font[0]} colored px-1`}
         ></i>{" "}
-        <span className="font-medium">{firstLetterUpper(item.name)}</span>
+        <span className="font-medium capitalize">{item.name}</span>
       </div>
     );
   };
@@ -57,9 +64,9 @@ function ChooseMeSkills() {
     <div>
       <div className=" w-full  rounded ">
         {/* <p className="font-semibold text-lg px-1">👇Your's</p> */}
-        {stackList?.length != 0 ? (
+        {currentUser?.skills?.length != 0 ? (
           <div className="flex flex-wrap gap-2 mt-4">
-            {stackList?.map((item, i) => {
+            {currentUser?.skills?.map((item, i) => {
               return (
                 <StackChip
                   key={i}
@@ -81,6 +88,7 @@ function ChooseMeSkills() {
               items={languages}
               onSelect={handleOnSelect}
               showIcon={false}
+              showClear={true}
               inputDebounce={700}
               formatResult={formatResult}
               placeholder="search here.."
@@ -115,7 +123,7 @@ function StackChip({ stack, onDeleteClick }) {
         height={20}
         width={20}
       />
-      <p className=" font-semibold text-sm">{firstLetterUpper(stack?.name)}</p>
+      <p className=" font-semibold text-sm capitalize">{stack?.name}</p>
       <button onClick={() => onDeleteClick(stack)}>
         <svg
           viewBox="0 0 15 15"

@@ -16,6 +16,7 @@ function LayoutPage() {
 
   function handleSelectType(type) {
     setCurrentTab(type);
+    console.log(type);
   }
   return (
     <>

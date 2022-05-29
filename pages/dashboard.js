@@ -5,15 +5,16 @@ import { useSimplyContext } from "../context/SimplyContext";
 import { useRouter } from "next/router";
 import NavBar from "../components/NavBar";
 
-import unfi from "/public/tokyo-binoculars-in-web-space.png";
+import sample_image from "/public/tokyo-binoculars-in-web-space.png";
 import Image from "next/image";
-import { userRef } from "../services/user.services";
-import { getDocs } from "firebase/firestore";
 import nookies from "nookies";
+import { SERVER } from "../components/utils/constants";
 
-function DashBoard({ found }) {
+function DashBoard({ found, users }) {
   const { user, currentUser, signOut } = useSimplyContext();
+  console.log(users);
   const router = useRouter();
+  console.log(SERVER);
   useEffect(() => {
     if (!user) {
       router.replace("/");
@@ -21,14 +22,14 @@ function DashBoard({ found }) {
   }, [user]);
 
   return (
-    <div className="h-screen">
+    <div className="h-full">
       {!found ? (
-        <div>
+        <>
           <NavBar />
           <div className="text-center mt-[5rem] ">
             <Image
               alt="username_not_found_image"
-              src={unfi}
+              src={sample_image}
               height={300}
               width={400}
             />
@@ -44,7 +45,7 @@ function DashBoard({ found }) {
               signout
             </button>
           </div>
-        </div>
+        </>
       ) : currentUser ? (
         <LayoutPage />
       ) : (
@@ -61,17 +62,14 @@ function DashBoard({ found }) {
 export default DashBoard;
 
 export async function getServerSideProps(context) {
-  const snapshot = await getDocs(userRef);
-  let users = [];
-  snapshot.docs.forEach((doc) => {
-    users.push({ ...doc.data() });
-  });
+  const res = await fetch(`${SERVER}/api/users`);
+  const data = await res.json();
   const cookies = nookies.get(context);
-  const found = users.some((u) => u.uid === cookies.UID);
+  const found = data.users.some((u) => u === cookies.UID);
   return {
     props: {
-      usernameslist: users,
       found: found,
+      users: data,
     }, // will be passed to the page component as props
   };
 }
