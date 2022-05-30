@@ -3,16 +3,13 @@ import Image from "next/image";
 import React from "react";
 import { firstLetterUpper } from "../utils/textutils";
 import Link from "next/link";
-import sampleimg from "../../public/avatar-male.png";
-
-import { fetchHashnodeBlogs } from "../../fetchAPI/hashnodeFetch";
-import { devtofetch } from "../../fetchAPI/devtofetch";
+import sampleImage from "../../public/avatar-male.png";
 import MarkdownPreview from "../MarkdownPreview";
+import { useTheme } from "next-themes";
 
-function NormalTemplete({ profile }) {
-  // const data = fetchHashnodeBlogs("chrisdevcode");
-  // const dev = devtofetch("chrisdevcode");
-  // console.log(dev, data);
+function NormalTemplate({ profile }) {
+  const { theme } = useTheme();
+  console.log(profile);
   return (
     <div className=" sm:px-7 lg:px-72 md:7 2xl:7 px-7 pt-5 ">
       <div className="flex flex-wrap lg:flex-none gap-4">
@@ -24,7 +21,7 @@ function NormalTemplete({ profile }) {
               className="rounded-full   object-cover  "
               height={300}
               width={300}
-              src={profile?.profile_img ? profile?.profile_img : sampleimg}
+              src={profile?.profile_img ? profile?.profile_img : sampleImage}
             />
           </div>
           {/* profile details */}
@@ -62,7 +59,13 @@ function NormalTemplete({ profile }) {
                   >
                     <Image
                       alt="some"
-                      src={social.icon}
+                      src={
+                        social?.darkPath
+                          ? theme == "dark"
+                            ? `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${social.value}-dark.svg`
+                            : `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${social.value}.svg`
+                          : `https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/${social.value}.svg`
+                      }
                       height={20}
                       width={20}
                     />
@@ -136,4 +139,4 @@ function NormalTemplete({ profile }) {
   );
 }
 
-export default NormalTemplete;
+export default NormalTemplate;

@@ -61,18 +61,18 @@ function Settings() {
   );
 }
 function SeoSettings() {
-  const { currentUser, setCurrentUser } = useSimplyContext();
+  const { currentUser, setCurrentUser, setChangeDone } = useSimplyContext();
   const [seo, setSeo] = useState({
     seo_title: currentUser?.seo_settings.seo_title,
     seo_description: currentUser?.seo_settings.seo_description,
   });
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     setCurrentUser((prev) => ({
       ...prev,
-      seo_settings: [...prev, seo],
+      seo_settings: { ...prev.seo_settings, ...seo },
     }));
     toast.success("saved");
+    setChangeDone(true);
   }
   return (
     <div>

@@ -17,31 +17,15 @@ function ChooseMeMyExtra() {
   const tabs = [
     {
       name: "Certifications",
-      component: (
-        <Certification
-          currentUser={currentUser}
-          setCurrentUser={setCurrentUser}
-          setChangeDone={setChangeDone}
-        />
-      ),
       icon: "🎓",
     },
     {
       name: "Experience",
-      component: (
-        <Experience
-          currentUser={currentUser}
-          setCurrentUser={setCurrentUser}
-          setChangeDone={setChangeDone}
-        />
-      ),
       icon: "💼",
     },
   ];
   const [tabSelected, setTabSelected] = useState(tabs[0]);
-  function handleChangeTab(tab) {
-    return tab.component;
-  }
+
   return (
     <div className="w-full mt-4">
       <div className="hidden md:block">
@@ -64,14 +48,33 @@ function ChooseMeMyExtra() {
             })}
           </div>
           <div className="h-screen w-full px-3 pl-5">
-            {handleChangeTab(tabSelected)}
+            {tabSelected.name === "Experience" ? (
+              <Experience
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                setChangeDone={setChangeDone}
+              />
+            ) : (
+              <Certification
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                setChangeDone={setChangeDone}
+              />
+            )}
           </div>
         </div>
       </div>
-      <div className="lg:hidden">
-        {tabs.map((tab, i) => {
-          return tab.component;
-        })}
+      <div className="lg:hidden grid gap-2">
+        <Experience
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setChangeDone={setChangeDone}
+        />
+        <Certification
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setChangeDone={setChangeDone}
+        />
       </div>
     </div>
   );
@@ -202,29 +205,35 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
 
 function Experience({ currentUser, setCurrentUser, setChangeDone }) {
   const [showAdd, setShowAdd] = useState(false);
-  const [experience, setExperience] = useState({
+  const [editId, setEditId] = useState();
+  const initialState = {
+    id: currentUser.experiences.length + 1,
     title: "",
     company_name: "",
     description: "",
     start_date: "",
     end_date: "",
     is_currently_working: "",
-  });
-  const handleSubmit = () => {
-    setCurrentUser((prev) => ({
-      ...prev,
-      experiences: [...prev.experiences, experience],
-    }));
+  };
+  const [experience, setExperience] = useState({ ...initialState });
 
-    setExperience({
-      title: "",
-      company_name: "",
-      description: "",
-      start_date: "",
-      end_date: "",
-      is_currently_working: "",
-      company_link: "",
-    });
+  const handleSubmit = () => {
+    if (editId) {
+      const editExperience = [...currentUser.experiences];
+      const index = editExperience.findIndex((exp) => exp.id == editId);
+      editExperience[index] = experience;
+      setCurrentUser((prev) => ({
+        ...prev,
+        experiences: editExperience,
+      }));
+      setEditId(null);
+    } else {
+      setCurrentUser((prev) => ({
+        ...prev,
+        experiences: [...prev.experiences, experience],
+      }));
+    }
+    setExperience({ ...initialState });
     setChangeDone(true);
   };
 
@@ -236,7 +245,19 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
       [name]: value,
     }));
   };
-
+  const handleEdit = (id) => {
+    // setEditData();
+    setExperience({ ...currentUser.experiences.find((exp) => exp.id == id) });
+    setEditId(id);
+    setShowAdd(!showAdd);
+  };
+  const handleDelete = (id) => {
+    setCurrentUser((prev) => ({
+      ...prev,
+      experiences: prev.experiences.filter((exp) => exp.id != id),
+    }));
+    setChangeDone(true);
+  };
   return (
     <div className="mt-4 sm:mt-0">
       <div className="flex justify-between mb-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
@@ -253,37 +274,82 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
         <div className="grid gap-2">
           {currentUser?.experiences?.map((e, i) => {
             return (
-              <div key={i} className="flex flex-col border-b-2  p-4">
-                <div className="flex gap-2">
-                  <div>
-                    {e?.company_link ? (
-                      <Image
-                        alt={e.company_name}
-                        src={GET_FAVICON_FROM_SITE_LINK + e.company_link}
-                        height={20}
-                        width={20}
-                        layout={"fixed"}
-                      />
-                    ) : (
-                      <i className="fa fa-building" aria-hidden="true"></i>
-                    )}
+              <div
+                key={i}
+                className="flex flex-col border-2 rounded dark:border-[#18181B]   p-4"
+              >
+                <div className="flex justify-between">
+                  <div className="flex gap-2">
+                    <div>
+                      {e?.company_link ? (
+                        <Image
+                          alt={e.company_name}
+                          src={GET_FAVICON_FROM_SITE_LINK + e.company_link}
+                          height={20}
+                          width={20}
+                          layout={"fixed"}
+                        />
+                      ) : (
+                        <i className="fa fa-building" aria-hidden="true"></i>
+                      )}
+                    </div>
+                    <div>
+                      <h1 className="capitalize">
+                        {e?.title}{" "}
+                        <a
+                          href={e?.company_link}
+                          className=" font-bold  hover:underline"
+                        >
+                          @{e?.company_name}
+                        </a>
+                      </h1>
+                      <p className="capitalize  text-gray-500 ">
+                        {dayjs(e.start_date).format("MMM YYYY")} {" - "}
+                        {e.end_date
+                          ? dayjs(e.end_date).format("MMM YYYY")
+                          : "present"}{" "}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h1 className="capitalize">
-                      {e?.title}{" "}
-                      <a
-                        href={e?.company_link}
-                        className="text-yellow-500 dark:text-yellow-300 font-semibold hover:underline"
+                  <div className="flex gap-2">
+                    <button
+                      className="bg-gray-100 px-4 rounded-md dark:bg-[#18181B] "
+                      onClick={() => handleEdit(e.id)}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
                       >
-                        @{e?.company_name}
-                      </a>
-                    </h1>
-                    <p className="capitalize  text-gray-500">
-                      {dayjs(e.start_date).format("MMM YYYY")} {" - "}
-                      {e.end_date
-                        ? dayjs(e.end_date).format("MMM YYYY")
-                        : "present"}{" "}
-                    </p>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      className="bg-gray-100 px-4 rounded-md dark:bg-[#18181B] "
+                      onClick={() => handleDelete(e.id)}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
                 <div className="prose text-justify dark:prose-invert max-w-max">
@@ -305,6 +371,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
           placeholder={"Ex:Tech lead"}
           type={"text"}
           onchange={handleChange}
+          value={experience.title}
         />
         <Label text="Company Name" />
         <InputField
@@ -312,6 +379,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
           placeholder={"Ex:Google"}
           type={"text"}
           onchange={handleChange}
+          value={experience.company_name}
         />
         <div className="flex justify-between">
           <Label text={"Description"} />
@@ -321,6 +389,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
           name={"description"}
           placeholder="Ex:worked on Data Science"
           onchange={handleChange}
+          value={experience.description}
         />
         <Label text={"Start date"} />
         <InputField
@@ -328,6 +397,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
           placeholder={"Start date"}
           type={"date"}
           onchange={handleChange}
+          value={experience.start_date}
         />
         <Label text="Company url"></Label>
         <InputField
@@ -335,6 +405,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
           placeholder={"https://somecompany.com"}
           type={"text"}
           onchange={handleChange}
+          value={experience.end_date}
         />
         <label className="flex mt-3 mb-3">
           <input
@@ -362,6 +433,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
               placeholder={"End date"}
               type={"date"}
               onchange={handleChange}
+              value={experience.end_date}
             />
           </>
         )}

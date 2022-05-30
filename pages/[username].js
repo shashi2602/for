@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import DarkMode from "../components/buttons/DarkMode";
 import { userRef } from "../services/user.services";
 import { getDocs } from "firebase/firestore";
-import NormalTemplete from "../components/Themes/DefaultTheme";
+import NormalTemplate from "../components/Themes/DefaultTheme";
 import Head from "next/head";
 import { SITE_ENDPOINT } from "../components/utils/constants";
 
@@ -44,7 +44,7 @@ function User({ data }) {
         <meta property="twitter:image" content={data.profile_img} />
       </Head>
       <DarkMode />
-      <NormalTemplete profile={data} />
+      <NormalTemplate profile={data} />
     </>
   );
 }
