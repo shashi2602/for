@@ -5,6 +5,7 @@ import { getAllUsers, getUserDoc } from "../services/user.services";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { setCookie, destroyCookie } from "nookies";
 import toast from "react-hot-toast";
+import { SERVER } from "../components/utils/constants";
 
 const Simply = React.createContext();
 
@@ -25,6 +26,7 @@ function SimplyContext({ children }) {
     experiences: [],
     seo_settings: {},
     last_visited_tab: "",
+    resume:""
   });
   const [userNamesList, setUserNamesList] = useState([]);
   const [changeDone, setChangeDone] = useState(false);
@@ -34,8 +36,15 @@ function SimplyContext({ children }) {
   //auth state change
   const [user, loading] = useAuthState(auth);
 
+  const predo=async()=>{
+    const res = await fetch(`${SERVER}/api/users`);
+    const data = await res.json();
+    setFound(data.users.some((u) => u ===user?.uid ))
+  }
+
   useEffect(() => {
     setCookie(null, "UID", user?.uid);
+    predo()
   }, [user]);
 
   //Fetching the usernames
@@ -83,7 +92,7 @@ function SimplyContext({ children }) {
         userNamesList,
         changeDone,
         setChangeDone,
-
+        found,
         currentTab,
         setCurrentTab,
         ispublished,

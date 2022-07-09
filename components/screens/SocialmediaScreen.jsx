@@ -179,6 +179,7 @@ function ChooseMeSocialMedia() {
           show={isOpen}
           showAdd={true}
           handleAdd={()=>handleLinkSubmit(clickedSocial)}
+          heading={"🤝Add Social"}
         >
           <Dialog.Title
             as="h3"

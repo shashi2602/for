@@ -7,14 +7,12 @@ import NavBar from "../components/NavBar";
 
 import sample_image from "/public/tokyo-binoculars-in-web-space.png";
 import Image from "next/image";
-import nookies from "nookies";
-import { SERVER } from "../components/utils/constants";
+// import nookies from "nookies";
 
-function DashBoard({ found, users }) {
-  const { user, currentUser, signOut } = useSimplyContext();
-  console.log(users);
+
+function DashBoard() {
+  const { user, currentUser, signOut ,found} = useSimplyContext();
   const router = useRouter();
-  console.log(SERVER);
   useEffect(() => {
     if (!user) {
       router.replace("/");
@@ -22,6 +20,7 @@ function DashBoard({ found, users }) {
   }, [user]);
 
   return (
+   
     <div className="h-full">
       {!found ? (
         <>
@@ -61,15 +60,15 @@ function DashBoard({ found, users }) {
 
 export default DashBoard;
 
-export async function getServerSideProps(context) {
-  const res = await fetch(`${SERVER}/api/users`);
-  const data = await res.json();
-  const cookies = nookies.get(context);
-  const found = data.users.some((u) => u === cookies.UID);
-  return {
-    props: {
-      found: found,
-      users: data,
-    }, // will be passed to the page component as props
-  };
-}
+// export async function getServerSideProps(context) {
+//   const res = await fetch(`${SERVER}/api/users`);
+//   const data = await res.json();
+//   const cookies = nookies.get(context);
+//   const found = data.users.some((u) => u === cookies.UID);
+//   return {
+//     props: {
+//       found: found,
+//       users: data,
+//     }, // will be passed to the page component as props
+//   };
+// }

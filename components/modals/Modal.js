@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, Fragment, useEffect, useCallback } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-export default function Modal({ children, show, showAdd, handleAdd }) {
+export default function Modal({ children, show, showAdd=true, handleAdd,heading ,disableSave=false}) {
   let [isOpen, setIsOpen] = useState(false);
 
   const closeModal = useCallback(() => setIsOpen(false), []);
@@ -47,24 +47,24 @@ export default function Modal({ children, show, showAdd, handleAdd }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full dark:bg-[#121212] bg-gray-100 max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform   shadow-[3px_3px_0_0_#000] dark:shadow-none  border-black border-2  rounded-md ">
-                {children}
-
-                {showAdd && (
-                  <div className=" mt-4">
-                    <button
-                      type="button"
-                      className=" py-2 px-4 text-sm font-medium bg-red-500  transition  border-shadow hover:bg-red-600 focus:outline-none  mr-2 text-white"
-                      onClick={(e) => {
-                        e.preventDefault();
+              <div className="inline-block w-full dark:bg-[#121212] bg-gray-100 max-w-md  my-8 overflow-hidden text-left align-middle transition-all transform   shadow-[3px_3px_0_0_#000] dark:shadow-none  border-black border-2  rounded-md ">
+              <div className="flex justify-between mb-2 border-b-2 p-3 border-black">
+              <h1 className="text-lg pl-2 font-medium leading-6 dark:text-white ">
+                {heading}
+              </h1>
+              <i className="fa fa-times text-lg font-medium hover:cursor-pointer" aria-hidden="true" onClick={() => {
                         closeModal();
-                      }}
-                    >
-                      close
-                    </button>
+                      }}></i>
+              </div>
+              <div className="p-6">
+
+                {children}
+                {showAdd && (
+                  <div className=" mt-4 flex justify-end">
                     <button
                       type="button"
-                      className=" px-4 py-2 text-sm font-medium dark:text-black bg-yellow-400 transition border-shadow hover:bg-yellow-300 focus:outline-none  "
+                      className=" px-6 py-2 text-sm font-medium dark:text-black bg-yellow-400 transition border-shadow hover:bg-yellow-300 focus:outline-none disabled:bg-yellow-300 disabled:cursor-not-allowed "
+                      disabled={disableSave}
                       onClick={(e) => {
                         e.preventDefault();
                         handleAdd();
@@ -72,10 +72,13 @@ export default function Modal({ children, show, showAdd, handleAdd }) {
                         console.log("add closed");
                       }}
                     >
-                      ✔️Add
+                      Save
                     </button>
                   </div>
                 )}
+              </div>
+
+                
               </div>
             </Transition.Child>
           </div>

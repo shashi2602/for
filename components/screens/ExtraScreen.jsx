@@ -10,10 +10,10 @@ import InputField from "../forms/InputField";
 import TextArea from "../forms/TextArea";
 import Label from "../forms/Label";
 import MarkdownPreview from "../MarkdownPreview";
+import FormGroup from "../forms/FormGroup";
 function ChooseMeMyExtra() {
   const { setChangeDone, currentUser, setCurrentUser } = useSimplyContext();
   dayjs.extend(relativeTime);
-
   const tabs = [
     {
       name: "Certifications",
@@ -22,6 +22,10 @@ function ChooseMeMyExtra() {
     {
       name: "Experience",
       icon: "💼",
+    },
+    {
+      name: "Resume",
+      icon: "📝",
     },
   ];
   const [tabSelected, setTabSelected] = useState(tabs[0]);
@@ -35,7 +39,7 @@ function ChooseMeMyExtra() {
               return (
                 <div
                   key={i}
-                  className={`p-4  font-semibold hover:bg-gray-100 dark:hover:text-black transition ${
+                  className={`p-4  font-semibold hover:bg-gray-100 dark:hover:text-black transition hover:cursor-pointer ${
                     tabSelected?.name === tab.name
                       ? "bg-gray-100 text-black"
                       : ""
@@ -48,14 +52,22 @@ function ChooseMeMyExtra() {
             })}
           </div>
           <div className="h-screen w-full px-3 pl-5">
-            {tabSelected.name === "Experience" ? (
+            {tabSelected.name === "Experience" && (
               <Experience
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
                 setChangeDone={setChangeDone}
               />
-            ) : (
+            )}
+            {tabSelected.name === "Certifications" && (
               <Certification
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                setChangeDone={setChangeDone}
+              />
+            )}
+            {tabSelected.name === "Resume" && (
+              <Resume
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
                 setChangeDone={setChangeDone}
@@ -85,6 +97,7 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
   const [certificate, setCertificate] = useState({
     certi_link: "",
     certi_title: "",
+    certi_issued_by: "",
     certi_issued: "",
   });
 
@@ -110,7 +123,7 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
     <div className="">
       <div className="flex justify-between m-b-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
         <h1 className="font-semibold text-lg">🎓 Certifications</h1>
-        <button onClick={() => setShowAdd(!showAdd)}>
+        <button onClick={() => setShowAdd(!showAdd)} className="font-semibold">
           <i className="fa fa-plus"></i> Add Certification
         </button>
       </div>
@@ -137,6 +150,7 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
                     <a href={certi.certi_link}>
                       <p className="font-semibold ">{certi.certi_title}</p>
                     </a>
+                    <p>{certi.certi_issued_by}</p>
                     <p className="text-sm text-gray-500 ">
                       Issued on{" "}
                       {certi.certi_issued
@@ -156,15 +170,13 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
           })}
         </div>
       )}
-      <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit}>
-        <h1 className="text-lg font-medium leading-6 text-center dark:text-white  ">
-          🎓 Certificate
-        </h1>
+      <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit} heading="🎓 Add Certificate" disableSave={certificate.certi_title===""} >
+
         <div className="mt-2">
           <Label text={"Certificate title"} />
           <InputField
             name={"Certificate title"}
-            placeholder="Certificate title"
+            placeholder="Ex:Reactjs Bootcamp"
             type={"text"}
             onchange={(e) => {
               setCertificate((prev) => ({
@@ -182,6 +194,18 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
               setCertificate((prev) => ({
                 ...prev,
                 certi_link: e.target.value,
+              }));
+            }}
+          />
+          <Label text={"Certificate issued by"} />
+          <InputField
+            name={"Certificate link"}
+            placeholder="Ex:Udemy"
+            type={"text"}
+            onchange={(e) => {
+              setCertificate((prev) => ({
+                ...prev,
+                certi_issued_by: e.target.value,
               }));
             }}
           />
@@ -207,7 +231,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
   const [showAdd, setShowAdd] = useState(false);
   const [editId, setEditId] = useState();
   const initialState = {
-    id: currentUser.experiences.length + 1,
+    id: currentUser.experiences?.length + 1,
     title: "",
     company_name: "",
     description: "",
@@ -262,7 +286,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
     <div className="mt-4 sm:mt-0">
       <div className="flex justify-between mb-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
         <h1 className="font-semibold text-lg ">💼 Experience</h1>
-        <button onClick={() => setShowAdd(!showAdd)}>
+        <button onClick={() => setShowAdd(!showAdd)} className="font-semibold">
           <i className="fa fa-plus"></i> Add Experience
         </button>
       </div>
@@ -361,10 +385,8 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
         </div>
       )}
 
-      <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit}>
-        <h1 className="text-lg font-medium leading-6 text-center dark:text-white m-2">
-          💼 Experience
-        </h1>
+      <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit} heading=" 💼 Add Experience" disableSave={experience.title===""}>
+
         <Label text={"Title"} />
         <InputField
           name={"title"}
@@ -442,4 +464,24 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
   );
 }
 
+function Resume({ currentUser, setCurrentUser, setChangeDone }) {
+  return (
+    <div>
+      <div className="flex justify-between m-b-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
+        <h1 className="font-semibold text-lg">📝 Resume</h1>
+      </div>
+      <div className="mt-2">
+        <InputField
+          name={"resume"}
+          placeholder={"Add resume link here and click on save changes"}
+          value={currentUser?.resume}
+          onchange={(e) => {
+            setCurrentUser((prev) => ({ ...prev, resume: e.target.value }));
+            setChangeDone(true);
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 export default ChooseMeMyExtra;

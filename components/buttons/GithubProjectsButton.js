@@ -18,8 +18,8 @@ function GithubProjectsBtn() {
       const filtered_data = data.filter(
         (item) => (item.fork != true) & (item.private != true)
       );
-      const github_projects = filtered_data.map((project) => ({
-        id: Math.floor(Math.random() * 100),
+      const github_projects = filtered_data.map((project,i) => ({
+        id: "GID"+i,
         title: project.name,
         short_info: project.description,
         stacks: project.language,
@@ -37,11 +37,11 @@ function GithubProjectsBtn() {
   };
   return (
     <button
-      className="ml-4 bg-black/5 dark:bg-[#18181B] dark:text-white font-semibold rounded-md p-2 text-sm"
-      onClick={handleGet}
+      className="font-semibold  px-5 py-3 border-shadow"
+      onClick={()=>{handleGet()}}
     >
       <span>
-        <i className="fa fa-github" aria-hidden="true"></i> github
+        <i className="fa fa-github" aria-hidden="true"></i> Github
       </span>
     </button>
   );

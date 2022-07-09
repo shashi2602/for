@@ -22,7 +22,7 @@ export default function PublishButton() {
   };
   return (
     <button
-      className=" text-black bg-yellow-300 font-semibold capitalize px-3 py-2 hover:bg-yellow-200 rounded-md disabled:cursor-no-drop"
+      className=" text-black bg-yellow-300 font-semibold capitalize px-3 py-2 hover:bg-yellow-200 disabled:bg-yellow-200 rounded-md disabled:cursor-no-drop"
       onClick={handleSubmit}
       disabled={!changeDone}
     >
