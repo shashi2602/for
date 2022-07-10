@@ -60,7 +60,7 @@ function ChooseMeSocialMedia() {
         }));
         setChangeDone(true);
       }
-      closeModal();
+      // closeModal();
     }
   };
 

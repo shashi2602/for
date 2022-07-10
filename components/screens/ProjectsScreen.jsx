@@ -84,7 +84,7 @@ function ChooseMeProjects() {
   const uploadImage = (image) => {
     const data = new FormData();
     data.append("file", image);
-    data.append("upload_preset", "xmraq4gh");
+    data.append("upload_preset", "o9dcboit");
     console.log(data);
     const fetch = axios
       .post("https://api.cloudinary.com/v1_1/dtpdc2bhh/image/upload/", data)
@@ -255,7 +255,7 @@ const ProjectCard = ({
                       key={i}
                       className="text-lg"
                     >
-                      <i class={`devicon-${s.toLowerCase()}-plain `}></i>
+                      <i className={`devicon-${s.toLowerCase()}-plain `}></i>
                     </p>
                   );
                 })}

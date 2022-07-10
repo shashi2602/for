@@ -34,10 +34,13 @@ function ChooseMeProfile() {
           ...prev,
           profile_img: res.data.secure_url,
         }));
-        
       });
 
-    
+    toast.promise(fetch, {
+      loading: "😅 uploading",
+      error: "😱 error while uploading",
+      success: "🥳 upload success",
+    });
   };
 
   return (

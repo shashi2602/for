@@ -21,12 +21,13 @@ function SimplyContext({ children }) {
     projects: [],
     skills: [],
     social: [],
-    blog_site: "",
+    blog_site: [],
     certifications: [],
     experiences: [],
     seo_settings: {},
     last_visited_tab: "",
-    resume:""
+    resume:"",
+    pinned_blogs: [],
   });
   const [userNamesList, setUserNamesList] = useState([]);
   const [changeDone, setChangeDone] = useState(false);
@@ -79,7 +80,6 @@ function SimplyContext({ children }) {
     setCurrentUser("");
     setChangeDone(false);
   };
-
   return (
     <Simply.Provider
       value={{

@@ -21,6 +21,7 @@
     "joi": "^17.6.0",
     "markdown-it": "^12.3.2",
     "next": "12.1.0",
+    "next-seo": "^5.4.0",
     "next-themes": "^0.1.1",
     "nookies": "^2.5.2",
     "react": "17.0.2",
