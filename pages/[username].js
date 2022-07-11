@@ -4,11 +4,12 @@ import DarkMode from "../components/buttons/DarkMode";
 import { userRef } from "../services/user.services";
 import { getDocs } from "firebase/firestore";
 import NormalTemplate from "../components/Themes/DefaultTheme";
-import { SITE_ENDPOINT } from "../components/utils/constants";
+import SeoHead from "../components/seo/SeoHead";
 
 function User({ data }) {
   return (
     <>
+      <SeoHead data={data}/>
       <DarkMode />
       <NormalTemplate profile={data} />
     </>
