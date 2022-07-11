@@ -15,7 +15,7 @@ function LoginModal() {
         Login
       </button>
 
-      <Modal show={showModal}>
+      <Modal show={showModal} disableSave={true} showAdd={false}>
         <h1
           as="h3"
           className="text-lg font-medium leading-6 text-center dark:text-white"
