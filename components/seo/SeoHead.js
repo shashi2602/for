@@ -6,11 +6,18 @@ function SeoHead({ data }) {
   return (
     <NextSeo
       title={`${data.username} | ${data.expertise}`}
+      description={data.status}
       defaultTitle="Simply"
       additionalLinkTags={[
         {
           rel: "icon",
           href: data.profile_img,
+        },
+      ]}
+      additionalMetaTags={[
+        {
+          name: "keywords",
+          content: `${data.skills.map((k)=>{return k.name}).toString()}`,
         },
       ]}
       canonical={`${SITE_ENDPOINT}/${data.site_username}`}
@@ -61,7 +68,7 @@ function SeoHead({ data }) {
             : data.profile_img
         }`,
       }}
-    ></NextSeo>
+    />
   );
 }
 

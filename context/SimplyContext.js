@@ -38,7 +38,13 @@ function SimplyContext({ children }) {
   const [user, loading] = useAuthState(auth);
 
   const predo=async()=>{
-    const res = await fetch(`${SERVER}/api/users`);
+    const res = await fetch(`${SERVER}/api/users`,{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      }
+    });
     const data = await res.json();
     setFound(data.users.some((u) => u ===user?.uid ))
   }
