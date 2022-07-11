@@ -21,6 +21,7 @@ function SeoHead({ data }) {
         },
       ]}
       canonical={`${SITE_ENDPOINT}/${data.site_username}`}
+      nofollow={true}
       openGraph={{
         url: `${SITE_ENDPOINT}/${data.site_username}`,
         type: "website",
