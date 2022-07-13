@@ -37,8 +37,8 @@ export const social = [
   {
     value: "youtube",
     link: "",
-    link_placeholder: "https://www.youtube.com/c",
-    placeholder: "youtube channel name",
+    link_placeholder: "",
+    placeholder: "channel link",
     darkPath: false,
   },
   {

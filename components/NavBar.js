@@ -34,13 +34,13 @@ export default function NavBar() {
                 <div className="flex-shrink-0 flex items-center">
                   <div className="block lg:hidden ">
                     <Link href="/" passHref={true}>
-                      <span className="text-3xl font-bold ">..-. O .-.</span>
+                      <span className="text-3xl font-bold ">... ..-.</span>
                     </Link>
                   </div>
                   <Link href="/" passHref={true}>
                     <div className="hidden lg:block h-8 w-auto dark:text-white text-2xl cursor-pointer">
                       <span className="font-bold">
-                        ..-. --- .-.
+                      ... ..-.
                         <span className=" font-bold">{"DEV"}</span>
                       </span>
                     </div>

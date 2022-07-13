@@ -67,7 +67,7 @@ function HomePage() {
                 >
                   Make your Portfolio website easy with{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-500">
-                    For -.. . ...-
+                    simplyfor
                   </span>
                 </h1>
                 <div className="max-w-3xl mx-auto">
@@ -76,7 +76,7 @@ function HomePage() {
                     data-aos="zoom-y-out"
                     data-aos-delay="150"
                   >
-                    Let's make simple for developers
+                    Let's make it simple
                   </p>
                   <div
                     className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"
@@ -120,7 +120,7 @@ function HomePage() {
                     >
                       Pick your name for the <br />
                       <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
-                        For.-.. . ...-/
+                        simplyfor.dev/
                         <span className="dark:text-white">{username}</span>
                       </span>
                     </h1>
@@ -129,7 +129,7 @@ function HomePage() {
                         type="text"
                         name="username"
                         className="appearance-none font-semibold  dark:text-white dark:bg-[#18181B]  bg-gray-100 w-full py-4 px-3 text-grey-darker mb-2 rounded-md focus:outline-none"
-                        placeholder="username"
+                        placeholder="simply select your username"
                         style={{ width: "60%" }}
                         onChange={(e) => {
                           handleChange(e);
@@ -141,7 +141,7 @@ function HomePage() {
                       </p>
                       {!userNameAvailable ? (
                         <p className="text-red-700 font-semibold ">
-                          😢 Sorry Simplyfolio is not available{" "}
+                          😢 Sorry Simplyfor is not available{" "}
                         </p>
                       ) : username.length === 0 ? (
                         <></>
@@ -149,7 +149,7 @@ function HomePage() {
                         !error && (
                           <div>
                             <p className="text-green-600  font-semibold">
-                              😍 Your Simplyfolio is available{" "}
+                              😍 Your Simplyfor is available{" "}
                             </p>
                             <div className="flex justify-center gap-2 mt-3">
                               <GoogleBtn username={username} />

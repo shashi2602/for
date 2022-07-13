@@ -193,7 +193,7 @@ function ChooseMeProjects() {
           />
         </FormGroup>
       </Modal>
-      <div className="pt-4 mx-4 grid sm:grid-cols-2 grid-cols-1 gap-2">
+      <div className="pt-4 mx-4 grid sm:grid-cols-3 grid-cols-1 gap-2">
         {currentUser?.projects.map((p, i) => {
           return (
             <ProjectCard
@@ -268,7 +268,7 @@ const ProjectCard = ({
           </>
         </Link>
       </div>
-      <div className="border-t-2 border-black dark:border-[#18181B] flex justify-between flex-nowrap p-2">
+      <div className="border-t-2 border-black dark:border-[#18181B] flex justify-between flex-nowrap rounded-b p-2 bg-yellow-300 dark:text-black">
         <Link href={gitlink} passHref>
           <a target={"_blank"}>
             <i className="fa fa-github text-2xl "></i>
