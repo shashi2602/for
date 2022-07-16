@@ -5,14 +5,23 @@ import { userRef } from "../services/user.services";
 import { getDocs } from "firebase/firestore";
 import NormalTemplate from "../components/Themes/DefaultTheme";
 import SeoHead from "../components/seo/SeoHead";
+import NavBar from "../components/NavBar";
 
 function User({ data,found }) {
   return (
-    !found?<>
+    found?<>
     <SeoHead data={data} />
     <DarkMode />
     <NormalTemplate profile={data} />
-  </>:<div>user not found</div>
+  </>:<div>
+    <NavBar/>
+    <div className="grid place-content-center h-screen gap-6">
+    <p className="sm:text-[10rem] text-8xl text-center">
+    😲🤕
+    </p>
+    <p className="text-3xl font-bold">Oohh...Username Not Found</p>
+    </div>
+  </div>
   );
 }
 
@@ -22,8 +31,11 @@ export async function getStaticProps({ params }) {
   snapshot.docs.forEach((doc) => {
     users.push({ ...doc.data() });
   });
-  const found=users.some((u) => u.username === params.username);
-  const data = users.find((user) => user.site_username == params.username);
+  const found=users.some((u) => u.site_username === params.username);
+  var data = {};
+  if(found){
+    data = users.find((u) => u.site_username === params.username);
+  }
   return {
     props: {
       data: data,

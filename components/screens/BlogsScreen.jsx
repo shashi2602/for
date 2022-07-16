@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
@@ -41,7 +42,7 @@ function ChooseMeBlogs() {
   };
 
   const handleSelectBlogSite = (siteName) => {
-    if (currentUser.blog_site.some((n) => n.name == siteName)) {
+    if (currentUser?.blog_site.some((n) => n.name == siteName)) {
       setCurrentUser((prev) => ({
         ...prev,
         blog_site: [...prev.blog_site.filter((n) => n.name != siteName)],
@@ -50,7 +51,7 @@ function ChooseMeBlogs() {
       setError("");
       setChangeDone(true);
     } else {
-      if (currentUser.social.some((s) => s.value == siteName)) {
+      if (currentUser?.social.some((s) => s.value == siteName)) {
         setCurrentUser((prev) => ({
           ...prev,
           blog_site: [
@@ -81,14 +82,14 @@ function ChooseMeBlogs() {
         <BlogSelectButton
           onclick={() => handleSelectBlogSite("hashnode")}
           name="hashnode"
-          blogSites={currentUser.blog_site}
+          blogSites={currentUser?.blog_site}
           theme={theme}
         />
 
         <BlogSelectButton
           onclick={() => handleSelectBlogSite("devto")}
           name="devto"
-          blogSites={currentUser.blog_site}
+          blogSites={currentUser?.blog_site}
           isdark={true}
           theme={theme}
         />
@@ -96,7 +97,7 @@ function ChooseMeBlogs() {
         <BlogSelectButton
           onclick={() => handleSelectBlogSite("medium")}
           name="medium"
-          blogSites={currentUser.blog_site}
+          blogSites={currentUser?.blog_site}
           isdark={true}
           theme={theme}
         />

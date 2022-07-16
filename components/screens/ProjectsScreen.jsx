@@ -105,7 +105,7 @@ function ChooseMeProjects() {
   return (
     <div className="mt-2">
       <div>
-        <p className="p-3 text-center">
+        <p className="p-3 text-center font-semibold">
           click on create project to add project or to get projects from github
           click on github button.
         </p>

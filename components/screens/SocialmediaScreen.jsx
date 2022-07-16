@@ -65,12 +65,11 @@ function ChooseMeSocialMedia() {
   };
 
   const handleRemoveSocial = (e) => {
-    setCurrentUser(
-      (prev = {
-        ...prev,
-        social: prev.social.filter((item) => item.value != e.value),
-      })
-    );
+    setCurrentUser((prev) => ({
+      ...prev,
+      social: prev.social.filter((item) => item.value != e.value),
+    }));
+
     setChangeDone(true);
   };
 

@@ -163,9 +163,9 @@ function SeoSettings() {
         ) : (
           <label
             htmlFor="seoimage"
-            className="flex flex-col items-center justify-center px-4 py-16 my-2 rounded-lg tracking-wide uppercase border-2 border-dashed cursor-pointer hover:shadow-xl"
+            className="flex flex-col items-center justify-center px-4 py-16 my-2 rounded-lg tracking-wide uppercase border-2 border-dashed border-black dark:border-white cursor-pointer "
           >
-            upload
+            upload image
           </label>
         )}
         <input

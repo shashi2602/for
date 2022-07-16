@@ -52,6 +52,7 @@ function SimplyContext({ children }) {
   useEffect(() => {
     setCookie(null, "UID", user?.uid);
     predo();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   //Fetching the usernames
