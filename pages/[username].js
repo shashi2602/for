@@ -6,13 +6,13 @@ import { getDocs } from "firebase/firestore";
 import NormalTemplate from "../components/Themes/DefaultTheme";
 import SeoHead from "../components/seo/SeoHead";
 
-function User({ data }) {
+function User({ data,found }) {
   return (
-    <>
-      <SeoHead data={data} />
-      <DarkMode />
-      <NormalTemplate profile={data} />
-    </>
+    !found?<>
+    <SeoHead data={data} />
+    <DarkMode />
+    <NormalTemplate profile={data} />
+  </>:<div>user not found</div>
   );
 }
 
@@ -22,10 +22,12 @@ export async function getStaticProps({ params }) {
   snapshot.docs.forEach((doc) => {
     users.push({ ...doc.data() });
   });
+  const found=users.some((u) => u.username === params.username);
   const data = users.find((user) => user.site_username == params.username);
   return {
     props: {
       data: data,
+      found: found,
     },
     revalidate: 10,
   };
