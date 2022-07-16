@@ -17,7 +17,11 @@ function SeoHead({ data }) {
       additionalMetaTags={[
         {
           name: "keywords",
-          content: `${data.skills.map((k)=>{return k.name}).toString()}`,
+          content: `${data.skills
+            .map((k) => {
+              return k.name;
+            })
+            .toString()}`,
         },
       ]}
       canonical={`${SITE_ENDPOINT}/${data.site_username}`}

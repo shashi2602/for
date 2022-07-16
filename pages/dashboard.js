@@ -9,9 +9,8 @@ import sample_image from "/public/tokyo-binoculars-in-web-space.png";
 import Image from "next/image";
 // import nookies from "nookies";
 
-
 function DashBoard() {
-  const { user, currentUser, signOut ,found} = useSimplyContext();
+  const { user, currentUser, signOut, found } = useSimplyContext();
   const router = useRouter();
   useEffect(() => {
     if (!user) {
@@ -20,7 +19,6 @@ function DashBoard() {
   }, [user]);
 
   return (
-   
     <div className="h-full">
       {!found ? (
         <>

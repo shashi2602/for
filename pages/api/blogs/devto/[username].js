@@ -5,18 +5,20 @@ export default async function handler(req, res) {
   );
   const dev_to_blogs = await data.json();
   if (dev_to_blogs.length == 0) {
-    res.status(401).json({ msg: "No blogs found in your dev.to or no username found" });
+    res
+      .status(401)
+      .json({ msg: "No blogs found in your dev.to or no username found" });
   } else {
-    const filtered_blogs=dev_to_blogs.map((blog) => {
-        return {
-            title: blog.title,
-            url: blog.url,
-            image: blog.cover_image,
-            description: blog.description,
-            published_at: blog.published_at,
-            published_on:"devto"
-    }
-})
+    const filtered_blogs = dev_to_blogs.map((blog) => {
+      return {
+        title: blog.title,
+        url: blog.url,
+        image: blog.cover_image,
+        description: blog.description,
+        published_at: blog.published_at,
+        published_on: "devto",
+      };
+    });
     res.status(200).json(filtered_blogs);
   }
 }

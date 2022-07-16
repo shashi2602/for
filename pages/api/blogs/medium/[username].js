@@ -10,16 +10,16 @@ export default async function handler(req, res) {
     if (blogs.items.length == 0) {
       res.status(401).json({ msg: "No blogs found in your medium" });
     } else {
-        const filtered_blogs=blogs.items.map((blog) => {
-            return {
-                title: blog.title,
-                url: blog.link,
-                image: blog.thumbnail,
-                description: blog.description,
-                published_at: blog.pubDate,
-                published_on:"medium"
-        }
-    })
+      const filtered_blogs = blogs.items.map((blog) => {
+        return {
+          title: blog.title,
+          url: blog.link,
+          image: blog.thumbnail,
+          description: blog.description,
+          published_at: blog.pubDate,
+          published_on: "medium",
+        };
+      });
       res.status(200).json(filtered_blogs);
     }
   }

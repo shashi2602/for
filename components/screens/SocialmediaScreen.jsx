@@ -83,7 +83,6 @@ function ChooseMeSocialMedia() {
     <>
       {currentUser?.social?.length != 0 ? (
         <div className="w-full   rounded my-4 p-2">
-
           <div className="flex flex-wrap justify-center rounded-md gap-3">
             {currentUser?.social?.map((s, i) => {
               return (
@@ -178,7 +177,7 @@ function ChooseMeSocialMedia() {
         <Modal
           show={isOpen}
           showAdd={true}
-          handleAdd={()=>handleLinkSubmit(clickedSocial)}
+          handleAdd={() => handleLinkSubmit(clickedSocial)}
           heading={"🤝Add Social"}
         >
           <Dialog.Title

@@ -26,7 +26,7 @@ function SimplyContext({ children }) {
     experiences: [],
     seo_settings: {},
     last_visited_tab: "",
-    resume:"",
+    resume: "",
     pinned_blogs: [],
   });
   const [userNamesList, setUserNamesList] = useState([]);
@@ -37,21 +37,21 @@ function SimplyContext({ children }) {
   //auth state change
   const [user, loading] = useAuthState(auth);
 
-  const predo=async()=>{
-    const res = await fetch(`${SERVER}/api/users`,{
+  const predo = async () => {
+    const res = await fetch(`/api/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-      }
+      },
     });
     const data = await res.json();
-    setFound(data.users.some((u) => u ===user?.uid ))
-  }
+    setFound(data.users.some((u) => u === user?.uid));
+  };
 
   useEffect(() => {
     setCookie(null, "UID", user?.uid);
-    predo()
+    predo();
   }, [user]);
 
   //Fetching the usernames

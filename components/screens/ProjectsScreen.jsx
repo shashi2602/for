@@ -118,7 +118,8 @@ function ChooseMeProjects() {
               setShow(!show);
             }}
           >
-            Create Project <i className="fa fa-plus text-sm" aria-hidden="true"></i>
+            Create Project{" "}
+            <i className="fa fa-plus text-sm" aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -230,98 +231,95 @@ const ProjectCard = ({
   handleEdit,
   link,
   gitlink,
-  id
+  id,
 }) => {
   return (
     <div className="border-2 border-black rounded-md   dark:border-[#18181B] dark:bg-transparent ">
       <div className="flex flex-col  justify-between h-full w-full overflow-hidden">
-
-      <div className="grid grid-flow-col">
-        {/* <div
+        <div className="grid grid-flow-col">
+          {/* <div
           className="overflow-hidden bg-center bg-no-repeat bg-cover w-[10rem] h-full rounded-t-md"
           style={{
             backgroundImage: "url(https://www.hyperui.dev/photos/beach-1.jpeg)",
           }}
         ></div> */}
-        <Link href={link}>
-          <>
-            <div className="p-4">
-              <div className="flex justify-between py-2">
-              <h1 className="text-lg font-bold">{title}</h1>
-              <div className="flex gap-2">
-                {stack?.split(",").map((s, i) => {
-                  return (
-                    <p
-                      key={i}
-                      className="text-lg"
-                    >
-                      <i className={`devicon-${s.toLowerCase()}-plain `}></i>
-                    </p>
-                  );
-                })}
-              </div>
-              </div>
-              
-              <p>{description}</p>
-              
-            </div>
-          </>
-        </Link>
-      </div>
-      <div className="border-t-2 border-black dark:border-[#18181B] flex justify-between flex-nowrap rounded-b p-2 bg-yellow-300 dark:text-black">
-        <Link href={gitlink} passHref>
-          <a target={"_blank"}>
-            <i className="fa fa-github text-2xl "></i>
-          </a>
-        </Link>
-        <div className="flex items-center flex-nowrap">
-          <button
-            className="  transition-all   rounded-full "
-            type="button"
-            onClick={() => {
-              handleEdit(id);
-            }}
-          >
-            <svg
-              className="w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-              />
-            </svg>
-          </button>
+          <Link href={link}>
+            <>
+              <div className="p-4">
+                <div className="flex justify-between py-2">
+                  <h1 className="text-lg font-bold">{title}</h1>
+                  <div className="flex gap-2">
+                    {stack?.split(",").map((s, i) => {
+                      return (
+                        <p key={i} className="text-lg">
+                          <i
+                            className={`devicon-${s.toLowerCase()}-plain `}
+                          ></i>
+                        </p>
+                      );
+                    })}
+                  </div>
+                </div>
 
-          <button
-            className="p-2  transition-all  rounded-full"
-            type="button"
-            onClick={() => {
-              handleDelete(id);
-            }}
-          >
-            <svg
-              className="w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-              />
-            </svg>
-          </button>
+                <p>{description}</p>
+              </div>
+            </>
+          </Link>
         </div>
-      </div>
+        <div className="border-t-2 border-black dark:border-[#18181B] flex justify-between flex-nowrap rounded-b p-2 bg-yellow-300 dark:text-black">
+          <Link href={gitlink} passHref>
+            <a target={"_blank"}>
+              <i className="fa fa-github text-2xl "></i>
+            </a>
+          </Link>
+          <div className="flex items-center flex-nowrap">
+            <button
+              className="  transition-all   rounded-full "
+              type="button"
+              onClick={() => {
+                handleEdit(id);
+              }}
+            >
+              <svg
+                className="w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                />
+              </svg>
+            </button>
+
+            <button
+              className="p-2  transition-all  rounded-full"
+              type="button"
+              onClick={() => {
+                handleDelete(id);
+              }}
+            >
+              <svg
+                className="w-4 h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import { getAllUsers } from "../../services/user.services";
-import NextCors from 'nextjs-cors';
+import NextCors from "nextjs-cors";
 
 export default async function handler(req, res) {
   await NextCors(req, res, {
-    methods: ['GET'],
-    origin: '*',
- });
+    methods: ["GET"],
+    origin: "*",
+  });
   const data = [];
   await getAllUsers().then((users) => {
     users.docs.map((user) => {

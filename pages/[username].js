@@ -9,7 +9,7 @@ import SeoHead from "../components/seo/SeoHead";
 function User({ data }) {
   return (
     <>
-      <SeoHead data={data}/>
+      <SeoHead data={data} />
       <DarkMode />
       <NormalTemplate profile={data} />
     </>

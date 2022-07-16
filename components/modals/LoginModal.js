@@ -54,7 +54,7 @@ function LoginModal() {
                   as="h3"
                   className="text-lg font-medium leading-6 text-center dark:text-white"
                 >
-                 what to see the wonders? 👇 
+                  what to see the wonders? 👇
                 </h1>
 
                 <div className="mt-3 flex gap-2 w-full justify-center ">

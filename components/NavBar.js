@@ -40,7 +40,7 @@ export default function NavBar() {
                   <Link href="/" passHref={true}>
                     <div className="hidden lg:block h-8 w-auto dark:text-white text-2xl cursor-pointer">
                       <span className="font-bold">
-                      ... ..-.
+                        ... ..-.
                         <span className=" font-bold">{"DEV"}</span>
                       </span>
                     </div>
