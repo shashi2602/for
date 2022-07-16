@@ -87,6 +87,11 @@ function ChooseMeMyExtra() {
           setCurrentUser={setCurrentUser}
           setChangeDone={setChangeDone}
         />
+        <Resume
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setChangeDone={setChangeDone}
+        />
       </div>
     </div>
   );
@@ -170,8 +175,13 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
           })}
         </div>
       )}
-      <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit} heading="🎓 Add Certificate" disableSave={certificate.certi_title===""} >
-
+      <Modal
+        show={showAdd}
+        showAdd={true}
+        handleAdd={handleSubmit}
+        heading="🎓 Add Certificate"
+        disableSave={certificate.certi_title === ""}
+      >
         <div className="mt-2">
           <Label text={"Certificate title"} />
           <InputField
@@ -337,7 +347,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
                   </div>
                   <div className="flex gap-2">
                     <button
-                      className="bg-gray-100 px-4 rounded-md dark:bg-[#18181B] "
+                      className="bg-gray-100 px-4 rounded-md dark:bg-[#18181B] h-[2rem] "
                       onClick={() => handleEdit(e.id)}
                     >
                       <svg
@@ -356,7 +366,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
                       </svg>
                     </button>
                     <button
-                      className="bg-gray-100 px-4 rounded-md dark:bg-[#18181B] "
+                      className="bg-gray-100 px-4 rounded-md dark:bg-[#18181B] h-[2rem]"
                       onClick={() => handleDelete(e.id)}
                     >
                       <svg
@@ -385,8 +395,13 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
         </div>
       )}
 
-      <Modal show={showAdd} showAdd={true} handleAdd={handleSubmit} heading=" 💼 Add Experience" disableSave={experience.title===""}>
-
+      <Modal
+        show={showAdd}
+        showAdd={true}
+        handleAdd={handleSubmit}
+        heading=" 💼 Add Experience"
+        disableSave={experience.title === ""}
+      >
         <Label text={"Title"} />
         <InputField
           name={"title"}
@@ -470,6 +485,11 @@ function Resume({ currentUser, setCurrentUser, setChangeDone }) {
       <div className="flex justify-between m-b-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
         <h1 className="font-semibold text-lg">📝 Resume</h1>
       </div>
+      <span className="font-thin text-gray-500 my-4">
+        <i>
+          * simply paste the link of your resume here and click on save changes
+        </i>
+      </span>
       <div className="mt-2">
         <InputField
           name={"resume"}

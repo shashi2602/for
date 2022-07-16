@@ -13,7 +13,7 @@ function ChooseMeAbout() {
           <p className="py-2 text-sm">Markdown supported</p>
         </a>
         <textarea
-          className="w-full h-[20rem] sm:h-full md:h-full focus:outline-none bg-gray-100 p-4  dark:bg-[#18181B]  transition  rounded-md  "
+          className="w-full h-[20rem] sm:h-full md:h-full focus:outline-none bg-gray-100 p-4  dark:bg-[#18181B]   rounded-md  "
           placeholder="Till Your Story..✏️ "
           onChange={(e) => {
             setCurrentUser((prev) => ({

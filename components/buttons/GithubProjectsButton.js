@@ -37,7 +37,7 @@ function GithubProjectsBtn() {
   };
   return (
     <button
-      className="font-semibold  px-5 py-3 border-shadow"
+      className="font-semibold  px-5 py-3 transition duration-300 ease-in-out border-shadow"
       onClick={() => {
         handleGet();
       }}

@@ -65,7 +65,7 @@ function ChooseMeSkills() {
       <div className=" w-full  rounded ">
         {/* <p className="font-semibold text-lg px-1">👇Your's</p> */}
         {currentUser?.skills?.length != 0 ? (
-          <div className="flex flex-wrap gap-2 mt-4">
+          <div className="flex flex-wrap justify-center gap-2 mt-4">
             {currentUser?.skills?.map((item, i) => {
               return (
                 <StackChip

@@ -112,7 +112,7 @@ function ChooseMeProjects() {
         <div className="flex gap-3 flex-wrap justify-center">
           <GithubProjectsBtn />
           <button
-            className=" font-semibold px-5 py-3 border-shadow"
+            className=" font-semibold px-5 py-3 transition duration-300 ease-in-out border-shadow "
             onClick={() => {
               setProject(initialState);
               setShow(!show);
