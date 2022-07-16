@@ -150,7 +150,7 @@ function SeoSettings() {
 
         {seo.seo_image ? (
           <div
-            className="relative w-full my-2 bg-center bg-no-repeat bg-cover border h-full rounded-lg p-[200px]"
+            className="relative w-full  my-2 bg-center bg-no-repeat bg-cover border h-[200px] rounded-lg "
             style={{ backgroundImage: `url(${seo.seo_image})` }}
           >
             <button
