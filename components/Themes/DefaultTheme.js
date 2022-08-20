@@ -13,7 +13,7 @@ function NormalTemplate({ profile }) {
   return (
     <div className=" sm:px-7 lg:px-72 md:7 2xl:7 px-7 pt-5 ">
       <div className="flex flex-wrap lg:flex-none gap-4">
-        <div className="grid  lg:sticky top-0 lg:justify-start  lg:w-auto w-full flex-none lg:flex-1 auto-rows-max ">
+        <div className="grid sticky top-0 lg:justify-start  lg:w-auto w-full flex-none lg:flex-1 auto-rows-max ">
           {/* image  */}
           <div className="flex justify-center pt-3">
             <Image

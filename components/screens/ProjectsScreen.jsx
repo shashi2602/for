@@ -247,7 +247,7 @@ const ProjectCard = ({
             <>
               <div className="p-4">
                 <div className="flex justify-between py-2">
-                  <h1 className="text-lg font-bold">{title}</h1>
+                  <h1 className="text-lg font-bold capitalize">{title}</h1>
                   <div className="flex gap-2">
                     {stack?.split(",").map((s, i) => {
                       return (
@@ -266,7 +266,7 @@ const ProjectCard = ({
             </>
           </Link>
         </div>
-        <div className="border-t-2 border-black dark:border-[#18181B] flex justify-between flex-nowrap rounded-b p-2 bg-yellow-300 dark:text-black">
+        <div className="border-t-2 border-black dark:border-[#18181B] flex justify-between flex-nowrap rounded-b p-2 bg-black/95 text-white ">
           <Link href={gitlink} passHref>
             <a target={"_blank"}>
               <i className="fa fa-github text-2xl "></i>

@@ -6,13 +6,16 @@ import { getDocs } from "firebase/firestore";
 import NormalTemplate from "../components/Themes/DefaultTheme";
 import SeoHead from "../components/seo/SeoHead";
 import NavBar from "../components/NavBar";
+import DefaultTheme from "../themes/DefaultTheme";
+import { themes } from "../themes/themes";
+
 
 function User({ data, found }) {
   return found ? (
     <>
       <SeoHead data={data} />
-      <DarkMode />
-      <NormalTemplate profile={data} />
+      {/* <NormalTemplate profile={data} /> */}
+      <DefaultTheme profile={data} />
     </>
   ) : (
     <div>

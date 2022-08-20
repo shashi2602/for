@@ -41,6 +41,7 @@ function ChooseMeProfile() {
       error: "😱 error while uploading",
       success: "🥳 upload success",
     });
+    setChangeDone(true);
   };
 
   return (

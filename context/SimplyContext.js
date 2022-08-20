@@ -20,6 +20,7 @@ function SimplyContext({ children }) {
     site_username: "",
     projects: [],
     skills: [],
+    extra_skills: "",
     social: [],
     blog_site: [],
     certifications: [],

@@ -102,14 +102,32 @@ function ChooseMeSkills() {
           </div>
         </div>
       </div>
-      {/* <div className=" w-full bg-gray-100 m-2 mt-4 p-4 rounded">
-        <h2 className="font-semibold text-lg px-1">I ❤️ to do </h2>
+      <div className=" w-full bg-gray-100 m-2 mt-4 p-4 rounded dark:bg-[#18181B]">
+        <h2 className="font-semibold text-lg px-1 mb-2">Skills</h2>
+        {currentUser?.extra_skills?.length != 0 ? (
+          <div className="flex gap-2 ">
+            {currentUser?.extra_skills?.split(",").map((item, i) => {
+              return (
+                <div key={i} className="p-2  dark:bg-[#18181B] border-2 border-black bg-white rounded-md capitalize font-semibold">
+                  <snap className=" text-lg">#️</snap> {item}
+                </div>
+              )
+            })}
+          </div>
+        ):<></>}
         <textarea
-          className="w-full mt-4 border-2 border-black p-4 rounded"
-          placeholder="I ❤️ to love..... "
+          className="w-full mt-4 border-2 border-black p-4 rounded "
+          placeholder="Desing, Frontend, Backend, etc"
+          onChange={(e) => {
+            setCurrentUser((prev) => ({
+              ...prev,
+              extra_skills: e.target.value,
+            }));
+            setChangeDone(true);
+          }}
+          value={currentUser?.extra_skills}
         />
-        <div className="bg-gray-100 rounded  mt-2 p-2"></div>
-      </div> */}
+      </div>
     </div>
   );
 }

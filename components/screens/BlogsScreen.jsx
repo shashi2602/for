@@ -103,7 +103,7 @@ function ChooseMeBlogs() {
         />
       </div>
       {error ? <p className="mt-5 text-center">{error}</p> : null}
-      <div className="grid grid-cols-3 gap-2 mt-5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-5">
         {blog.map((n, i) => {
           return <BlogCard key={i} blog={n} />;
         })}
@@ -201,7 +201,7 @@ function BlogCard({ blog }) {
                   height="24"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="text-yellow-300"
+                  className="text-white"
                 >
                   <path d="M8 17h2v5l-2 2v-7zm2-11.5c0-2.319 1.219-4.35 3.047-5.5h-9.047c.068 1.911 2.429 2.097 2.429 5 0 3.771-3.429 3.291-3.429 10h12c0-1.358-.145-2.412-.369-3.276-2.678-.803-4.631-3.284-4.631-6.224zm6.5-4.5c-2.486 0-4.5 2.015-4.5 4.5s2.014 4.5 4.5 4.5c2.484 0 4.5-2.015 4.5-4.5s-2.016-4.5-4.5-4.5zm-.469 6.484l-1.688-1.637.695-.697.992.94 2.115-2.169.697.696-2.811 2.867z" />
                 </svg>
@@ -211,7 +211,7 @@ function BlogCard({ blog }) {
           <Link href={blog.url} passHref>
             <div className="flex flex-col h-full justify-end relative p-4 text-white bg-black bg-opacity-50 cursor-pointer">
               <h1 className="text-lg font-bold">{blog.title}</h1>
-              <p className="text-sm font-bold">{blog.published_on}</p>
+              <p className="text-sm font-bold capitalize">{blog.published_on}</p>
               <p>{dayjs(blog.published_at).format("MMM YYYY")}</p>
             </div>
           </Link>

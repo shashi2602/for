@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import GoogleBtn from "../buttons/GoogleButton";
 import GithubBtn from "../buttons/GithubButton";
 import { Dialog, Transition } from "@headlessui/react";
-
+import DarkMode from "../buttons/DarkMode";
 function LoginModal() {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -10,11 +10,11 @@ function LoginModal() {
       <button
         type="button"
         onClick={() => setShowModal(!showModal)}
-        className="px-4 py-2 text-sm font-semibold text-black bg-yellow-400    p-3 transition border-2 border-black  rounded-md shadow-[3px_3px_0_0_#000] dark:border-[#0B0B0B] dark:shadow-[3px_3px_0_0_#0B0B0B] hover:shadow-none"
+        className="px-4 py-2 text-sm font-semibold text-black bg-yellow-400    p-3 transition border-2 border-black  rounded-md shadow-[3px_3px_0_0_#000] dark:border-[#0B0B0B] dark:shadow-[3px_3px_0_0_#0B0B0B] hover:shadow-none mr-2"
       >
         Login
       </button>
-
+      <DarkMode/>
       <Transition appear show={showModal} as={Fragment}>
         <Dialog
           as="div"

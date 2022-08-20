@@ -65,8 +65,8 @@ export const social = [
   {
     value: "freecodecamp",
     link: "",
-    link_placeholder: "https://www.freecodecamp.org/news/author/",
-    placeholder: "freecodecamp username",
+    link_placeholder: "",
+    placeholder: "profile link",
     darkPath: true,
   },
   {

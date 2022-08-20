@@ -28,7 +28,7 @@ function ChooseMeAbout() {
       <div className="">
         <h4 className="font-semibold mt-3">🖨 Preview</h4>
         {currentUser.about_markdown.length ? (
-          <div className="prose text-justify max-w-none px-4 prose-strong:underline dark:prose-invert rounded">
+          <div className="prose text-justify max-w-none px-4 prose-strong:underline  prose-a:decoration-yellow-400 prose-a:decoration-wavy prose-a:decoration-2 dark:prose-invert rounded">
             <MarkdownPreview about={currentUser.about_markdown} />
           </div>
         ) : (
