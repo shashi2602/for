@@ -13,24 +13,18 @@ function DefaultTheme({ profile }) {
   const { theme } = useTheme();
   return (
     <div className="sm:px-7 lg:px-72 md:7 2xl:7 px-7">
-      <div className="grid grid-flow-col grid-cols-1 sm:grid-cols-2  mt-5  px-5 py-2  dark:border-none">
-        <div className="flex flex-col justify-center">
-          <div className="grid gap-2">
-            <h1 className="text-5xl font-bold"> 👋 Hi, I’m </h1>
-            <h1 className="text-5xl font-bold">{profile?.username}.</h1>
-            <p className="text-lg">
-              An <span className="font-semibold">{profile?.expertise}</span>{" "}
-              from <span className="font-semibold "> {profile?.country}</span>.
-            </p>
-            <p className="text-lg">{profile?.status}</p>
-          </div>
-          <SocialPart social={profile.social} />
-        </div>
-        <div className="flex justify-center">
-          <ProfileImageCircle image={profile?.profile_img} />
-        </div>
+      {/* profile on large screen */}
+      <div className="hidden lg:block">
+        <ProfileLargePart profile={profile} />
       </div>
-      <div className="px-5 py-2  rounded-md my-2">
+
+      {/*  profile on small screen */}
+      <div className="sm:hidden">
+        <ProfileSmallPart profile={profile} />
+      </div>
+
+      {/* stack part */}
+      <div className="px-5 pb-2 pt-5 rounded-md my-2">
         {profile?.skills.length > 0 ? (
           <StackPart skill={profile?.skills} />
         ) : (
@@ -45,9 +39,12 @@ function DefaultTheme({ profile }) {
           </div>
         )}
       </div>
-      <div className="border-2 px-5 py-2 border-black dark:border-none rounded-md my-2">
+      {/* about part */}
+      <div className=" py-2  rounded-md my-2">
         <AboutPart about={profile?.about_markdown} />
       </div>
+
+      {/* blogs part */}
       {profile?.pinned_blogs.length > 0 ? (
         <div className="my-2">
           <BlogsPart blogs={profile?.pinned_blogs} />
@@ -55,6 +52,7 @@ function DefaultTheme({ profile }) {
       ) : (
         <></>
       )}
+      {/* certificates part */}
       {profile?.certifications.length > 0 ? (
         <div className="my-2">
           <CertificationsPart certifications={profile?.certifications} />
@@ -62,6 +60,7 @@ function DefaultTheme({ profile }) {
       ) : (
         <></>
       )}
+      {/* projects part */}
       {profile?.projects.length > 0 ? (
         <div className="my-2">
           <ProjectPart projects={profile?.projects} />
@@ -72,6 +71,60 @@ function DefaultTheme({ profile }) {
     </div>
   );
 }
+
+const ProfileLargePart = ({ profile }) => {
+  const { theme } = useTheme();
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2  mt-5  px-5 py-2  dark:border-none">
+      <div className="flex flex-col ">
+        <div className="grid gap-2">
+          <h1 className="text-5xl font-bold"> 👋 Hi, I’m </h1>
+          <h1 className="text-5xl font-bold">{profile?.username}.</h1>
+          <p className="text-lg">
+            An <span className="font-semibold">{profile?.expertise}</span> from{" "}
+            <span className="font-semibold "> {profile?.country}</span>.
+          </p>
+          <p className="text-lg">{profile?.status}</p>
+        </div>
+        <SocialPart
+          social={profile.social}
+          theme={theme}
+          resume={profile?.resume}
+        />
+      </div>
+      <div className="flex justify-center">
+        <ProfileImageCircle image={profile?.profile_img} />
+      </div>
+    </div>
+  );
+};
+
+const ProfileSmallPart = ({ profile }) => {
+  const { theme } = useTheme();
+  return (
+    <div className="grid lg:justify-start  lg:w-auto w-full flex-none lg:flex-1 auto-rows-max ">
+      {/* image  */}
+      <div className="flex justify-center">
+        <ProfileImageCircle image={profile?.profile_img} />
+      </div>
+      {/* profile details */}
+      <div className="flex flex-col gap-2 text-center">
+        <h1 className="text-3xl font-bold"> 👋 Hi, I’m </h1>
+        <h1 className="text-3xl font-bold capitalize">{profile?.username}</h1>
+        <p className="text-lg">
+          An <span className="font-semibold">{profile?.expertise}</span> from{" "}
+          <span className="font-semibold "> {profile?.country}</span>.
+        </p>
+        <p className="text-lg">{profile?.status}</p>
+        <SocialPart
+          social={profile.social}
+          theme={theme}
+          resume={profile?.resume}
+        />
+      </div>
+    </div>
+  );
+};
 
 const ProfileImageCircle = ({ image }) => {
   return (
@@ -85,7 +138,7 @@ const ProfileImageCircle = ({ image }) => {
   );
 };
 
-const SocialPart = ({ social, theme }) => {
+const SocialPart = ({ social, theme, resume }) => {
   return (
     <div className="flex flex-wrap gap-2 pt-4">
       {social.map((social, i) => {
@@ -116,18 +169,30 @@ const SocialPart = ({ social, theme }) => {
           </div>
         );
       })}
+      {resume.length == 0 ? (
+        <></>
+      ) : (
+        <Link href={resume} passHref>
+          <Image
+            alt="some"
+            src="https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/pdf-svgrepo-com.svg"
+            height={20}
+            width={20}
+          />
+        </Link>
+      )}
     </div>
   );
 };
 
 const StackPart = ({ skill }) => {
   return (
-    <div className="flex flex-wrap gap-2 justify-center">
+    <div className="flex flex-wrap gap-5 sm:gap-2 sm:justify-center">
       {skill.map((skills, i) => {
         return (
           <div
             key={i}
-            className="px-3 pt-2 dark:bg-slate-900 rounded flex gap-2"
+            className="sm:px-3 pt-2 dark:bg-slate-900 rounded flex gap-2"
           >
             <Image
               alt={skills?.name}
@@ -136,7 +201,9 @@ const StackPart = ({ skill }) => {
               width={26}
               layout="fixed"
             />
-            <p className="capitalize font-semibold">{skills.name}</p>
+            <p className="capitalize font-semibold hidden lg:block">
+              {skills.name}
+            </p>
           </div>
         );
       })}
@@ -163,35 +230,42 @@ const ProjectPart = ({ projects }) => {
           return (
             <div
               key={i}
-              className={` border-2 border-black rounded-md  dark:border-[#18181B]  `}
+              className={`rounded-md bg-gray-100  dark:bg-[#18181B] `}
             >
-              <div className="flex flex-col  justify-between h-full w-full overflow-hidden ">
+              <div className=" h-full w-full overflow-hidden ">
                 <div className="grid grid-flow-col">
-                  <a href={p.live_link}>
-                    <>
-                      <div className="p-4">
-                        <div className="flex justify-between py-2">
-                          <h1 className="text-lg font-bold capitalize">
-                            {p.title}
-                          </h1>
-                          <div className="flex gap-2">
-                            <Link href={p?.source_code_link} passHref>
-                              <a target={"_blank"}>
-                                <i className="fa fa-github text-lg "></i>
-                              </a>
-                            </Link>
-                            <p key={i} className="text-lg">
-                              <i
-                                className={`devicon-${p.stacks.toLowerCase()}-plain `}
-                              ></i>
-                            </p>
-                          </div>
-                        </div>
-
-                        <p>{p.short_info}</p>
+                  <div className="p-4">
+                    <div className="flex justify-between py-2">
+                      <h1 className="text-lg font-bold capitalize hover:underline">
+                        <Link
+                          href={
+                            p?.live_link === ""
+                              ? p?.source_code_link === ""
+                                ? ""
+                                : p?.source_code_link
+                              : p?.live_link
+                          }
+                        >
+                          {p.title}
+                        </Link>
+                      </h1>
+                      <div className="flex gap-2">
+                        <Link href={p?.source_code_link} passHref>
+                          <a target={"_blank"}>
+                            <i className="fa fa-github"></i>
+                          </a>
+                        </Link>
+                        <p key={i}>
+                          <i
+                            className={`devicon-${p.stacks.toLowerCase()}-plain `}
+                          ></i>
+                          <span className="px-2">{p.stacks}</span>
+                        </p>
                       </div>
-                    </>
-                  </a>
+                    </div>
+
+                    <p>{p.short_info}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -203,7 +277,7 @@ const ProjectPart = ({ projects }) => {
           <></>
         ) : number == projects?.length ? (
           <div
-            className="border-2 border-black px-2 rounded-md font-semibold"
+            className=" dark:bg-[#18181B] px-2 rounded-md font-semibold"
             onClick={() => {
               setNumber(4);
             }}
@@ -212,7 +286,7 @@ const ProjectPart = ({ projects }) => {
           </div>
         ) : (
           <div
-            className="border-2 border-black px-2 rounded-md font-semibold"
+            className=" dark:bg-[#18181B] px-2 rounded-md font-semibold"
             onClick={() => {
               setNumber(projects?.length);
             }}
@@ -234,7 +308,7 @@ const BlogsPart = ({ blogs }) => {
           return (
             <div className="flex flex-col" key={i}>
               <div
-                className="h-[13rem] w-full relative block overflow-hidden bg-center bg-no-repeat bg-cover rounded-md border-2 border-black"
+                className="h-[13rem] w-full relative block overflow-hidden bg-center bg-no-repeat bg-cover rounded-md "
                 style={{
                   backgroundImage: `url(${blog.image})`,
                 }}
@@ -287,7 +361,7 @@ const CertificationsPart = ({ certifications }) => {
         return (
           <div
             key={i}
-            className=" rounded-md w-full bg-gray-100 grid grid-flow-col p-2 justify-between gap-2"
+            className=" rounded-md w-full bg-gray-100 dark:bg-[#18181B]  grid grid-flow-col p-2 justify-between gap-2"
           >
             <div className="flex justify-between">
               <img
