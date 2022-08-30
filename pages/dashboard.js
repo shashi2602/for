@@ -19,7 +19,7 @@ function DashBoard() {
   }, [user]);
 
   return (
-    <div className="h-full">
+    <div>
       {!found ? (
         <>
           <NavBar />

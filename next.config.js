@@ -8,7 +8,8 @@ const nextConfig = {
       "cdn.jsdelivr.net",
       "raw.githubusercontent.com",
       "avatars.githubusercontent.com",
-      "www.google.com",
+      // "www.google.com",
+      "logo.clearbit.com",
     ],
   },
 };

@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
 import Image from "next/image";
 import React from "react";
-import { firstLetterUpper } from "../utils/textutils";
 import Link from "next/link";
 import sampleImage from "../../public/avatar-male.png";
-import MarkdownPreview from "../MarkdownPreview";
+import MarkdownPreview from "../components/MarkdownPreview";
 import { useTheme } from "next-themes";
 
 function NormalTemplate({ profile }) {
@@ -26,8 +25,8 @@ function NormalTemplate({ profile }) {
           </div>
           {/* profile details */}
           <div className="dark:text-white">
-            <h1 align="center" className="text-3xl font-bold p-3 ">
-              {firstLetterUpper(profile?.username)}
+            <h1 align="center" className="text-3xl font-bold p-3 capitalize">
+              {profile?.username}
             </h1>
             <h3 align="center">{profile?.status}</h3>
             <div className="flex justify-center gap-5 pt-2 ">
@@ -111,10 +110,10 @@ function NormalTemplate({ profile }) {
                     <p className="text-5xl p-4 font-bold text-gray-400">{i}</p>
                     <div className="flex-auto">
                       <div className="flex justify-between">
-                        <h5 className="font-semibold text-lg">
+                        <h5 className="font-semibold text-lg capitalize">
                           <Link href={project.live_link} passHref>
                             <a target={"_blank"}>
-                              {firstLetterUpper(project.title)}
+                              {project.title}
                             </a>
                           </Link>
                         </h5>

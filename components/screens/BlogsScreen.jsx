@@ -182,36 +182,26 @@ function BlogCard({ blog }) {
           <span className="absolute z-10 inline-flex items-center p-2 text-xs font-semibold  hover:bg-black/5 rounded-full right-4 top-4">
             {currentUser?.pinned_blogs?.some((n) => n.title == blog.title) ? (
               <button onClick={handleUnPinBlog}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="text-red-500"
-                >
-                  <path d="M8 17h2v5l-2 2v-7zm2-11.5c0-2.319 1.219-4.35 3.047-5.5h-9.047c.068 1.911 2.429 2.097 2.429 5 0 3.771-3.429 3.291-3.429 10h12c0-1.358-.145-2.412-.369-3.276-2.678-.803-4.631-3.284-4.631-6.224zm11 0c0 2.485-2.017 4.5-4.5 4.5s-4.5-2.015-4.5-4.5 2.017-4.5 4.5-4.5 4.5 2.015 4.5 4.5zm-3.086-2.122l-1.414 1.414-1.414-1.414-.707.708 1.414 1.414-1.414 1.414.707.708 1.414-1.415 1.414 1.414.708-.708-1.414-1.413 1.414-1.414-.708-.708z" />
-                </svg>
+                <i
+                  className="fa fa-star text-lg text-white"
+                  aria-hidden="true"
+                ></i>
               </button>
             ) : (
               <button onClick={handlePinBlog}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="text-white"
-                >
-                  <path d="M8 17h2v5l-2 2v-7zm2-11.5c0-2.319 1.219-4.35 3.047-5.5h-9.047c.068 1.911 2.429 2.097 2.429 5 0 3.771-3.429 3.291-3.429 10h12c0-1.358-.145-2.412-.369-3.276-2.678-.803-4.631-3.284-4.631-6.224zm6.5-4.5c-2.486 0-4.5 2.015-4.5 4.5s2.014 4.5 4.5 4.5c2.484 0 4.5-2.015 4.5-4.5s-2.016-4.5-4.5-4.5zm-.469 6.484l-1.688-1.637.695-.697.992.94 2.115-2.169.697.696-2.811 2.867z" />
-                </svg>
+                <i
+                  className="fa fa-star-o text-2xl text-white"
+                  aria-hidden="true"
+                ></i>
               </button>
             )}
           </span>
           <Link href={blog.url} passHref>
             <div className="flex flex-col h-full justify-end relative p-4 text-white bg-black bg-opacity-50 cursor-pointer">
               <h1 className="text-lg font-bold">{blog.title}</h1>
-              <p className="text-sm font-bold capitalize">{blog.published_on}</p>
+              <p className="text-sm font-bold capitalize">
+                {blog.published_on}
+              </p>
               <p>{dayjs(blog.published_at).format("MMM YYYY")}</p>
             </div>
           </Link>

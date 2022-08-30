@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import Modal from "../modals/Modal";
 import FormGroup from "../forms/FormGroup";
 import Label from "../forms/Label";
+import Image from "next/image";
 
 function ChooseMeProjects() {
   const { currentUser, setCurrentUser, setChangeDone } = useSimplyContext();
@@ -33,7 +34,6 @@ function ChooseMeProjects() {
       setError(false);
       if (project.id) {
         const in_edit = currentUser.projects.find((p) => p.id == project.id);
-        console.log("======>updating project id", in_edit);
         if (in_edit) {
           in_edit = Object.assign(in_edit, project);
         }
@@ -67,7 +67,6 @@ function ChooseMeProjects() {
     const edit_project = currentUser.projects.find(
       (project) => project.id === id
     );
-    console.log(edit_project);
     setProject({ ...edit_project });
     setChangeDone(true);
     setShow(!show);
@@ -234,7 +233,7 @@ const ProjectCard = ({
   id,
 }) => {
   return (
-    <div className="border-2 border-black rounded-md   dark:border-[#18181B] dark:bg-transparent ">
+    <div className="rounded-md  bg-gray-100 dark:bg-[#18181B]">
       <div className="flex flex-col  justify-between h-full w-full overflow-hidden">
         <div className="grid grid-flow-col">
           {/* <div
@@ -251,11 +250,14 @@ const ProjectCard = ({
                   <div className="flex gap-2">
                     {stack?.split(",").map((s, i) => {
                       return (
-                        <p key={i} className="text-lg">
-                          <i
-                            className={`devicon-${s.toLowerCase()}-plain `}
-                          ></i>
-                        </p>
+                        <Image
+                          key={i}
+                          alt={s}
+                          src={`https://raw.githubusercontent.com/shashi2602/devicon/master/icons/${s.toLowerCase()}/${s.toLowerCase()}-original.svg`}
+                          height={20}
+                          width={20}
+                          layout="fixed"
+                        />
                       );
                     })}
                   </div>
@@ -266,7 +268,7 @@ const ProjectCard = ({
             </>
           </Link>
         </div>
-        <div className="border-t-2 border-black dark:border-[#18181B] flex justify-between flex-nowrap rounded-b p-2 bg-black/95 text-white ">
+        <div className=" flex justify-between flex-nowrap rounded-b p-2 bg-gray-200 dark:bg-[#141416] ">
           <Link href={gitlink} passHref>
             <a target={"_blank"}>
               <i className="fa fa-github text-2xl "></i>

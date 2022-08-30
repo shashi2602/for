@@ -1,13 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
-import DarkMode from "../components/buttons/DarkMode";
+import React from "react";
 import { userRef } from "../services/user.services";
 import { getDocs } from "firebase/firestore";
-import NormalTemplate from "../components/Themes/DefaultTheme";
 import SeoHead from "../components/seo/SeoHead";
 import NavBar from "../components/NavBar";
 import DefaultTheme from "../themes/DefaultTheme";
-import { themes } from "../themes/themes";
 
 
 function User({ data, found }) {

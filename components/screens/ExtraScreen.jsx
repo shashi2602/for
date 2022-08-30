@@ -10,7 +10,7 @@ import InputField from "../forms/InputField";
 import TextArea from "../forms/TextArea";
 import Label from "../forms/Label";
 import MarkdownPreview from "../MarkdownPreview";
-import FormGroup from "../forms/FormGroup";
+import { imageUtil } from "../utils/Utils";
 function ChooseMeMyExtra() {
   const { setChangeDone, currentUser, setCurrentUser } = useSimplyContext();
   dayjs.extend(relativeTime);
@@ -148,7 +148,9 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
                 <div className="flex justify-between">
                   <img
                     alt={certi.certi_title}
-                    src={GET_FAVICON_FROM_SITE_LINK + certi.certi_link}
+                    src={
+                      GET_FAVICON_FROM_SITE_LINK + imageUtil(certi.certi_link)
+                    }
                     className="w-[3rem] h-[3rem] rounded-md m-2"
                   />
                   <div className=" p-2">
@@ -248,6 +250,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
     start_date: "",
     end_date: "",
     is_currently_working: "",
+    company_link: "",
   };
   const [experience, setExperience] = useState({ ...initialState });
 
@@ -292,11 +295,20 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
     }));
     setChangeDone(true);
   };
+  const handleClearData = () => {
+    setExperience({ ...initialState });
+  };
   return (
     <div className="mt-4 sm:mt-0">
       <div className="flex justify-between mb-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
         <h1 className="font-semibold text-lg ">💼 Experience</h1>
-        <button onClick={() => setShowAdd(!showAdd)} className="font-semibold">
+        <button
+          onClick={() => {
+            setShowAdd(!showAdd);
+            handleClearData();
+          }}
+          className="font-semibold"
+        >
           <i className="fa fa-plus"></i> Add Experience
         </button>
       </div>
@@ -318,9 +330,12 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
                       {e?.company_link ? (
                         <Image
                           alt={e.company_name}
-                          src={GET_FAVICON_FROM_SITE_LINK + e.company_link}
-                          height={20}
-                          width={20}
+                          src={
+                            GET_FAVICON_FROM_SITE_LINK +
+                            imageUtil(e.company_link)
+                          }
+                          height={26}
+                          width={26}
                           layout={"fixed"}
                         />
                       ) : (
@@ -442,7 +457,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
           placeholder={"https://somecompany.com"}
           type={"text"}
           onchange={handleChange}
-          value={experience.end_date}
+          value={experience.company_link}
         />
         <label className="flex mt-3 mb-3">
           <input

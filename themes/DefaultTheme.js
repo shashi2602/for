@@ -8,13 +8,14 @@ import sampleImage from "../public/avatar-male.png";
 import Link from "next/link";
 import dayjs from "dayjs";
 import { GET_FAVICON_FROM_SITE_LINK } from "../components/utils/constants";
+import { imageUtil } from "../components/utils/Utils";
 
 function DefaultTheme({ profile }) {
   const { theme } = useTheme();
   return (
     <div className="sm:px-7 lg:px-72 md:7 2xl:7 px-7">
       {/* profile on large screen */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block md:block ">
         <ProfileLargePart profile={profile} />
       </div>
 
@@ -24,19 +25,14 @@ function DefaultTheme({ profile }) {
       </div>
 
       {/* stack part */}
-      <div className="px-5 pb-2 pt-5 rounded-md my-2">
+      <div className="p-5  rounded-md my-2 bg-gray-100 dark:bg-[#18181B]">
         {profile?.skills.length > 0 ? (
-          <StackPart skill={profile?.skills} />
+          <StackPart
+            skill={profile?.skills}
+            extra_skills={profile?.extra_skills}
+          />
         ) : (
-          <div className="flex gap-2 my-2">
-            {profile?.extra_skills.split(",").map((skill, i) => {
-              return (
-                <div key={i} className="capitalize font-semibold">
-                  # {skill}
-                </div>
-              );
-            })}
-          </div>
+          <></>
         )}
       </div>
       {/* about part */}
@@ -64,6 +60,14 @@ function DefaultTheme({ profile }) {
       {profile?.projects.length > 0 ? (
         <div className="my-2">
           <ProjectPart projects={profile?.projects} />
+        </div>
+      ) : (
+        <></>
+      )}
+      {/* experience part */}
+      {profile?.experiences.length > 0 ? (
+        <div className="my-2">
+          <ExperiencePart experience={profile?.experiences} />
         </div>
       ) : (
         <></>
@@ -185,9 +189,9 @@ const SocialPart = ({ social, theme, resume }) => {
   );
 };
 
-const StackPart = ({ skill }) => {
+const StackPart = ({ skill, extra_skills }) => {
   return (
-    <div className="flex flex-wrap gap-5 sm:gap-2 sm:justify-center">
+    <div className="flex flex-wrap gap-5 sm:gap-2 justify-center">
       {skill.map((skills, i) => {
         return (
           <div
@@ -204,6 +208,13 @@ const StackPart = ({ skill }) => {
             <p className="capitalize font-semibold hidden lg:block">
               {skills.name}
             </p>
+          </div>
+        );
+      })}
+      {extra_skills.split(",").map((skill, i) => {
+        return (
+          <div key={i} className="sm:px-3 pt-2 dark:bg-slate-900 rounded flex gap-2 capitalize font-semibold">
+            🤹 {skill}
           </div>
         );
       })}
@@ -230,43 +241,40 @@ const ProjectPart = ({ projects }) => {
           return (
             <div
               key={i}
-              className={`rounded-md bg-gray-100  dark:bg-[#18181B] `}
+              className={`rounded-md bg-gray-100  dark:bg-[#18181B] flex flex-col p-4 justify-between gap-2`}
             >
-              <div className=" h-full w-full overflow-hidden ">
-                <div className="grid grid-flow-col">
-                  <div className="p-4">
-                    <div className="flex justify-between py-2">
-                      <h1 className="text-lg font-bold capitalize hover:underline">
-                        <Link
-                          href={
-                            p?.live_link === ""
-                              ? p?.source_code_link === ""
-                                ? ""
-                                : p?.source_code_link
-                              : p?.live_link
-                          }
-                        >
-                          {p.title}
-                        </Link>
-                      </h1>
-                      <div className="flex gap-2">
-                        <Link href={p?.source_code_link} passHref>
-                          <a target={"_blank"}>
-                            <i className="fa fa-github"></i>
-                          </a>
-                        </Link>
-                        <p key={i}>
-                          <i
-                            className={`devicon-${p.stacks.toLowerCase()}-plain `}
-                          ></i>
-                          <span className="px-2">{p.stacks}</span>
-                        </p>
-                      </div>
-                    </div>
-
-                    <p>{p.short_info}</p>
-                  </div>
+              <>
+                <div className="flex justify-between">
+                  <h1 className="text-lg font-bold capitalize hover:underline">
+                    <Link
+                      href={
+                        p?.live_link === ""
+                          ? p?.source_code_link === ""
+                            ? ""
+                            : p?.source_code_link
+                          : p?.live_link
+                      }
+                    >
+                      {p.title}
+                    </Link>
+                  </h1>
+                  <Image
+                    alt={p.stacks}
+                    src={`https://raw.githubusercontent.com/shashi2602/devicon/master/icons/${p.stacks.toLowerCase()}/${p.stacks.toLowerCase()}-original.svg`}
+                    height={20}
+                    width={20}
+                    layout="fixed"
+                  />
                 </div>
+
+                <p>{p.short_info}</p>
+              </>
+              <div className="flex justify-around gap-2  pt-2">
+                <Link href={p.source_code_link} passHref>
+                  <a className="px-4 py-1 rounded-md bg-gray-200 dark:bg-[#141416] font-semibold">
+                    source
+                  </a>
+                </Link>
               </div>
             </div>
           );
@@ -277,7 +285,7 @@ const ProjectPart = ({ projects }) => {
           <></>
         ) : number == projects?.length ? (
           <div
-            className=" dark:bg-[#18181B] px-2 rounded-md font-semibold"
+            className="  px-2 font-semibold"
             onClick={() => {
               setNumber(4);
             }}
@@ -286,7 +294,7 @@ const ProjectPart = ({ projects }) => {
           </div>
         ) : (
           <div
-            className=" dark:bg-[#18181B] px-2 rounded-md font-semibold"
+            className="  px-2 font-semibold"
             onClick={() => {
               setNumber(projects?.length);
             }}
@@ -332,7 +340,7 @@ const BlogsPart = ({ blogs }) => {
           <></>
         ) : number == blogs?.length ? (
           <div
-            className="border-2 border-black px-2 rounded-md font-semibold"
+            className="font-semibold"
             onClick={() => {
               setNumber(3);
             }}
@@ -341,7 +349,7 @@ const BlogsPart = ({ blogs }) => {
           </div>
         ) : (
           <div
-            className="border-2 border-black px-2 rounded-md font-semibold"
+            className="font-semibold"
             onClick={() => {
               setNumber(blogs?.length);
             }}
@@ -361,12 +369,12 @@ const CertificationsPart = ({ certifications }) => {
         return (
           <div
             key={i}
-            className=" rounded-md w-full bg-gray-100 dark:bg-[#18181B]  grid grid-flow-col p-2 justify-between gap-2"
+            className={`rounded-md  dark:border-0 w-full dark:bg-[#18181B]  grid grid-flow-col p-2 justify-between gap-2`}
           >
             <div className="flex justify-between">
               <img
                 alt={certi.certi_title}
-                src={GET_FAVICON_FROM_SITE_LINK + certi.certi_link}
+                src={GET_FAVICON_FROM_SITE_LINK + imageUtil(certi.certi_link)}
                 className="w-[3rem] h-[3rem] rounded-md m-2"
               />
               <div className=" p-2">
@@ -384,6 +392,81 @@ const CertificationsPart = ({ certifications }) => {
                 </p>
               </div>
             </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const ExperiencePart = ({ experience }) => {
+  const [expand, setExpand] = useState(false);
+  return (
+    <div>
+      {experience.map((e, i) => {
+        return (
+          <div
+            key={i}
+            className="flex flex-col border-2 rounded dark:border-[#18181B]   p-4"
+          >
+            <div className="flex justify-between">
+              <div className="flex gap-2">
+                <div>
+                  {e?.company_link ? (
+                    <Image
+                      alt={e.company_name}
+                      src={
+                        GET_FAVICON_FROM_SITE_LINK + imageUtil(e.company_link)
+                      }
+                      height={26}
+                      width={26}
+                      layout={"fixed"}
+                    />
+                  ) : (
+                    <i className="fa fa-building" aria-hidden="true"></i>
+                  )}
+                </div>
+                <div>
+                  <h1 className="capitalize">
+                    {e?.title}{" "}
+                    <a
+                      href={e?.company_link}
+                      className=" font-bold  hover:underline"
+                    >
+                      @{e?.company_name}
+                    </a>
+                  </h1>
+                  <p className="  text-gray-500 ">
+                    {dayjs("2021-08-08").format("MMM YYYY")} {" - "}
+                    {e.end_date
+                      ? dayjs(e.end_date).format("MMM YYYY")
+                      : "present"}{" "}
+                  </p>
+                </div>
+              </div>
+              <div>
+                {expand ? (
+                  <i
+                    className="fa fa-angle-up text-2xl"
+                    aria-hidden="true"
+                    onClick={() => setExpand(!expand)}
+                  ></i>
+                ) : (
+                  <i
+                    className="fa fa-angle-down text-2xl"
+                    aria-hidden="true"
+                    onClick={() => setExpand(!expand)}
+                  ></i>
+                )}
+              </div>
+            </div>
+            {expand ? (
+              <div className="prose text-justify dark:prose-invert max-w-max">
+                <MarkdownPreview about={e.description} />
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         );
       })}

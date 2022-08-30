@@ -20,9 +20,10 @@ function GithubProjectsBtn() {
       );
       const github_projects = filtered_data.map((project, i) => ({
         id: "GID" + i,
-        title: project.name,
+        title: project.full_name,
         short_info: project.description,
         stacks: project.language,
+        favourite: false,
         live_link:
           project.homepage == null ? project.html_url : project.homepage,
         source_code_link: project.html_url,
