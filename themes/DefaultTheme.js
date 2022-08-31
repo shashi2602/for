@@ -13,7 +13,7 @@ import { imageUtil } from "../components/utils/Utils";
 function DefaultTheme({ profile }) {
   const { theme } = useTheme();
   return (
-    <div className="sm:px-7 lg:px-72 md:7 2xl:7 px-7">
+    <div className="h-screen mx-2 sm:mx-20 md:mx-56">
       {/* profile on large screen */}
       <div className="hidden lg:block md:block ">
         <ProfileLargePart profile={profile} />
@@ -25,7 +25,7 @@ function DefaultTheme({ profile }) {
       </div>
 
       {/* stack part */}
-      <div className="p-5  rounded-md my-2 bg-gray-100 dark:bg-[#18181B]">
+      <div className="p-5 rounded-md my-2 bg-gray-100 dark:bg-[#18181B]">
         {profile?.skills.length > 0 ? (
           <StackPart
             skill={profile?.skills}
@@ -36,7 +36,7 @@ function DefaultTheme({ profile }) {
         )}
       </div>
       {/* about part */}
-      <div className=" py-2  rounded-md my-2">
+      <div className=" py-2 rounded-md my-2">
         <AboutPart about={profile?.about_markdown} />
       </div>
 
@@ -191,7 +191,7 @@ const SocialPart = ({ social, theme, resume }) => {
 
 const StackPart = ({ skill, extra_skills }) => {
   return (
-    <div className="flex flex-wrap gap-5 sm:gap-2 justify-center">
+    <div className="flex gap-3 flex-wrap justify-center">
       {skill.map((skills, i) => {
         return (
           <div

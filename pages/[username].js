@@ -5,7 +5,7 @@ import { getDocs } from "firebase/firestore";
 import SeoHead from "../components/seo/SeoHead";
 import NavBar from "../components/NavBar";
 import DefaultTheme from "../themes/DefaultTheme";
-
+// import NormalTemplate from "../themes/NormalTemplate";
 
 function User({ data, found }) {
   return found ? (

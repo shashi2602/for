@@ -2,8 +2,8 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import sampleImage from "../../public/avatar-male.png";
-import MarkdownPreview from "../components/MarkdownPreview";
+import sampleImage from "../public/avatar-2.png";
+import MarkdownPreview from "../components/MarkdownPreview"
 import { useTheme } from "next-themes";
 
 function NormalTemplate({ profile }) {
