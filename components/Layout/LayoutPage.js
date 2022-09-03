@@ -21,7 +21,7 @@ function LayoutPage() {
   return (
     <>
       <NavBar />
-      <div className="h-screen mx-2 sm:mx-20 md:mx-56">
+      <div className=" mx-2 sm:mx-20 md:mx-56">
         <ChooseMe handleChange={handleSelectType} typeSelected={currentTab} />
         <ChooseMeInBrief type={currentTab} />
       </div>
