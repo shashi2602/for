@@ -125,7 +125,7 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
   };
 
   return (
-    <div className="mt-10 s:mt-0">
+    <div className="mt-10 sm:mt-0">
       <div className="flex justify-between m-b-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
         <h1 className="font-semibold text-lg">🎓 Certifications</h1>
         <button onClick={() => setShowAdd(!showAdd)} className="font-semibold">
@@ -496,7 +496,7 @@ function Experience({ currentUser, setCurrentUser, setChangeDone }) {
 
 function Resume({ currentUser, setCurrentUser, setChangeDone }) {
   return (
-    <div className="mt-10 s:mt-0">
+    <div className="mt-10 sm:mt-0">
       <div className="flex justify-between m-b-4 bg-gray-100 dark:bg-[#18181B] p-2 rounded-md">
         <h1 className="font-semibold text-lg">📝 Resume</h1>
       </div>

@@ -17,7 +17,7 @@ function HomePage() {
   const [userNameAvailable, setUserNameAvailable] = useState(true);
   const { user, userNamesList } = useSimplyContext();
   const [error, setError] = useState();
-  const schema = Joi.string().max(15).min(2).alphanum().allow(null, "");
+  const schema = Joi.string().max(15).min(2).alphanum();
 
   useEffect(() => {
     const checkUserNameAvailability = () => {

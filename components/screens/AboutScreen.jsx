@@ -7,13 +7,13 @@ function ChooseMeAbout() {
   const { currentUser, setCurrentUser, setChangeDone } = useSimplyContext();
 
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 mt-4">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 mt-4 mb-10">
       <div>
         <a href="https://www.markdownguide.org/basic-syntax" target={"_blank"}>
           <p className="py-2 text-sm">Markdown supported</p>
         </a>
         <textarea
-          className="w-full h-[20rem] sm:h-full md:h-full focus:outline-none bg-gray-100 p-4  dark:bg-[#18181B]   rounded-md  "
+          className="w-full h-[15rem] sm:h-full md:h-full focus:outline-none bg-gray-100 p-4  dark:bg-[#18181B]   rounded-md  "
           placeholder="Till Your Story..✏️ "
           onChange={(e) => {
             setCurrentUser((prev) => ({
