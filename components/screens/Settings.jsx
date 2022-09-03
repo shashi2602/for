@@ -242,7 +242,7 @@ function Appearance() {
   return (
     <div className="p-4">
       <h1 className="font-semibold text-lg">
-        Select the things that you don't wont to display in your profile
+        Select the things that you do not wont to display in your profile
       </h1>
       <div className="flex  flex-wrap gap-3 mt-2 ">
         {list_of_modules.map((m, i) => {
