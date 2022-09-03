@@ -240,7 +240,7 @@ function Appearance() {
     setChangeDone(true);
   };
   return (
-    <div>
+    <div className="mt-10 s:mt-0">
       <h1 className="font-semibold text-lg mb-2">💅 Appearance</h1>
       <h1 className=" text-base">
         Select the things that you do not wont to display in your profile
