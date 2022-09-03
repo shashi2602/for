@@ -5,6 +5,7 @@ import { getDocs } from "firebase/firestore";
 import SeoHead from "../components/seo/SeoHead";
 import NavBar from "../components/NavBar";
 import DefaultTheme from "../themes/DefaultTheme";
+import Link from "next/link";
 // import NormalTemplate from "../themes/NormalTemplate";
 
 function User({ data, found }) {
@@ -13,6 +14,9 @@ function User({ data, found }) {
       <SeoHead data={data} />
       {/* <NormalTemplate profile={data} /> */}
       <DefaultTheme profile={data} />
+      <div className="m-10 grid justify-center font-bold">
+      <Link href={""}>❤️Simplyfolio</Link>
+      </div>
     </>
   ) : (
     <div>

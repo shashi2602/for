@@ -15,6 +15,7 @@ function SimplyContext({ children }) {
     expertise: "",
     country: "",
     status: "",
+    status_2:"",
     profile_img: "",
     about_markdown: "",
     site_username: "",
@@ -29,6 +30,7 @@ function SimplyContext({ children }) {
     last_visited_tab: "",
     resume: "",
     pinned_blogs: [],
+    hidden_modules :[]
   });
   const [userNamesList, setUserNamesList] = useState([]);
   const [changeDone, setChangeDone] = useState(false);

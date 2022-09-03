@@ -2,7 +2,6 @@ import { NextSeo } from "next-seo";
 import React from "react";
 import { SITE_ENDPOINT } from "../../components/utils/constants";
 function SeoHead({ data }) {
-  console.log(data);
   return (
     <NextSeo
       title={`${data.username} | ${data.expertise}`}

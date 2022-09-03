@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useTheme } from "next-themes";
 import MarkdownPreview from "../components/MarkdownPreview";
-import DarkMode from "../components/buttons/DarkMode";
 import sampleImage from "../public/avatar-male.png";
 import Link from "next/link";
 import dayjs from "dayjs";
@@ -13,66 +12,104 @@ import { imageUtil } from "../components/utils/Utils";
 function DefaultTheme({ profile }) {
   const { theme } = useTheme();
   return (
-    <div className="h-screen mx-2 sm:mx-20 md:mx-56">
-      {/* profile on large screen */}
-      <div className="hidden lg:block md:block ">
-        <ProfileLargePart profile={profile} />
-      </div>
+    <>
+      {/* <style jsx>
+    </style> */}
+      <div className="mx-2 sm:mx-20 md:mx-56">
+        {/* profile on large screen */}
+        <div className="hidden lg:block md:block profile">
+          {profile.hidden_modules.some((m) => m == "Profile") ? (
+            <></>
+          ) : (
+            <ProfileLargePart profile={profile} />
+          )}
+        </div>
 
-      {/*  profile on small screen */}
-      <div className="sm:hidden">
-        <ProfileSmallPart profile={profile} />
-      </div>
+        {/*  profile on small screen */}
+        <div className="sm:hidden profile-small">
+          {profile.hidden_modules.some((m) => m == "Profile") ? (
+            <></>
+          ) : (
+            <ProfileSmallPart profile={profile} />
+          )}
+        </div>
 
-      {/* stack part */}
-      <div className="p-5 rounded-md my-2 bg-gray-100 dark:bg-[#18181B]">
-        {profile?.skills.length > 0 ? (
-          <StackPart
-            skill={profile?.skills}
-            extra_skills={profile?.extra_skills}
-          />
+        {/* stack part */}
+        <div className=" skills">
+          {profile?.skills.length > 0 ? (
+            profile.hidden_modules.some((m) => m == "Skills") ? (
+              <></>
+            ) : (
+              <StackPart
+                skill={profile?.skills}
+                extra_skills={profile?.extra_skills}
+              />
+            )
+          ) : (
+            <></>
+          )}
+        </div>
+
+        {/* about part */}
+        <div className=" py-2 rounded-md my-2 about">
+          {profile.hidden_modules.some((m) => m == "About") ? (
+            <></>
+          ) : (
+            <AboutPart about={profile?.about_markdown} />
+          )}
+        </div>
+
+        {/* blogs part */}
+        {profile?.pinned_blogs.length > 0 ? (
+          profile.hidden_modules.some((m) => m == "Blogs") ? (
+            <></>
+          ) : (
+            <div className="my-2 blogs">
+              <BlogsPart blogs={profile?.pinned_blogs} />
+            </div>
+          )
+        ) : (
+          <></>
+        )}
+        {/* certificates part */}
+        {profile?.certifications.length > 0 ? (
+          profile.hidden_modules.some((m) => m == "Certifications") ? (
+            <></>
+          ) : (
+            <div className="my-2 certifications">
+              <CertificationsPart certifications={profile?.certifications} />
+            </div>
+          )
+        ) : (
+          <></>
+        )}
+        {/* projects part */}
+        {profile?.projects.length > 0 ? (
+          profile.hidden_modules.some((m) => m == "Projects") ? (
+            <></>
+          ) : (
+            <div className="my-2 projects">
+              <ProjectPart projects={profile?.projects} />
+            </div>
+          )
+        ) : (
+          <></>
+        )}
+        {/* experience part */}
+        {profile?.experiences.length > 0 ? (
+          profile.hidden_modules.some((m) => m == "Experience") ? (
+            <></>
+          ) : (
+            <div className="my-2 experience">
+              <ExperiencePart experience={profile?.experiences} />
+            </div>
+          )
         ) : (
           <></>
         )}
       </div>
-      {/* about part */}
-      <div className=" py-2 rounded-md my-2">
-        <AboutPart about={profile?.about_markdown} />
-      </div>
 
-      {/* blogs part */}
-      {profile?.pinned_blogs.length > 0 ? (
-        <div className="my-2">
-          <BlogsPart blogs={profile?.pinned_blogs} />
-        </div>
-      ) : (
-        <></>
-      )}
-      {/* certificates part */}
-      {profile?.certifications.length > 0 ? (
-        <div className="my-2">
-          <CertificationsPart certifications={profile?.certifications} />
-        </div>
-      ) : (
-        <></>
-      )}
-      {/* projects part */}
-      {profile?.projects.length > 0 ? (
-        <div className="my-2">
-          <ProjectPart projects={profile?.projects} />
-        </div>
-      ) : (
-        <></>
-      )}
-      {/* experience part */}
-      {profile?.experiences.length > 0 ? (
-        <div className="my-2">
-          <ExperiencePart experience={profile?.experiences} />
-        </div>
-      ) : (
-        <></>
-      )}
-    </div>
+    </>
   );
 }
 
@@ -89,6 +126,16 @@ const ProfileLargePart = ({ profile }) => {
             <span className="font-semibold "> {profile?.country}</span>.
           </p>
           <p className="text-lg">{profile?.status}</p>
+          <div className="flex flex-wrap">
+          {
+            profile.status_2.split(",").map((s,i)=>{
+              return <div key={i} className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold">
+                  {s}
+                </div>
+            })
+          }
+          </div>
+          
         </div>
         <SocialPart
           social={profile.social}
@@ -120,6 +167,15 @@ const ProfileSmallPart = ({ profile }) => {
           <span className="font-semibold "> {profile?.country}</span>.
         </p>
         <p className="text-lg">{profile?.status}</p>
+        <div className="flex flex-wrap">
+          {
+            profile.status_2.split(",").map((s,i)=>{
+              return <div key={i} className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold">
+                  {s}
+                </div>
+            })
+          }
+          </div>
         <SocialPart
           social={profile.social}
           theme={theme}
@@ -134,6 +190,7 @@ const ProfileImageCircle = ({ image }) => {
   return (
     <Image
       alt={image}
+      priority={true}
       className="rounded-full object-cover "
       height={300}
       width={300}
@@ -176,14 +233,14 @@ const SocialPart = ({ social, theme, resume }) => {
       {resume.length == 0 ? (
         <></>
       ) : (
-        <Link href={resume} passHref>
+        <a href={resume} className="pt-2">
           <Image
             alt="some"
             src="https://raw.githubusercontent.com/shashi2602/shashi2602.github.io/master/pdf-svgrepo-com.svg"
             height={20}
             width={20}
           />
-        </Link>
+        </a>
       )}
     </div>
   );
@@ -191,12 +248,12 @@ const SocialPart = ({ social, theme, resume }) => {
 
 const StackPart = ({ skill, extra_skills }) => {
   return (
-    <div className="flex gap-3 flex-wrap justify-center">
+    <div className="flex gap-3 flex-wrap justify-center stack-grid p-5 rounded-md my-2 bg-gray-100 dark:bg-[#18181B]">
       {skill.map((skills, i) => {
         return (
           <div
             key={i}
-            className="sm:px-3 pt-2 dark:bg-slate-900 rounded flex gap-2"
+            className="sm:px-3 pt-2 dark:bg-slate-900 rounded flex gap-2 stack-single"
           >
             <Image
               alt={skills?.name}
@@ -213,7 +270,10 @@ const StackPart = ({ skill, extra_skills }) => {
       })}
       {extra_skills.split(",").map((skill, i) => {
         return (
-          <div key={i} className="sm:px-3 pt-2 dark:bg-slate-900 rounded flex gap-2 capitalize font-semibold">
+          <div
+            key={i}
+            className="sm:px-3 pt-2 dark:bg-slate-900 rounded flex gap-2 capitalize font-semibold stack-single"
+          >
             🤹 {skill}
           </div>
         );
@@ -236,12 +296,12 @@ const ProjectPart = ({ projects }) => {
   const [number, setNumber] = useState(4);
   return (
     <>
-      <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
+      <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 projects-grid">
         {projects?.slice(0, number).map((p, i) => {
           return (
             <div
               key={i}
-              className={`rounded-md bg-gray-100  dark:bg-[#18181B] flex flex-col p-4 justify-between gap-2`}
+              className={`rounded-md bg-gray-100  dark:bg-[#18181B] flex flex-col p-4 justify-between gap-2 project-single`}
             >
               <>
                 <div className="flex justify-between">
@@ -269,13 +329,13 @@ const ProjectPart = ({ projects }) => {
 
                 <p>{p.short_info}</p>
               </>
-              <div className="flex justify-around gap-2  pt-2">
+              <button className="flex justify-around gap-2  pt-2">
                 <Link href={p.source_code_link} passHref>
                   <a className="px-4 py-1 rounded-md bg-gray-200 dark:bg-[#141416] font-semibold">
                     source
                   </a>
                 </Link>
-              </div>
+              </button>
             </div>
           );
         })}
@@ -311,10 +371,10 @@ const BlogsPart = ({ blogs }) => {
   const [number, setNumber] = useState(3);
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-5 ">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-5 blogs-grid">
         {blogs?.slice(0, number).map((blog, i) => {
           return (
-            <div className="flex flex-col" key={i}>
+            <div className="flex flex-col blog-single" key={i}>
               <div
                 className="h-[13rem] w-full relative block overflow-hidden bg-center bg-no-repeat bg-cover rounded-md "
                 style={{
@@ -335,12 +395,12 @@ const BlogsPart = ({ blogs }) => {
           );
         })}
       </div>
-      <div className="flex justify-center mt-2">
+      <div className="flex justify-center mt-2 show-btn">
         {blogs.length === 3 ? (
           <></>
         ) : number == blogs?.length ? (
           <div
-            className="font-semibold"
+            className="font-semibold show-up"
             onClick={() => {
               setNumber(3);
             }}
@@ -349,7 +409,7 @@ const BlogsPart = ({ blogs }) => {
           </div>
         ) : (
           <div
-            className="font-semibold"
+            className="font-semibold show-down"
             onClick={() => {
               setNumber(blogs?.length);
             }}
@@ -364,12 +424,12 @@ const BlogsPart = ({ blogs }) => {
 
 const CertificationsPart = ({ certifications }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 cert-grid">
       {certifications?.map((certi, i) => {
         return (
           <div
             key={i}
-            className={`rounded-md  dark:border-0 w-full dark:bg-[#18181B]  grid grid-flow-col p-2 justify-between gap-2`}
+            className={`rounded-md  dark:border-0 w-full dark:bg-[#18181B]  grid grid-flow-col p-2 justify-between gap-2 cert-single`}
           >
             <div className="flex justify-between">
               <img
@@ -402,12 +462,12 @@ const CertificationsPart = ({ certifications }) => {
 const ExperiencePart = ({ experience }) => {
   const [expand, setExpand] = useState(false);
   return (
-    <div>
+    <div className="experience-box">
       {experience.map((e, i) => {
         return (
           <div
             key={i}
-            className="flex flex-col border-2 rounded dark:border-[#18181B]   p-4"
+            className="flex flex-col border-2 rounded dark:border-[#18181B] p-4 experience-single"
           >
             <div className="flex justify-between">
               <div className="flex gap-2">

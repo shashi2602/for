@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import NavBar from "../NavBar";
 import { updateUserDoc } from "../../services/user.services";
 import { useSimplyContext } from "../../context/SimplyContext";
+import Link from "next/link";
 function LayoutPage() {
   const { currentUser, currentTab, setCurrentTab } = useSimplyContext();
 
@@ -24,6 +25,9 @@ function LayoutPage() {
       <div className="h-screen mx-2 sm:mx-20 md:mx-56">
         <ChooseMe handleChange={handleSelectType} typeSelected={currentTab} />
         <ChooseMeInBrief type={currentTab} />
+      </div>
+      <div className="m-2 grid justify-center font-bold">
+          <Link href={""}>❤️Simplyfolio</Link>
       </div>
     </>
   );

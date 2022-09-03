@@ -106,7 +106,7 @@ function ChooseMeSkills() {
             {currentUser?.extra_skills?.split(",").map((item, i) => {
               return (
                 <div key={i} className="p-2 flex gap-2  dark:bg-[#18181B] bg-gray-100 rounded-md capitalize font-semibold">
-                  <snap className="text-lg">🤹</snap> {item}
+                  <span className="text-lg">🤹</span> {item}
                 </div>
               )
             })}

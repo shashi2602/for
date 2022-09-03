@@ -104,7 +104,16 @@ function ChooseMeProfile() {
             height={"h-[10rem]"}
           />
         </FormGroup>
-
+        <FormGroup>
+          <Label text={"🤝 Status"} />
+          <InputField
+            name="status_2"
+            value={currentUser?.status_2}
+            placeholder="Open to work,Hiring"
+            onchange={handelChange}
+            size={"sm:w-[27rem]"}
+          />
+        </FormGroup>
         <FormGroup>
           <Label text={"🌍 From"} />
           <InputField
@@ -116,78 +125,6 @@ function ChooseMeProfile() {
         </FormGroup>
       </div>
     </div>
-
-    // <div className="m-2 flex flex-col gap-2 justify-center items-center">
-    //   {/* <div className="w-full flex flex-col gap-2 items-center justify-center"> */}
-    //     <div>
-    //       <Image
-    //         src={
-    //           currentUser?.profile_img
-    //             ? currentUser?.profile_img
-    //             : sampleProfile
-    //         }
-    //         alt={currentUser?.username}
-    //         className="rounded-full object-cover"
-    //         height={350}
-    //         width={350}
-    //       />
-    //     </div>
-    //     <div className="mt-2">
-    //       <label
-    //         htmlFor="profile_img"
-    //         className=" px-2 py-2 font-semibold dark:bg-black/40  text-center  cursor-pointer dark:hover:bg-opacity-20 transition duration-300 ease-in-out border-shadow"
-    //       >
-    //         📸 Choose Photo
-    //       </label>
-    //       <input
-    //         type="file"
-    //         id="profile_img"
-    //         className="hidden"
-    //         name="profile_img"
-    //         onChange={(e) => {
-    //           uploadImage(e.target.files[0]);
-    //         }}
-    //       />
-    //     </div>
-    //     <div className="flex gap-3 mt-4">
-    //       <FormGroup>
-    //         <Label text={"👋 Name"} />
-    //         <InputField
-    //           name="username"
-    //           value={currentUser?.username}
-    //           onchange={handelChange}
-    //         />
-    //       </FormGroup>
-    //       <FormGroup>
-    //         <Label text={"💡 Expertise "} />
-    //         <InputField
-    //           name="expertise"
-    //           value={currentUser?.expertise}
-    //           onchange={handelChange}
-    //         />
-    //       </FormGroup>
-    //     </div>
-    //       <div className="flex flex-col sm:w-full">
-    //         <Label text={"✏️ Bio "} />
-    //         <TextArea
-    //           name="status"
-    //           value={currentUser?.status}
-    //           onchange={handelChange}
-    //           width={"sm:w-[27rem] "}
-    //         />
-    //       </div>
-
-    //     <FormGroup>
-    //       <Label text={"🌍 From"} />
-    //       <InputField
-    //         name="country"
-    //         value={currentUser?.country}
-    //         onchange={handelChange}
-    //         size={"w-[27rem]"}
-    //       />
-    //     </FormGroup>
-    //   {/* </div> */}
-    // </div>
   );
 }
 

@@ -31,12 +31,12 @@ function DashBoard() {
               width={400}
             />
             <h1 className="text-[3rem] font-semibold">
-              🧐 No username found for your account
+              No username found for your account
             </h1>
-            <p className="my-2">Please 🙌 signout and create username</p>
+            <p className="my-2">Please signout and create username</p>
 
             <button
-              className="bg-yellow-400 text-black font-semibold px-4 py-2 rounded"
+              className="bg-gray-100 text-black font-semibold px-6 py-2 rounded"
               onClick={signOut}
             >
               signout
@@ -45,6 +45,7 @@ function DashBoard() {
         </>
       ) : currentUser ? (
         <LayoutPage />
+        
       ) : (
         <div className="flex h-screen">
           <div className="m-auto">

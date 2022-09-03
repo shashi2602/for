@@ -43,11 +43,16 @@ function ChooseMeBlogs() {
 
   const handleSelectBlogSite = (siteName) => {
     if (currentUser?.blog_site.some((n) => n.name == siteName)) {
-      setCurrentUser((prev) => ({
-        ...prev,
-        blog_site: [...prev.blog_site.filter((n) => n.name != siteName)],
-      }));
-      setBlogs((prev) => prev.filter((n) => n.published_on != siteName));
+      
+      if(currentUser.pinned_blogs.some(b=>b.published_on==siteName)){
+          toast.error(`There was some pinnned blogs of ${siteName}. please unpin them to proceed`)
+      }else{
+        setCurrentUser((prev) => ({
+          ...prev,
+          blog_site: [...prev.blog_site.filter((n) => n.name != siteName)],
+        }));
+        setBlogs((prev) => prev.filter((n) => n.published_on != siteName));
+      }
       setError("");
       setChangeDone(true);
     } else {
@@ -74,7 +79,8 @@ function ChooseMeBlogs() {
     }
   };
   return (
-    <div className="w-full  my-4   ">
+    <div className="w-full  my-4">
+      
       <p className="pb-3 font-semibold text-center">
         ✍️ Select to add blogs to your for.dev page
       </p>
