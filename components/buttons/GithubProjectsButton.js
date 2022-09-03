@@ -28,7 +28,6 @@ function GithubProjectsBtn() {
           project.homepage == null ? project.html_url : project.homepage,
         source_code_link: project.html_url,
       }));
-      // console.log(...github_projects);
       setCurrentUser((prev) => ({
         ...prev,
         projects: [...prev.projects, ...github_projects],

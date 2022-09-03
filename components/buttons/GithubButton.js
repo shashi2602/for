@@ -17,7 +17,6 @@ function GithubBtn(props) {
           uid: result.user.uid,
           email: result.user.email,
         };
-        console.log(user_details);
         props.username &&
           addUsername({ site_username: props.username, uid: result.user.uid });
         props.username && addUser(user_details);
@@ -26,7 +25,6 @@ function GithubBtn(props) {
       });
     } catch (err) {
       toast.error("😭 error occurred");
-      console.log(err);
     }
   };
   return (

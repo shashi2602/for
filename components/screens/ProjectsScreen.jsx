@@ -84,7 +84,6 @@ function ChooseMeProjects() {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "o9dcboit");
-    console.log(data);
     const fetch = axios
       .post("https://api.cloudinary.com/v1_1/dtpdc2bhh/image/upload/", data)
       .then((res) => {
@@ -93,7 +92,6 @@ function ChooseMeProjects() {
           project_thumbnail: res.data.secure_url,
         }));
       });
-    console.log(fetch);
 
     toast.promise(fetch, {
       loading: "😅 uploading",

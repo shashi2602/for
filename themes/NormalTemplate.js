@@ -8,7 +8,6 @@ import { useTheme } from "next-themes";
 
 function NormalTemplate({ profile }) {
   const { theme } = useTheme();
-  console.log(profile);
   return (
     <div className=" sm:px-7 lg:px-72 md:7 2xl:7 px-7 pt-5 ">
       <div className="flex flex-wrap lg:flex-none gap-4">

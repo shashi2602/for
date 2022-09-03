@@ -17,7 +17,6 @@ function GoogleBtn(props) {
           uid: result.user.uid,
           email: result.user.email,
         };
-        console.log(result)
         props.username &&
           addUsername({ site_username: props.username, uid: result.user.uid });
         props.username && addUser(user_details);

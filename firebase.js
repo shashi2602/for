@@ -9,6 +9,5 @@ export const auth = getAuth(app);
 export const database = getDatabase(app);
 export default app;
 export const GoogleProvider = new GoogleAuthProvider();
-GoogleProvider.addScope("https://www.googleapis.com/auth/youtube")
 export const GithubProvider = new GithubAuthProvider();
 export const firestoreDB = getFirestore();

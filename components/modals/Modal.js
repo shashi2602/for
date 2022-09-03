@@ -79,7 +79,6 @@ export default function Modal({
                           e.preventDefault();
                           handleAdd();
                           closeModal();
-                          console.log("add closed");
                         }}
                       >
                         Save
