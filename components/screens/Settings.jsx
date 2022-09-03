@@ -43,7 +43,7 @@ function Settings() {
               );
             })}
           </div>
-          <div className="h-screen w-full px-3 pl-5">
+          <div className=" w-full px-3 pl-5">
             {handleChangeTab(tabSelected)}
           </div>
         </div>
@@ -240,7 +240,7 @@ function Appearance() {
     setChangeDone(true);
   };
   return (
-    <div className="mt-10 s:mt-0">
+    <div className="mt-10 sm:mt-0">
       <h1 className="font-semibold text-lg mb-2">💅 Appearance</h1>
       <h1 className=" text-base">
         Select the things that you do not wont to display in your profile

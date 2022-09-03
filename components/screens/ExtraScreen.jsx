@@ -51,7 +51,7 @@ function ChooseMeMyExtra() {
               );
             })}
           </div>
-          <div className="h-screen w-full px-3 pl-5">
+          <div className="w-full px-3 pl-5">
             {tabSelected.name === "Experience" && (
               <Experience
                 currentUser={currentUser}

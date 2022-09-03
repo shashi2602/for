@@ -25,7 +25,7 @@ function LayoutPage() {
         <ChooseMe handleChange={handleSelectType} typeSelected={currentTab} />
         <ChooseMeInBrief type={currentTab} />
       </div>
-      <div className="m-2 grid justify-center font-bold">
+      <div className="m-4 grid justify-center font-bold">
           <Link href={""}>❤️Simplyfolio</Link>
       </div>
     </>
