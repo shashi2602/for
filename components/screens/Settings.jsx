@@ -240,8 +240,9 @@ function Appearance() {
     setChangeDone(true);
   };
   return (
-    <div className="p-4">
-      <h1 className="font-semibold text-lg">
+    <div>
+      <h1 className="font-semibold text-lg mb-2">💅 Appearance</h1>
+      <h1 className=" text-base">
         Select the things that you do not wont to display in your profile
       </h1>
       <div className="flex  flex-wrap gap-3 mt-2 ">

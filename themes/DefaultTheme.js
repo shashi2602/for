@@ -167,7 +167,7 @@ const ProfileSmallPart = ({ profile }) => {
           <span className="font-semibold "> {profile?.country}</span>.
         </p>
         <p className="text-lg">{profile?.status}</p>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap justify-center">
           {
             profile.status_2.split(",").map((s,i)=>{
               return <div key={i} className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold">
