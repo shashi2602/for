@@ -173,7 +173,7 @@ function ChooseMeProjects() {
             onchange={handleChange}
           />
         </FormGroup>
-        <FormGroup>
+        {/* <FormGroup>
           <label
             htmlFor="profile_img"
             className=" px-2 py-2 font-semibold dark:bg-black/40  text-center  cursor-pointer dark:hover:bg-opacity-20 transition duration-300 ease-in-out border-2 border-black dark:border-0 rounded-md"
@@ -189,7 +189,7 @@ function ChooseMeProjects() {
               uploadImage(e.target.files[0]);
             }}
           />
-        </FormGroup>
+        </FormGroup> */}
       </Modal>
       <div className="pt-4 mx-4 grid sm:grid-cols-3 grid-cols-1 gap-2">
         {currentUser?.projects.map((p, i) => {

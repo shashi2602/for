@@ -15,10 +15,10 @@ function DefaultTheme({ profile }) {
     <>
       {/* <style jsx>
     </style> */}
-      <div className="mx-2 sm:mx-20 md:mx-56">
+      <div className="mx-2 sm:?mx-20 md:mx-56">
         {/* profile on large screen */}
         <div className="hidden lg:block md:block profile">
-          {profile.hidden_modules.some((m) => m == "Profile") ? (
+          {profile?.hidden_modules?.some((m) => m == "Profile") ? (
             <></>
           ) : (
             <ProfileLargePart profile={profile} />
@@ -27,7 +27,7 @@ function DefaultTheme({ profile }) {
 
         {/*  profile on small screen */}
         <div className="sm:hidden profile-small">
-          {profile.hidden_modules.some((m) => m == "Profile") ? (
+          {profile?.hidden_modules?.some((m) => m == "Profile") ? (
             <></>
           ) : (
             <ProfileSmallPart profile={profile} />
@@ -36,8 +36,8 @@ function DefaultTheme({ profile }) {
 
         {/* stack part */}
         <div className=" skills">
-          {profile?.skills.length > 0 ? (
-            profile.hidden_modules.some((m) => m == "Skills") ? (
+          {profile?.skills?.length > 0 ? (
+            profile?.hidden_modules?.some((m) => m == "Skills") ? (
               <></>
             ) : (
               <StackPart
@@ -52,7 +52,7 @@ function DefaultTheme({ profile }) {
 
         {/* about part */}
         <div className=" py-2 rounded-md my-2 about">
-          {profile.hidden_modules.some((m) => m == "About") ? (
+          {profile?.hidden_modules?.some((m) => m == "About") ? (
             <></>
           ) : (
             <AboutPart about={profile?.about_markdown} />
@@ -60,8 +60,8 @@ function DefaultTheme({ profile }) {
         </div>
 
         {/* blogs part */}
-        {profile?.pinned_blogs.length > 0 ? (
-          profile.hidden_modules.some((m) => m == "Blogs") ? (
+        {profile?.pinned_blogs?.length > 0 ? (
+          profile?.hidden_modules?.some((m) => m == "Blogs") ? (
             <></>
           ) : (
             <div className="my-2 blogs">
@@ -72,8 +72,8 @@ function DefaultTheme({ profile }) {
           <></>
         )}
         {/* certificates part */}
-        {profile?.certifications.length > 0 ? (
-          profile.hidden_modules.some((m) => m == "Certifications") ? (
+        {profile?.certifications?.length > 0 ? (
+          profile?.hidden_modules?.some((m) => m == "Certifications") ? (
             <></>
           ) : (
             <div className="my-2 certifications">
@@ -84,8 +84,8 @@ function DefaultTheme({ profile }) {
           <></>
         )}
         {/* projects part */}
-        {profile?.projects.length > 0 ? (
-          profile.hidden_modules.some((m) => m == "Projects") ? (
+        {profile?.projects?.length > 0 ? (
+          profile?.hidden_modules?.some((m) => m == "Projects") ? (
             <></>
           ) : (
             <div className="my-2 projects">
@@ -96,8 +96,8 @@ function DefaultTheme({ profile }) {
           <></>
         )}
         {/* experience part */}
-        {profile?.experiences.length > 0 ? (
-          profile.hidden_modules.some((m) => m == "Experience") ? (
+        {profile?.experiences?.length > 0 ? (
+          profile?.hidden_modules?.some((m) => m == "Experience") ? (
             <></>
           ) : (
             <div className="my-2 experience">
@@ -128,7 +128,7 @@ const ProfileLargePart = ({ profile }) => {
           <p className="text-lg">{profile?.status}</p>
           <div className="flex flex-wrap">
           {
-            profile.status_2.split(",").map((s,i)=>{
+            profile?.status_2?.split(",").map((s,i)=>{
               return <div key={i} className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold">
                   {s}
                 </div>
@@ -138,7 +138,7 @@ const ProfileLargePart = ({ profile }) => {
           
         </div>
         <SocialPart
-          social={profile.social}
+          social={profile?.social}
           theme={theme}
           resume={profile?.resume}
         />
@@ -169,7 +169,7 @@ const ProfileSmallPart = ({ profile }) => {
         <p className="text-lg">{profile?.status}</p>
         <div className="flex flex-wrap justify-center">
           {
-            profile.status_2.split(",").map((s,i)=>{
+            profile?.status_2?.split(",").map((s,i)=>{
               return <div key={i} className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold">
                   {s}
                 </div>
@@ -177,7 +177,7 @@ const ProfileSmallPart = ({ profile }) => {
           }
           </div>
         <SocialPart
-          social={profile.social}
+          social={profile?.social}
           theme={theme}
           resume={profile?.resume}
         />
@@ -202,14 +202,14 @@ const ProfileImageCircle = ({ image }) => {
 const SocialPart = ({ social, theme, resume }) => {
   return (
     <div className="flex flex-wrap gap-2 pt-4">
-      {social.map((social, i) => {
+      {social?.map((social, i) => {
         return (
           <div key={i} className=" flex px-3 pt-2  rounded-md">
             <a
               href={
-                social.link_placeholder
-                  ? social.link_placeholder + social.link
-                  : social.link
+                social?.link_placeholder
+                  ? social?.link_placeholder + social.link
+                  : social?.link
               }
               target={"_blank"}
               rel="noreferrer"
@@ -230,7 +230,7 @@ const SocialPart = ({ social, theme, resume }) => {
           </div>
         );
       })}
-      {resume.length == 0 ? (
+      {resume?.length == 0 ? (
         <></>
       ) : (
         <a href={resume} className="pt-2">
@@ -249,7 +249,7 @@ const SocialPart = ({ social, theme, resume }) => {
 const StackPart = ({ skill, extra_skills }) => {
   return (
     <div className="flex gap-3 flex-wrap justify-center stack-grid p-5 rounded-md my-2 bg-gray-100 dark:bg-[#18181B]">
-      {skill.map((skills, i) => {
+      {skill?.map((skills, i) => {
         return (
           <div
             key={i}
@@ -268,7 +268,7 @@ const StackPart = ({ skill, extra_skills }) => {
           </div>
         );
       })}
-      {extra_skills.split(",").map((skill, i) => {
+      {extra_skills&&extra_skills?.split(",").map((skill, i) => {
         return (
           <div
             key={i}
@@ -297,7 +297,7 @@ const ProjectPart = ({ projects }) => {
   return (
     <>
       <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 projects-grid">
-        {projects?.slice(0, number).map((p, i) => {
+        {projects?.slice(0, number)?.map((p, i) => {
           return (
             <div
               key={i}
@@ -341,7 +341,7 @@ const ProjectPart = ({ projects }) => {
         })}
       </div>
       <div className="flex justify-center mt-2">
-        {projects.length === 4 ? (
+        {projects?.length === 4 ? (
           <></>
         ) : number == projects?.length ? (
           <div
@@ -372,7 +372,7 @@ const BlogsPart = ({ blogs }) => {
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-5 blogs-grid">
-        {blogs?.slice(0, number).map((blog, i) => {
+        {blogs?.slice(0, number)?.map((blog, i) => {
           return (
             <div className="flex flex-col blog-single" key={i}>
               <div
@@ -396,7 +396,7 @@ const BlogsPart = ({ blogs }) => {
         })}
       </div>
       <div className="flex justify-center mt-2 show-btn">
-        {blogs.length === 3 ? (
+        {blogs?.length === 3 ? (
           <></>
         ) : number == blogs?.length ? (
           <div
@@ -463,7 +463,7 @@ const ExperiencePart = ({ experience }) => {
   const [expand, setExpand] = useState(false);
   return (
     <div className="experience-box">
-      {experience.map((e, i) => {
+      {experience?.map((e, i) => {
         return (
           <div
             key={i}
@@ -522,7 +522,7 @@ const ExperiencePart = ({ experience }) => {
             </div>
             {expand ? (
               <div className="prose text-justify dark:prose-invert max-w-max">
-                <MarkdownPreview about={e.description} />
+                <MarkdownPreview about={e?.description} />
               </div>
             ) : (
               <></>

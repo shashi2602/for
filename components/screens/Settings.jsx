@@ -249,7 +249,7 @@ function Appearance() {
         {list_of_modules.map((m, i) => {
           return (
             <div
-              key={i}
+              key={m.name}
               className={`px-2 py-2 rounded-md bg-gray-100  dark:bg-[#18181B] flex gap-2 items-center`}
               onClick={() => handleOnSelect(m.name)}
             >

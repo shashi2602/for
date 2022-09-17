@@ -1,5 +1,5 @@
 import md from "markdown-it";
-export default function MarkdownPreview(props) {
+export default function MarkdownPreview({about}) {
   return (
     <div
       dangerouslySetInnerHTML={{
@@ -8,7 +8,7 @@ export default function MarkdownPreview(props) {
           linkify: true,
           typographer: true,
           xhtmlOut: true,
-        }).render(props.about),
+        }).render(about?about:""),
       }}
     />
   );
