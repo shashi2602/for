@@ -21,7 +21,7 @@ const addUser = (user) => {
 };
 
 function getAllUsers() {
-  return getDocs(usernamesRef);
+  return getDocs(userRef);
 }
 
 function getUserDoc(id) {

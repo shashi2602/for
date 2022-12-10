@@ -137,8 +137,6 @@ export default function NavBar() {
                             <span
                               onClick={() => {
                                 signOut();
-                                localStorage.removeItem("userDoc");
-                                localStorage.removeItem("current_user");
                                 history.push("/");
                               }}
                               className={classNames(

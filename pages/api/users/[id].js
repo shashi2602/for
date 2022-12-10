@@ -1,4 +1,4 @@
-import { getAllUsers } from "../../services/user.services";
+import { getAllUsers } from "../../../services/user.services";
 import NextCors from "nextjs-cors";
 
 export default async function handler(req, res) {
@@ -12,5 +12,5 @@ export default async function handler(req, res) {
       data.push(user.data().uid);
     });
   });
-  res.status(200).json({ users: data });
+  res.send(data.some((u) => u == req.query.id));
 }

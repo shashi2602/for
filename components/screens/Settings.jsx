@@ -17,26 +17,41 @@ function Settings() {
       icon: "💅",
     },
   ];
-  const [tabSelected, setTabSelected] = useState(tabs[0]);
-  function handleChangeTab(tab) {
-    return tab.component;
-  }
+  const [tabSelected, setTabSelected] = useState(0);
+  
 
   return (
     <div className="w-full mt-4">
-      <div className="hidden md:block">
+      <div className="block">
         <div className="flex flex-wrap lg:flex-nowrap">
-          <div className="w-[20rem] border-2 border-gray-200 rounded-md h-full ">
-            {tabs.map((tab, i) => {
+          <div className="hidden lg:block w-[20rem] border-2 border-gray-200 rounded-md h-full">
+            {tabs.map((tab,i) => {
               return (
                 <div
-                  key={i}
+                  key={tab.name}
                   className={`p-4  font-semibold hover:bg-gray-100 dark:hover:text-black transition ${
                     tabSelected?.name === tab.name
                       ? "bg-gray-100 text-black"
                       : ""
                   } ${i + 1 === tabs.length ? "border-b-0" : "border-b-2"}`}
-                  onClick={() => setTabSelected(tab)}
+                  onClick={() => setTabSelected(i)}
+                >
+                  {tab.icon} {tab.name}
+                </div>
+              );
+            })}
+          </div>
+          <div className="lg:hidden w-full border-2 border-gray-200 rounded-md h-full flex flex-wrap mb-10 ">
+            {tabs.map((tab,i) => {
+              return (
+                <div
+                  key={tab.name}
+                  className={`p-3  font-semibold hover:bg-gray-100 dark:hover:text-black transition ${
+                    tabSelected?.name === tab.name
+                      ? "bg-gray-100 text-black"
+                      : ""
+                  } ${i + 1 === tabs.length ? "border-r-0" : "border-r-2"}`}
+                  onClick={() => setTabSelected(i)}
                 >
                   {tab.icon} {tab.name}
                 </div>
@@ -44,14 +59,9 @@ function Settings() {
             })}
           </div>
           <div className=" w-full px-3 pl-5">
-            {handleChangeTab(tabSelected)}
+            {tabs[tabSelected].component}
           </div>
         </div>
-      </div>
-      <div className="lg:hidden">
-        {tabs.map((tab, i) => {
-          return tab.component;
-        })}
       </div>
     </div>
   );
@@ -59,9 +69,9 @@ function Settings() {
 function SeoSettings() {
   const { currentUser, setCurrentUser, setChangeDone } = useSimplyContext();
   const [seo, setSeo] = useState({
-    seo_title: currentUser?.seo_settings.seo_title,
-    seo_description: currentUser?.seo_settings.seo_description,
-    seo_image: currentUser?.seo_settings.seo_image,
+    seo_title: currentUser?.seo_settings?.seo_title,
+    seo_description: currentUser?.seo_settings?.seo_description,
+    seo_image: currentUser?.seo_settings?.seo_image,
   });
   function handleSubmit() {
     setCurrentUser((prev) => ({
@@ -225,22 +235,24 @@ function Appearance() {
   const { currentUser, setCurrentUser, setChangeDone } = useSimplyContext();
 
   const handleOnSelect = (module_name) => {
-    if(currentUser.hidden_modules.some(md=>md==module_name)){
-      setCurrentUser((prev)=>({
+    if (currentUser.hidden_modules.some((md) => md == module_name)) {
+      setCurrentUser((prev) => ({
         ...prev,
-        hidden_modules:currentUser.hidden_modules.filter(m=>m!=module_name)
-      }))
-    }else{
+        hidden_modules: currentUser.hidden_modules.filter(
+          (m) => m != module_name
+        ),
+      }));
+    } else {
       setCurrentUser((prev) => ({
         ...prev,
         hidden_modules: [...prev.hidden_modules, module_name],
       }));
     }
-    
+
     setChangeDone(true);
   };
   return (
-    <div className="mt-10 sm:mt-0">
+    <div>
       <h1 className="font-semibold text-lg mb-2">💅 Appearance</h1>
       <h1 className=" text-base">
         Select the things that you do not wont to display in your profile

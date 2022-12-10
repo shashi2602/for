@@ -151,7 +151,7 @@ function Certification({ currentUser, setCurrentUser, setChangeDone }) {
                     src={
                       GET_FAVICON_FROM_SITE_LINK + imageUtil(certi.certi_link)
                     }
-                    className="w-[3rem] h-[3rem] rounded-md m-2"
+                    className="w-[3rem] h-[3rem] rounded-md m-2 object-contain"
                   />
                   <div className=" p-2">
                     <a href={certi.certi_link}>

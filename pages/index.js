@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment, useCallback } from "react";
 import GithubBtn from "../components/buttons/GithubButton";
 import GoogleBtn from "../components/buttons/GoogleButton";
 import { Transition } from "@headlessui/react";
@@ -18,35 +18,27 @@ function HomePage() {
   const { user, userNamesList } = useSimplyContext();
   const [error, setError] = useState();
   const schema = Joi.string().max(15).min(2).alphanum();
-
-  useEffect(() => {
-    const checkUserNameAvailability = () => {
-      const result = schema.validate(username);
-      setError(result?.error?.message.replaceAll('"', ""));
-
-      if (userNamesList.some((u) => u.site_username === username)) {
+  const checkUserNameAvailability = useCallback(
+    (un) => {
+      const result = schema.validate(un);
+      setError(result?.error?.message.replaceAll('"', " "));
+      if (userNamesList.some((u) => u.site_username === un)) {
         setUserNameAvailable(false);
       } else {
         setUserNameAvailable(true);
       }
-    };
-    checkUserNameAvailability();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username]);
+    },
+    [username]
+  );
 
   const handleChange = (e) => {
     e.preventDefault();
     setUsername(e.target.value);
+    checkUserNameAvailability(e.target.value);
   };
 
   const router = useRouter();
-
-  // useEffect(() => {
-  //   if (user) {
-  //     router.replace("/dashboard");
-  //   }
-  // }, [user]);
-
+  console.log("▙▟  █〓 ██ ▙▟ ▛▟ ◗  ▛▚▞▜ █☰ ");
   return (
     <>
       <div
@@ -121,7 +113,9 @@ function HomePage() {
                       Pick your name for the <br />
                       <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
                         simplyfor.dev/
-                        <span className="dark:text-white">{username}</span>
+                        <span className="dark:text-white">
+                          {username.replaceAll(" ", "_")}
+                        </span>
                       </span>
                     </h1>
                     <div className="py-3">
@@ -136,8 +130,7 @@ function HomePage() {
                         }}
                       />
                       <p className="text-red-600 font-semibold">
-                        {error && "☠️"}
-                        {error}
+                        {username && error && "☠️" + error}
                       </p>
                       {!userNameAvailable ? (
                         <p className="text-red-700 font-semibold ">
@@ -152,8 +145,12 @@ function HomePage() {
                               😍 Your Simplyfor is available{" "}
                             </p>
                             <div className="flex justify-center gap-2 mt-3">
-                              <GoogleBtn username={username} />
-                              <GithubBtn username={username} />
+                              <GoogleBtn
+                                username={username.replaceAll(" ", "_")}
+                              />
+                              <GithubBtn
+                                username={username.replaceAll(" ", "_")}
+                              />
                             </div>
                           </div>
                         )

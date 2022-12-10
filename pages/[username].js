@@ -15,7 +15,7 @@ function User({ data, found }) {
       {/* <NormalTemplate profile={data} /> */}
       <DefaultTheme profile={data} />
       <div className="m-10 grid justify-center font-bold">
-      <Link href={""}>❤️Simplyfolio</Link>
+        <Link href={""}>❤️Simplyfolio</Link>
       </div>
     </>
   ) : (

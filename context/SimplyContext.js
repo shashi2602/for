@@ -15,7 +15,7 @@ function SimplyContext({ children }) {
     expertise: "",
     country: "",
     status: "",
-    status_2:"",
+    status_2: "",
     profile_img: "",
     about_markdown: "",
     site_username: "",
@@ -30,38 +30,31 @@ function SimplyContext({ children }) {
     last_visited_tab: "",
     resume: "",
     pinned_blogs: [],
-    hidden_modules :[]
+    hidden_modules: [],
   });
   const [userNamesList, setUserNamesList] = useState([]);
   const [changeDone, setChangeDone] = useState(false);
   const [currentTab, setCurrentTab] = useState("");
   const [ispublished, setIsPublished] = useState(false);
-  const [found, setFound] = useState(false); // TODO:need to add this
+  // const [found, setFound] = useState(false); // TODO:need to add this
   //auth state change
   const [user, loading] = useAuthState(auth);
 
-  const predo = async () => {
-    const res = await fetch(`/api/users`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-    const data = await res.json();
-    setFound(data.users.some((u) => u === user?.uid));
-  };
-
   useEffect(() => {
     setCookie(null, "UID", user?.uid);
-    predo();
+    localStorage.removeItem("is_found");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   //Fetching the usernames
   useEffect(() => {
     getAllUsers().then((users) => {
-      setUserNamesList(users.docs.map((doc) => ({ ...doc.data() })));
+      setUserNamesList(
+        users.docs.map((doc) => ({
+          site_username: doc.data().site_username,
+          uid: doc.data().uid,
+        }))
+      );
     });
   }, [user]);
 
@@ -89,6 +82,7 @@ function SimplyContext({ children }) {
     destroyCookie(null, "UID");
     setCurrentUser("");
     setChangeDone(false);
+    localStorage.removeItem("is_found");
   };
   return (
     <Simply.Provider
@@ -102,7 +96,7 @@ function SimplyContext({ children }) {
         userNamesList,
         changeDone,
         setChangeDone,
-        found,
+        // found,
         currentTab,
         setCurrentTab,
         ispublished,

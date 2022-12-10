@@ -10,17 +10,16 @@ import Image from "next/image";
 // import nookies from "nookies";
 
 function DashBoard() {
-  const { user, currentUser, signOut, found } = useSimplyContext();
+  const { user, currentUser, signOut } = useSimplyContext();
   const router = useRouter();
   useEffect(() => {
     if (!user) {
       router.replace("/");
     }
   }, [user]);
-
   return (
     <div>
-      {!found ? (
+      {Object.keys(currentUser).length == 0 ? (
         <>
           <NavBar />
           <div className="text-center mt-[5rem] ">
@@ -45,7 +44,6 @@ function DashBoard() {
         </>
       ) : currentUser ? (
         <LayoutPage />
-        
       ) : (
         <div className="flex h-screen">
           <div className="m-auto">

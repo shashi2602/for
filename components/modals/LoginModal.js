@@ -14,7 +14,7 @@ function LoginModal() {
       >
         Login
       </button>
-      <DarkMode/>
+      <DarkMode />
       <Transition appear show={showModal} as={Fragment}>
         <Dialog
           as="div"
