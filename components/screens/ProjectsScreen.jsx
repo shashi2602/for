@@ -43,6 +43,7 @@ function ChooseMeProjects() {
           {
             ...project,
             id: "MID" + currentUser.projects.length++,
+            is_github: false,
           },
         ];
         setCurrentUser((prev) => ({

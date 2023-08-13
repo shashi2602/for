@@ -11,7 +11,7 @@ function GithubProjectsBtn() {
   );
   const handleGet = () => {
     if (currentUser?.social.length === 0) {
-      toast.error("Please add social accounts");
+      toast.error("Please add github username in social");
     } else if (!currentUser?.social.some((s) => s.value === "github")) {
       toast.error("Please add github username in social");
     } else {
@@ -27,6 +27,7 @@ function GithubProjectsBtn() {
         live_link:
           project.homepage == null ? project.html_url : project.homepage,
         source_code_link: project.html_url,
+        is_github: true
       }));
       setCurrentUser((prev) => ({
         ...prev,

@@ -71,6 +71,18 @@ function DefaultTheme({ profile }) {
         ) : (
           <></>
         )}
+        {/* experience part */}
+        {profile?.experiences?.length > 0 ? (
+          profile?.hidden_modules?.some((m) => m == "Experience") ? (
+            <></>
+          ) : (
+            <div className="my-2 experience">
+              <ExperiencePart experience={profile?.experiences} />
+            </div>
+          )
+        ) : (
+          <></>
+        )}
         {/* certificates part */}
         {profile?.certifications?.length > 0 ? (
           profile?.hidden_modules?.some((m) => m == "Certifications") ? (
@@ -95,20 +107,7 @@ function DefaultTheme({ profile }) {
         ) : (
           <></>
         )}
-        {/* experience part */}
-        {profile?.experiences?.length > 0 ? (
-          profile?.hidden_modules?.some((m) => m == "Experience") ? (
-            <></>
-          ) : (
-            <div className="my-2 experience">
-              <ExperiencePart experience={profile?.experiences} />
-            </div>
-          )
-        ) : (
-          <></>
-        )}
       </div>
-
     </>
   );
 }
@@ -127,15 +126,17 @@ const ProfileLargePart = ({ profile }) => {
           </p>
           <p className="text-lg">{profile?.status}</p>
           <div className="flex flex-wrap">
-          {
-            profile?.status_2?.split(",").map((s,i)=>{
-              return <div key={i} className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold">
+            {profile?.status_2?.split(",").map((s, i) => {
+              return (
+                <div
+                  key={i}
+                  className="text-green-600 px-2 py-1 rounded-md font-semibold"
+                >
                   {s}
                 </div>
-            })
-          }
+              );
+            })}
           </div>
-          
         </div>
         <SocialPart
           social={profile?.social}
@@ -168,14 +169,17 @@ const ProfileSmallPart = ({ profile }) => {
         </p>
         <p className="text-lg">{profile?.status}</p>
         <div className="flex flex-wrap justify-center">
-          {
-            profile?.status_2?.split(",").map((s,i)=>{
-              return <div key={i} className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold">
-                  {s}
-                </div>
-            })
-          }
-          </div>
+          {profile?.status_2?.split(",").map((s, i) => {
+            return (
+              <div
+                key={i}
+                className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold"
+              >
+                {s}
+              </div>
+            );
+          })}
+        </div>
         <SocialPart
           social={profile?.social}
           theme={theme}
@@ -268,16 +272,17 @@ const StackPart = ({ skill, extra_skills }) => {
           </div>
         );
       })}
-      {extra_skills&&extra_skills?.split(",").map((skill, i) => {
-        return (
-          <div
-            key={i}
-            className="sm:px-3 pt-2 dark:bg-slate-900 rounded flex gap-2 capitalize font-semibold stack-single"
-          >
-            🤹 {skill}
-          </div>
-        );
-      })}
+      {extra_skills &&
+        extra_skills?.split(",").map((skill, i) => {
+          return (
+            <div
+              key={i}
+              className="sm:px-3 pt-2 dark:bg-slate-900 rounded flex gap-2 capitalize font-semibold stack-single"
+            >
+              🤹 {skill}
+            </div>
+          );
+        })}
     </div>
   );
 };
@@ -293,50 +298,70 @@ const AboutPart = ({ about }) => {
 };
 
 const ProjectPart = ({ projects }) => {
-  const [number, setNumber] = useState(4);
+  const [number, setNumber] = useState(6);
   return (
     <>
-      <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 projects-grid">
+      <div className="grid sm:grid-cols-3 gap-2 projects-grid">
         {projects?.slice(0, number)?.map((p, i) => {
           return (
-            <div
+            <Link
+              href={p.source_code_link}
+              passHref
               key={i}
-              className={`rounded-md bg-gray-100  dark:bg-[#18181B] flex flex-col p-4 justify-between gap-2 project-single`}
+              className="hover:shadow-focus hover:shadow-gray-300 focus-within:shadow-gray-300"
             >
-              <>
-                <div className="flex justify-between">
-                  <h1 className="text-lg font-bold capitalize hover:underline">
-                    <Link
-                      href={
-                        p?.live_link === ""
-                          ? p?.source_code_link === ""
-                            ? ""
-                            : p?.source_code_link
-                          : p?.live_link
-                      }
-                    >
-                      {p.title}
-                    </Link>
-                  </h1>
-                  <Image
+              <div
+                className={`rounded-md bg-gray-100 grid dark:bg-[#18181B] p-4 justify-between gap-2`}
+              >
+                <>
+                  <div className="flex justify-between">
+                    <h1 className="text-lg font-bold capitalize hover:underline">
+                      <Link
+                        href={
+                          p?.live_link === ""
+                            ? p?.source_code_link === ""
+                              ? ""
+                              : p?.source_code_link
+                            : p?.live_link
+                        }
+                      >
+                        {p.title}
+                      </Link>
+                    </h1>
+                    <div className="flex gap-2">
+                      {p.stacks?.split(",").map((s, i) => {
+                        return (
+                          <Image
+                            key={i}
+                            alt={s}
+                            src={`https://raw.githubusercontent.com/shashi2602/devicon/master/icons/${s.toLowerCase()}/${s.toLowerCase()}-original.svg`}
+                            height={20}
+                            width={20}
+                            layout="fixed"
+                          />
+                        );
+                      })}
+                    </div>
+                    {/* <Image
                     alt={p.stacks}
                     src={`https://raw.githubusercontent.com/shashi2602/devicon/master/icons/${p.stacks.toLowerCase()}/${p.stacks.toLowerCase()}-original.svg`}
                     height={20}
                     width={20}
                     layout="fixed"
-                  />
-                </div>
+                  /> */}
+                  </div>
 
-                <p>{p.short_info}</p>
-              </>
-              <button className="flex justify-around gap-2  pt-2">
+                  <p>{p.short_info}</p>
+                </>
+                {/* <button className="flex justify-around gap-2  pt-2">
                 <Link href={p.source_code_link} passHref>
                   <a className="px-4 py-1 rounded-md bg-gray-200 dark:bg-[#141416] font-semibold">
                     source
                   </a>
                 </Link>
-              </button>
-            </div>
+              </button> */}
+              </div>
+            </Link>
           );
         })}
       </div>

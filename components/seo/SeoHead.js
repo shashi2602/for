@@ -54,18 +54,18 @@ function SeoHead({ data }) {
             }`,
           },
         ],
-        site_name: `${SITE_ENDPOINT}/${data.site_username}`,
+        site_name: `${SITE_ENDPOINT}/${data?.site_username}`,
       }}
       twitter={{
         cardType: "summary_large_image",
         site: `${SITE_ENDPOINT}/${data?.site_username}`,
-        creator: `@${data?.social?.find((n) => n.value == "twitter").link}`,
+        creator: `@${data?.social?.find((n) => n.value == "twitter")?.link}`,
         description: `${
           data?.seo_settings?.seo_description
             ? data?.seo_settings?.seo_description
             : data?.status
         }`,
-        handle: `@${data?.social?.find((n) => n.value == "twitter").link}`,
+        handle: `@${data?.social?.find((n) => n.value == "twitter")?.link}`,
         image: `${
           data?.seo_settings?.seo_image
             ? data?.seo_settings?.seo_image
