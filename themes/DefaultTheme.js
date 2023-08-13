@@ -171,10 +171,7 @@ const ProfileSmallPart = ({ profile }) => {
         <div className="flex flex-wrap justify-center">
           {profile?.status_2?.split(",").map((s, i) => {
             return (
-              <div
-                key={i}
-                className="bg-gray-200 dark:bg-[#18181B] px-2 py-1 rounded-md font-semibold"
-              >
+              <div key={i} className=" px-2 py-1 rounded-md font-semibold">
                 {s}
               </div>
             );
@@ -194,7 +191,7 @@ const ProfileImageCircle = ({ image }) => {
   return (
     <Image
       alt={image}
-      priority={true}
+      loading="lazy"
       className="rounded-full object-cover "
       height={300}
       width={300}
@@ -205,7 +202,7 @@ const ProfileImageCircle = ({ image }) => {
 
 const SocialPart = ({ social, theme, resume }) => {
   return (
-    <div className="flex flex-wrap gap-2 pt-4">
+    <div className="flex flex-wrap gap-2 pt-4 sm:justify-start justify-center">
       {social?.map((social, i) => {
         return (
           <div key={i} className=" flex px-3 pt-2  rounded-md">
